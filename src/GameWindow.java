@@ -1,4 +1,6 @@
 import javax.swing.*;
+
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 
 /**
@@ -6,6 +8,8 @@ import java.awt.event.ActionEvent;
  */
 public class GameWindow extends JFrame {
 
+	private GamePanel gamePanel;
+	
     enum PlantType {
         None,
         Sunflower,
@@ -20,40 +24,46 @@ public class GameWindow extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLayout(null);
 
-        JLabel sun = new JLabel("SUN");
-        sun.setLocation(37, 80);
-        sun.setSize(60, 20);
+        JLabel sun = setSun();
 
-        GamePanel gp = new GamePanel(sun);
-        gp.setLocation(0, 0);
-        getLayeredPane().add(gp, new Integer(0));
+        setGamePanel(sun);
 
-        PlantCard sunflower = new PlantCard(new ImageIcon(this.getClass().getResource("images/cards/card_sunflower.png")).getImage());
-        sunflower.setLocation(110, 8);
-        sunflower.setAction((ActionEvent e) -> {
-            gp.setActivePlantingBrush(PlantType.Sunflower);
-        });
-        getLayeredPane().add(sunflower, new Integer(3));
+        Image sunflowerImage = new ImageIcon(this.getClass().getResource("images/cards/card_sunflower.png")).getImage();
+        setPlantCard(sunflowerImage, 110, 8, PlantType.Sunflower);
 
-        PlantCard peashooter = new PlantCard(new ImageIcon(this.getClass().getResource("images/cards/card_peashooter.png")).getImage());
-        peashooter.setLocation(175, 8);
-        peashooter.setAction((ActionEvent e) -> {
-            gp.setActivePlantingBrush(PlantType.Peashooter);
-        });
-        getLayeredPane().add(peashooter, new Integer(3));
+        Image peashooterImage = new ImageIcon(this.getClass().getResource("images/cards/card_peashooter.png")).getImage();
+        setPlantCard(peashooterImage, 175, 8, PlantType.Peashooter);
 
-        PlantCard freezepeashooter = new PlantCard(new ImageIcon(this.getClass().getResource("images/cards/card_freezepeashooter.png")).getImage());
-        freezepeashooter.setLocation(240, 8);
-        freezepeashooter.setAction((ActionEvent e) -> {
-            gp.setActivePlantingBrush(PlantType.FreezePeashooter);
-        });
-        getLayeredPane().add(freezepeashooter, new Integer(3));
+        Image freezepeashooterImage = new ImageIcon(this.getClass().getResource("images/cards/card_freezepeashooter.png")).getImage();
+        setPlantCard(freezepeashooterImage, 240, 8, PlantType.FreezePeashooter);
 
-
-        getLayeredPane().add(sun, new Integer(2));
+        
         setResizable(false);
         setVisible(true);
     }
+    
+    private void setPlantCard(Image image, int x, int y, PlantType plantType) {
+    	PlantCard plantCard = new PlantCard(image);
+        plantCard.setLocation(x, y);
+        plantCard.setAction((ActionEvent e) -> {
+            gamePanel.setActivePlantingBrush(plantType);
+        });
+        getLayeredPane().add(plantCard, new Integer(3));
+    }
+
+	private void setGamePanel(JLabel sun) {
+		gamePanel = new GamePanel(sun);
+        gamePanel.setLocation(0, 0);
+        getLayeredPane().add(gamePanel, new Integer(0));
+	}
+
+	private JLabel setSun() {
+		JLabel sun = new JLabel("SUN");
+        sun.setLocation(37, 80);
+        sun.setSize(60, 20);
+        getLayeredPane().add(sun, new Integer(2));
+		return sun;
+	}
 
     public GameWindow(boolean b) {
         Menu menu = new Menu();
