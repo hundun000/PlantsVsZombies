@@ -12,7 +12,15 @@ import java.util.Random;
  */
 public class GamePanel extends JLayeredPane implements MouseMotionListener {
 
-    private Image bgImage;
+    private static final int SCREEN_HEIGHT_CONSTANT = 752;
+	private static final int SCREEN_WIDTH_CONSTANT = 1000;
+	
+	private static final int ADVANCETIME_CONSTANT = 60;
+	private static final int REDRAWTIME_CONSTANT = 45;
+	private static final int ZOMBIE_PRODUCETIME_CONSTANT = 7000;
+	private static final int SUN_PRODUCETIME_CONSTANT = 5000;
+	
+	private Image bgImage;
     private Image peashooterImage;
     private Image freezePeashooterImage;
     private Image sunflowerImage;
@@ -32,7 +40,7 @@ public class GamePanel extends JLayeredPane implements MouseMotionListener {
     private Timer sunProducer;
     private Timer zombieProducer;
     private JLabel sunScoreboard;
-
+    
     private GameWindow.PlantType activePlantingBrush = GameWindow.PlantType.None;
 
     private int mouseX, mouseY;
@@ -49,7 +57,7 @@ public class GamePanel extends JLayeredPane implements MouseMotionListener {
     }
 
     public GamePanel(JLabel sunScoreboard) {
-        setSize(1000, 752);
+        setSize(SCREEN_WIDTH_CONSTANT, SCREEN_HEIGHT_CONSTANT);
         setLayout(null);
         addMouseMotionListener(this);
         this.sunScoreboard = sunScoreboard;
@@ -64,15 +72,15 @@ public class GamePanel extends JLayeredPane implements MouseMotionListener {
         produceColliders();
         produceSuns();
 
-        setRedrawTimer();
-        setAdvanceTimer();
-        setSunProducer();
-        setZombieProducer();
+        setRedrawTimer(REDRAWTIME_CONSTANT);
+        setAdvanceTimer(ADVANCETIME_CONSTANT);
+        setSunProducer(SUN_PRODUCETIME_CONSTANT);
+        setZombieProducer(ZOMBIE_PRODUCETIME_CONSTANT);
 
     }
 
-	private void setZombieProducer() {
-		zombieProducer = new Timer(7000, (ActionEvent e) -> {
+	private void setZombieProducer(int produceTime) {
+		zombieProducer = new Timer(produceTime, (ActionEvent e) -> {
             Random rnd = new Random();
             LevelData lvl = new LevelData();
             String[] Level = lvl.LEVEL_CONTENT[Integer.parseInt(lvl.LEVEL_NUMBER) - 1];
@@ -90,8 +98,8 @@ public class GamePanel extends JLayeredPane implements MouseMotionListener {
         zombieProducer.start();
 	}
 
-	private void setSunProducer() {
-		sunProducer = new Timer(5000, (ActionEvent e) -> {
+	private void setSunProducer(int produceTime) {
+		sunProducer = new Timer(produceTime, (ActionEvent e) -> {
             Random rnd = new Random();
             Sun sta = new Sun(this, rnd.nextInt(800) + 100, 0, rnd.nextInt(300) + 200);
             activeSuns.add(sta);
@@ -100,13 +108,13 @@ public class GamePanel extends JLayeredPane implements MouseMotionListener {
         sunProducer.start();
 	}
 
-	private void setAdvanceTimer() {
-		advancerTimer = new Timer(60, (ActionEvent e) -> advance());
+	private void setAdvanceTimer(int advanceTime) {
+		advancerTimer = new Timer(advanceTime, (ActionEvent e) -> advance());
         advancerTimer.start();
 	}
 
-	private void setRedrawTimer() {
-		redrawTimer = new Timer(25, (ActionEvent e) -> {
+	private void setRedrawTimer(int redrawTime) {
+		redrawTimer = new Timer(redrawTime, (ActionEvent e) -> {
             repaint();
         });
         redrawTimer.start();
