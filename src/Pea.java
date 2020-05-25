@@ -27,7 +27,7 @@ public class Pea {
                     System.out.println("ZOMBIE DIED");
 
                     gp.getLaneZombies().get(myLane).remove(i);
-                    GamePanel.setProgress(10);
+                    GamePanel.setLevel(10);
                     exit = true;
                 }
                 gp.getLaneZombies().get(myLane).remove(this);

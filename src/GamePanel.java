@@ -287,24 +287,35 @@ public class GamePanel extends JLayeredPane implements MouseMotionListener {
         mouseY = e.getY();
     }
 
-    static int progress = 0;
+    static int totalLevelPoint = 0;
 
-    public static void setProgress(int num) {
-        progress = progress + num;
-        System.out.println(progress);
-        if (progress >= 150) {
+    public static void setLevel(int levelPoint) {
+        totalLevelPoint = totalLevelPoint + levelPoint;
+        System.out.println(totalLevelPoint);
+        boolean isLevelUp = totalLevelPoint >= 150;
+		if (isLevelUp) {
             if ("1".equals(LevelData.LEVEL_NUMBER)) {
-                JOptionPane.showMessageDialog(null, "LEVEL_CONTENT Completed !!!" + '\n' + "Starting next LEVEL_CONTENT");
+            	showGameMessage(LevelData.LEVEL_NUMBER);
                 GameWindow.gw.dispose();
                 LevelData.write("2");
                 GameWindow.gw = new GameWindow();
             } else {
-                JOptionPane.showMessageDialog(null, "LEVEL_CONTENT Completed !!!" + '\n' + "More Levels will come soon !!!" + '\n' + "Resetting data");
+            	showGameMessage(LevelData.LEVEL_NUMBER);
                 LevelData.write("1");
                 System.exit(0);
             }
-            progress = 0;
+            totalLevelPoint = 0;
         }
+    }
+    
+    public static void showGameMessage(String level_) {
+    	int level = Integer.parseInt(level_);
+    	if (level < 2) {
+    		JOptionPane.showMessageDialog(null, "LEVEL_CONTENT Completed !!!" + '\n' + "Starting next LEVEL_CONTENT");
+    	}
+    	else{
+        	JOptionPane.showMessageDialog(null, "LEVEL_CONTENT Completed !!!" + '\n' + "More Levels will come soon !!!" + '\n' + "Resetting data");  	
+    	}
     }
 
     public GameWindow.PlantType getActivePlantingBrush() {
