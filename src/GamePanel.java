@@ -317,9 +317,8 @@ public class GamePanel extends JLayeredPane implements MouseMotionListener {
 		if (isLevelUp) {
             if ("1".equals(LevelData.LEVEL_NUMBER)) {
             	messageDialog.levelUpDialog();
-            	GameWindow.gw.dispose();
-                LevelData.write("2");
-                GameWindow.gw = new GameWindow();
+            	LevelData.write("2");
+            	GameWindow.begin();
             } else {
             	messageDialog.gameClearDialog();
             	LevelData.write("1");
