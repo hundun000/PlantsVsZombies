@@ -48,9 +48,9 @@ public class Zombie {
                 collided.assignedPlant.setHealth(collided.assignedPlant.getHealth() - 10);
                 
                 /* edited */
-                final boolean planthasHealth = collided.assignedPlant.getHealth() < 0;
+                final boolean planthasHealth = collided.assignedPlant.getHealth() >= 0;
                 
-				if (planthasHealth) {
+				if (!planthasHealth) {
                     collided.removePlant();
                 }
             }
