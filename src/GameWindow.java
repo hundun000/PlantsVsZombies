@@ -17,8 +17,6 @@ public class GameWindow extends JFrame {
         FreezePeashooter
     }
 
-    //PlantType activePlantingBrush = PlantType.None;
-
     public GameWindow() {
         setSize(1012, 785);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -28,21 +26,21 @@ public class GameWindow extends JFrame {
 
         setGamePanel(sun);
 
-        Image sunflowerImage = new ImageIcon(this.getClass().getResource("images/cards/card_sunflower.png")).getImage();
+        String sunflowerImage = "images/cards/card_sunflower.png";
         setPlantCard(sunflowerImage, 110, 8, PlantType.Sunflower);
 
-        Image peashooterImage = new ImageIcon(this.getClass().getResource("images/cards/card_peashooter.png")).getImage();
+        String peashooterImage = "images/cards/card_peashooter.png";
         setPlantCard(peashooterImage, 175, 8, PlantType.Peashooter);
 
-        Image freezepeashooterImage = new ImageIcon(this.getClass().getResource("images/cards/card_freezepeashooter.png")).getImage();
+        String freezepeashooterImage = "images/cards/card_freezepeashooter.png";
         setPlantCard(freezepeashooterImage, 240, 8, PlantType.FreezePeashooter);
-
         
         setResizable(false);
         setVisible(true);
     }
     
-    private void setPlantCard(Image image, int x, int y, PlantType plantType) {
+    private void setPlantCard(String imageResource, int x, int y, PlantType plantType) {
+    	Image image = new ImageIcon(this.getClass().getResource(imageResource)).getImage();
     	PlantCard plantCard = new PlantCard(image);
         plantCard.setLocation(x, y);
         plantCard.setAction((ActionEvent e) -> {
@@ -76,15 +74,15 @@ public class GameWindow extends JFrame {
         setVisible(true);
     }
 
-    static GameWindow gw;
+    private static GameWindow gameWindow;
 
     public static void begin() {
-        gw.dispose();
-        gw = new GameWindow();
+        gameWindow.dispose();
+        gameWindow = new GameWindow();
     }
 
     public static void main(String[] args) {
-        gw = new GameWindow(true);
+        gameWindow = new GameWindow(true);
     }
 
 }
