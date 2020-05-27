@@ -21,10 +21,16 @@ public class Zombie {
 
     public void advance() {
         if (isMoving) {
+        	
             boolean isCollides = false;
             Collider collided = null;
+            
             for (int i = myLane * 9; i < (myLane + 1) * 9; i++) {
-                if (gp.getColliders()[i].assignedPlant != null && gp.getColliders()[i].isInsideCollider(posX)) {
+            	
+            	/* edited */
+                final boolean intersectPlant = gp.getColliders()[i].assignedPlant != null && gp.getColliders()[i].isInsideCollider(posX);
+                
+				if (intersectPlant) {
                     isCollides = true;
                     collided = gp.getColliders()[i];
                 }
@@ -40,7 +46,11 @@ public class Zombie {
                 }
             } else {
                 collided.assignedPlant.setHealth(collided.assignedPlant.getHealth() - 10);
-                if (collided.assignedPlant.getHealth() < 0) {
+                
+                /* edited */
+                final boolean planthasHealth = collided.assignedPlant.getHealth() < 0;
+                
+				if (planthasHealth) {
                     collided.removePlant();
                 }
             }
