@@ -15,16 +15,14 @@ public class FreezePea extends Pea {
         for (int i = 0; i < gp.getLaneZombies().get(getMyLane()).size(); i++) {
             Zombie z = gp.getLaneZombies().get(getMyLane()).get(i);
             Rectangle zRect = new Rectangle(z.getPosX(), 109 + getMyLane() * 120, 400, 120);
-            
+
             /* edited */
             if(attackZombie(z, pRect,zRect,i)) break;
         }
-        
+
         setPosX(getPosX() - 15);
     }
-    
-    
+
+
 
 }
-
-
