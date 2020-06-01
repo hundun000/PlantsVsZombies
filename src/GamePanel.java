@@ -45,7 +45,7 @@ public class GamePanel extends JLayeredPane implements MouseMotionListener {
     
     private Collider[] colliders;
     private ArrayList<ArrayList<Zombie>> laneZombies;
-    private ArrayList<ArrayList<Pea>> lanePeas;
+    private ArrayList<ArrayList<AbstractPea>> lanePeas;
     private ArrayList<Sun> activeSuns;
 
     private Timer redrawTimer;
@@ -204,7 +204,7 @@ public class GamePanel extends JLayeredPane implements MouseMotionListener {
             }
 
             for (int object = 0; object < lanePeas.get(row).size(); object++) {
-                Pea p = lanePeas.get(row).get(object);
+                AbstractPea p = lanePeas.get(row).get(object);
                 p.advance();
             }
 
@@ -252,7 +252,7 @@ public class GamePanel extends JLayeredPane implements MouseMotionListener {
             }
 
             for (int object = 0; object < lanePeas.get(row).size(); object++) {
-                Pea pea = lanePeas.get(row).get(object);
+                AbstractPea pea = lanePeas.get(row).get(object);
                 int rowPadding = 130;
                 if (pea instanceof FreezePea) {
                     graphics.drawImage(freezePeaImage, pea.getPosX(), rowPadding + (row * SIZE_ROW_CONSTANT), null);
@@ -344,11 +344,11 @@ public class GamePanel extends JLayeredPane implements MouseMotionListener {
         this.laneZombies = laneZombies;
     }
 
-    public ArrayList<ArrayList<Pea>> getLanePeas() {
+    public ArrayList<ArrayList<AbstractPea>> getLanePeas() {
         return lanePeas;
     }
 
-    public void setLanePeas(ArrayList<ArrayList<Pea>> lanePeas) {
+    public void setLanePeas(ArrayList<ArrayList<AbstractPea>> lanePeas) {
         this.lanePeas = lanePeas;
     }
 
