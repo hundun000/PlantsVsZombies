@@ -1,4 +1,3 @@
-
 import java.awt.*;
 
 /**
@@ -21,35 +20,35 @@ public class Pea {
         for (int i = 0; i < gp.getLaneZombies().get(myLane).size(); i++) {
             Zombie z = gp.getLaneZombies().get(myLane).get(i);
             Rectangle zRect = new Rectangle(z.getPosX(), 109 + myLane * 120, 400, 120);
-            
+
             /* edited */
             if(attackZombie(z, pRect,zRect,i)) break;
         }
-        
+
         posX += 15;
     }
-    
+
     /* edited */
     public boolean attackZombie(Zombie z, Rectangle pRect,Rectangle zRect,int i) {
-    	
-    	final boolean zombiehasHealth = z.getHealth() >= 0;
-    	boolean exit = false;
-    	
-    	if (pRect.intersects(zRect)) {
+
+        final boolean zombiehasHealth = z.getHealth() >= 0;
+        boolean exit = false;
+
+        if (pRect.intersects(zRect)) {
             z.setHealth(z.getHealth() - 300);
-            
+
             if (!zombiehasHealth) {
                 System.out.println("ZOMBIE DIED");
 
                 gp.getLaneZombies().get(myLane).remove(i);
-                GamePanel.setProgress(10);
+                GamePanel.setLevel(10);
                 exit = true;
             }
             gp.getLaneZombies().get(myLane).remove(this);
-            
+
         }
-		return exit;
-    	
+        return exit;
+
     }
 
     public int getPosX() {
@@ -68,4 +67,3 @@ public class Pea {
         this.myLane = myLane;
     }
 }
-
