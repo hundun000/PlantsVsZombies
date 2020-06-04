@@ -7,6 +7,7 @@ public class Pea {
 
     private int posX;
     protected GamePanel gp;
+    private PlantMovingStrategy plantMovingStrategy;
     private int myLane;
 
     public Pea(GamePanel parent, int lane, int startX) {
@@ -16,16 +17,7 @@ public class Pea {
     }
 
     public void advance() {
-        Rectangle pRect = new Rectangle(posX, 130 + myLane * 120, 28, 28);
-        for (int i = 0; i < gp.getLaneZombies().get(myLane).size(); i++) {
-            Zombie z = gp.getLaneZombies().get(myLane).get(i);
-            Rectangle zRect = new Rectangle(z.getPosX(), 109 + myLane * 120, 400, 120);
-
-            /* edited */
-            if(attackZombie(z, pRect,zRect,i)) break;
-        }
-
-        posX += 15;
+        plantMovingStrategy.move();
     }
 
     /* edited */
@@ -52,11 +44,11 @@ public class Pea {
     }
 
     public int getPosX() {
-        return posX;
+        return plantMovingStrategy.getPosX();
     }
 
     public void setPosX(int posX) {
-        this.posX = posX;
+        plantMovingStrategy.setPosX(posX);
     }
 
     public int getMyLane() {
@@ -65,5 +57,9 @@ public class Pea {
 
     public void setMyLane(int myLane) {
         this.myLane = myLane;
+    }
+
+    public void setMovingStrategy(PlantMovingStrategy movingStrategy) {
+        this.plantMovingStrategy = movingStrategy;
     }
 }
