@@ -268,6 +268,7 @@ public class GamePanel extends JLayeredPane implements MouseMotionListener {
     private class PlantActionListener implements ActionListener {
 
         int x, y;
+        Planting planting;
 
         public PlantActionListener(int x, int y) {
             this.x = x;
@@ -276,29 +277,24 @@ public class GamePanel extends JLayeredPane implements MouseMotionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (activePlantingBrush == GameWindow.PlantType.Sunflower) {
-                if (getSunScore() >= SUN_SCORE_CONSTANT) {
-                    colliders[x + y * NUM_COLUMN_CONSTANT].setPlant(new Sunflower(GamePanel.this, x, y));
-                    setSunScore(getSunScore() - SUN_SCORE_CONSTANT);
-                }
-            }
-            if (activePlantingBrush == GameWindow.PlantType.Peashooter) {
-                if (getSunScore() >= PEASHOOTER_SCORE_CONSTANT) {
-                    colliders[x + y * NUM_COLUMN_CONSTANT].setPlant(new Peashooter(GamePanel.this, x, y));
-                    setSunScore(getSunScore() - PEASHOOTER_SCORE_CONSTANT);
-                }
-            }
-
-            if (activePlantingBrush == GameWindow.PlantType.FreezePeashooter) {
-                if (getSunScore() >= FREEZE_PEASHOOTER_SCORE_CONSTANT) {
-                    colliders[x + y * NUM_COLUMN_CONSTANT].setPlant(new FreezePeashooter(GamePanel.this, x, y));
-                    setSunScore(getSunScore() - FREEZE_PEASHOOTER_SCORE_CONSTANT);
-                }
-            }
+        	switch(activePlantingBrush) {
+        	case Sunflower:
+        		planting = new PlantingSunflower(GamePanel.this, SUN_SCORE_CONSTANT, x, y);
+        		break;
+        	case Peashooter:
+        		planting = new PlantingPeashooter(GamePanel.this, PEASHOOTER_SCORE_CONSTANT, x, y);
+        		break;
+        	case FreezePeashooter:
+        		planting = new PlantingFreezePeashooter(GamePanel.this, FREEZE_PEASHOOTER_SCORE_CONSTANT, x, y);
+        		break;
+        	default: return;
+        	}
+        	
+            planting.activePlanting();
             activePlantingBrush = GameWindow.PlantType.None;
         }
     }
-
+    
     @Override
     public void mouseDragged(MouseEvent e) {
 
