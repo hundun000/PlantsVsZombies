@@ -1,14 +1,12 @@
-
-public class AdvanceStrategy implements ZombieMovingStrategy{
-    private GamePanel gp;
-
+public class ZombieAdvanceStrategy implements ZombieMovingStrategy{
     private int posX = 1000;
     private int myLane;
     private boolean isMoving = true;
+    private Facade facade;
     int slowInt = 0;
 
-    public AdvanceStrategy(GamePanel gp, int myLane) {
-        this.gp = gp;
+    public ZombieAdvanceStrategy(GamePanel gp, int myLane) {
+        facade = new Facade(gp);
         this.myLane = myLane;
     }
 
@@ -40,17 +38,10 @@ public class AdvanceStrategy implements ZombieMovingStrategy{
         if (isMoving) {
 
             boolean isCollides = false;
-            Collider collided = null;
+            Collider collided = facade.peaCoillder(myLane, posX);
 
-            for (int i = myLane * 9; i < (myLane + 1) * 9; i++) {
-
-                /* edited */
-                final boolean intersectPlant = gp.getColliders()[i].assignedPlant != null && gp.getColliders()[i].isInsideCollider(posX);
-
-                if (intersectPlant) {
-                    isCollides = true;
-                    collided = gp.getColliders()[i];
-                }
+            if(collided!= null) {
+                isCollides = true;
             }
             if (!isCollides) {
                 if (slowInt > 0) {
@@ -73,8 +64,7 @@ public class AdvanceStrategy implements ZombieMovingStrategy{
             }
             if (posX < 0) {
                 isMoving = false;
-                gp.getMessageDialog().gameOverDialog();
-                GameWindow.begin();
+                facade.gameOver();
             }
         }
     }
