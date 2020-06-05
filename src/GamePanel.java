@@ -122,7 +122,8 @@ public class GamePanel extends JLayeredPane implements MouseMotionListener {
             Random rnd = new Random();
             Sun sta = new Sun(this, rnd.nextInt(800) + 100, 0, rnd.nextInt(300) + 200);
             activeSuns.add(sta);
-            add(sta, new Integer(1));
+            /* object put on container to look sun */
+            add(sta, Singleton.sunInstance()); /* Singleton */
         });
         sunProducer.start();
 	}
@@ -150,7 +151,7 @@ public class GamePanel extends JLayeredPane implements MouseMotionListener {
             collider.setLocation(44 + getColumn(object) * SIZE_COLUMN_CONSTANT, 109 + getRow(object) * SIZE_ROW_CONSTANT);
             collider.setAction(new PlantActionListener(getColumn(object), getRow(object)));
             colliders[object] = collider;
-            add(collider, new Integer(0));
+            add(collider, Singleton.coliderInstance()); /* Singleton */
         }
 	}
 	
@@ -164,20 +165,17 @@ public class GamePanel extends JLayeredPane implements MouseMotionListener {
 
 	private void produceLanePeas() {
 		lanePeas = new ArrayList<>();
-        lanePeas.add(new ArrayList<>()); //line 1
-        lanePeas.add(new ArrayList<>()); //line 2
-        lanePeas.add(new ArrayList<>()); //line 3
-        lanePeas.add(new ArrayList<>()); //line 4
-        lanePeas.add(new ArrayList<>()); //line 5
+		for(int line=1; line <6; line++) {
+			lanePeas.add(new ArrayList<>()); //line
+		}
 	}
 
 	private void produceLaneZombies() {
 		laneZombies = new ArrayList<>();
-        laneZombies.add(new ArrayList<>()); //line 1
-        laneZombies.add(new ArrayList<>()); //line 2
-        laneZombies.add(new ArrayList<>()); //line 3
-        laneZombies.add(new ArrayList<>()); //line 4
-        laneZombies.add(new ArrayList<>()); //line 5
+		for(int line=1; line <6; line++) {
+			laneZombies.add(new ArrayList<>()); //line 
+		}
+        
 	}
 
 	private void loadZombieImage() {

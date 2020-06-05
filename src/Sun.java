@@ -60,9 +60,10 @@ public class Sun extends JPanel implements MouseListener {
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        gp.setSunScore(gp.getSunScore() + 25);
-        gp.remove(this);
-        gp.getActiveSuns().remove(this);
+        ClickScoreCreator sunfactory = new ClickScoreCreator();
+        Product product = sunfactory.createProduct("sun");
+        product.setscore(gp, this);
+        
     }
 
     @Override
