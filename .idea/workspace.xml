@@ -2,28 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="363587dc-83f6-4633-bb6b-7c57e4dc72c2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Facade.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/FreezePeaAdvanceStrategy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/PeaAdvanceStrategy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/PlantMovingStrategy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/SunAdvanceStrategy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/SunMovingStrategy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ZombieAdvanceStrategy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdvanceStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdvanceStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LEVEL_CONTENT.vbhv" beforeDir="false" afterPath="$PROJECT_DIR$/LEVEL_CONTENT.vbhv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AbstractPea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AbstractPea.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FreezePea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FreezePea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FreezePeashooter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FreezePeashooter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GamePanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Peashooter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Peashooter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Planting.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PlantingFreezePeashooter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PlantingPeashooter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PlantingSunflower.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Sun.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Sun.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Sunflower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Sunflower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Zombie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Zombie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ZombieMovingStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ZombieMovingStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SunProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SunProduct.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -389,14 +373,35 @@
       <screen x="0" y="23" width="3008" height="1603" />
     </state>
     <state x="1028" y="404" key="#Project_Structure/0.23.3008.1603@0.23.3008.1603" timestamp="1591287915450" />
+    <state x="1204" y="538" key="#com.intellij.ide.util.MemberChooser" timestamp="1591507422245">
+      <screen x="0" y="23" width="3008" height="1605" />
+    </state>
+    <state x="1204" y="538" key="#com.intellij.ide.util.MemberChooser/0.23.3008.1605@0.23.3008.1605" timestamp="1591507422245" />
     <state x="1278" y="577" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1591288864488">
       <screen x="0" y="23" width="3008" height="1603" />
     </state>
     <state x="1278" y="577" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.3008.1603@0.23.3008.1603" timestamp="1591288864488" />
-    <state x="1241" y="578" width="598" height="490" key="find.popup" timestamp="1591288195850">
-      <screen x="0" y="23" width="3008" height="1603" />
+    <state width="1714" height="463" key="GridCell.Tab.0.bottom" timestamp="1591507634351">
+      <screen x="0" y="23" width="3008" height="1605" />
+    </state>
+    <state width="1714" height="463" key="GridCell.Tab.0.bottom/0.23.3008.1605@0.23.3008.1605" timestamp="1591507634351" />
+    <state width="1714" height="463" key="GridCell.Tab.0.center" timestamp="1591507634351">
+      <screen x="0" y="23" width="3008" height="1605" />
+    </state>
+    <state width="1714" height="463" key="GridCell.Tab.0.center/0.23.3008.1605@0.23.3008.1605" timestamp="1591507634351" />
+    <state width="1714" height="463" key="GridCell.Tab.0.left" timestamp="1591507634350">
+      <screen x="0" y="23" width="3008" height="1605" />
+    </state>
+    <state width="1714" height="463" key="GridCell.Tab.0.left/0.23.3008.1605@0.23.3008.1605" timestamp="1591507634350" />
+    <state width="1714" height="463" key="GridCell.Tab.0.right" timestamp="1591507634351">
+      <screen x="0" y="23" width="3008" height="1605" />
+    </state>
+    <state width="1714" height="463" key="GridCell.Tab.0.right/0.23.3008.1605@0.23.3008.1605" timestamp="1591507634351" />
+    <state x="1241" y="579" width="598" height="491" key="find.popup" timestamp="1591507601059">
+      <screen x="0" y="23" width="3008" height="1606" />
     </state>
     <state x="1241" y="578" width="598" height="490" key="find.popup/0.23.3008.1603@0.23.3008.1603" timestamp="1591288195850" />
+    <state x="1241" y="579" width="598" height="491" key="find.popup/0.23.3008.1606@0.23.3008.1606" timestamp="1591507601059" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

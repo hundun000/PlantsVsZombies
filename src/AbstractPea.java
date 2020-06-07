@@ -1,67 +1,64 @@
 import java.awt.Rectangle;
 
 public abstract class AbstractPea {
-	  private int posX;
-	    protected GamePanel gp;
-	    private int myLane;
+    private int posX;
+    protected GamePanel gp;
+    private int myLane;
+    private PlantMovingStrategy plantMovingStrategy;
 
-	    public AbstractPea(GamePanel parent, int lane, int startX) {
-	        this.gp = parent;
-	        this.myLane = lane;
-	        posX = startX;
-	    }
 
-	    public final void advance() {
-	        Rectangle pRect = new Rectangle(posX, 130 + myLane * 120, 28, 28);
-	        for (int i = 0; i < gp.getLaneZombies().get(myLane).size(); i++) {
-	            Zombie z = gp.getLaneZombies().get(myLane).get(i);
-	            Rectangle zRect = new Rectangle(z.getPosX(), 109 + myLane * 120, 400, 120);
+    public AbstractPea(GamePanel parent, int lane, int startX) {
+        this.gp = parent;
+        this.myLane = lane;
+        posX = startX;
+    }
 
-	            /* edited */
-	            if(attackZombie(z, pRect,zRect,i)) break;
-	        }
+    public void setMovingStrategy(PlantMovingStrategy movingStrategy) {
+        this.plantMovingStrategy = movingStrategy;
+    }
 
-	        setPosXX();
-	    }
 
-	    protected abstract void setPosXX();
-	    
-	    /* edited */
-	    public boolean attackZombie(Zombie z, Rectangle pRect,Rectangle zRect,int i) {
+    public void advance() {
+		plantMovingStrategy.move();
+    }
 
-	        final boolean zombiehasHealth = z.getHealth() >= 0;
-	        boolean exit = false;
 
-	        if (pRect.intersects(zRect)) {
-	            z.setHealth(z.getHealth() - 300);
+    /* edited */
+    public boolean attackZombie(Zombie z, Rectangle pRect, Rectangle zRect, int i) {
 
-	            if (!zombiehasHealth) {
-	                System.out.println("ZOMBIE DIED");
+        final boolean zombiehasHealth = z.getHealth() >= 0;
+        boolean exit = false;
 
-	                gp.getLaneZombies().get(myLane).remove(i);
-	                GamePanel.setLevel(10);
-	                exit = true;
-	            }
-	            gp.getLaneZombies().get(myLane).remove(this);
+        if (pRect.intersects(zRect)) {
+            z.setHealth(z.getHealth() - 300);
 
-	        }
-	        return exit;
+            if (!zombiehasHealth) {
+                System.out.println("ZOMBIE DIED");
 
-	    }
+                gp.getLaneZombies().get(myLane).remove(i);
+                GamePanel.setLevel(10);
+                exit = true;
+            }
+            gp.getLaneZombies().get(myLane).remove(this);
 
-	    public int getPosX() {
-	        return posX;
-	    }
+        }
+        return exit;
 
-	    public void setPosX(int posX) {
-	        this.posX = posX;
-	    }
+    }
 
-	    public int getMyLane() {
-	        return myLane;
-	    }
+    public int getPosX() {
+        return plantMovingStrategy.getPosX();
+    }
 
-	    public void setMyLane(int myLane) {
-	        this.myLane = myLane;
-	    }
+    public void setPosX(int posX) {
+        plantMovingStrategy.setPosX(posX);
+    }
+
+    public int getMyLane() {
+        return myLane;
+    }
+
+    public void setMyLane(int myLane) {
+        this.myLane = myLane;
+    }
 }
