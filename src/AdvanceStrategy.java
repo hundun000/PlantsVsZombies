@@ -6,6 +6,7 @@ public class AdvanceStrategy implements ZombieMovingStrategy{
     private int myLane;
     private boolean isMoving = true;
     int slowInt = 0;
+    private int speed = 1;
 
     public AdvanceStrategy(GamePanel gp, int myLane) {
         this.gp = gp;
@@ -34,6 +35,11 @@ public class AdvanceStrategy implements ZombieMovingStrategy{
 
     public void setSlowInt(int slowInt) {
         this.slowInt = slowInt;
+    }
+
+    @Override
+    public void faster() {
+        speed += 10;
     }
 
     public void move() {

@@ -1,6 +1,6 @@
 import java.awt.Rectangle;
 
-public abstract class AbstractPea {
+public abstract class AbstractPea implements OnLevelUpListener {
     private int posX;
     protected GamePanel gp;
     private int myLane;
@@ -11,6 +11,7 @@ public abstract class AbstractPea {
         this.gp = parent;
         this.myLane = lane;
         posX = startX;
+        gp.addLevelUpObservers(this);
     }
 
     public void setMovingStrategy(PlantMovingStrategy movingStrategy) {
@@ -34,15 +35,16 @@ public abstract class AbstractPea {
 
             if (!zombiehasHealth) {
                 System.out.println("ZOMBIE DIED");
-
                 gp.getLaneZombies().get(myLane).remove(i);
-                GamePanel.setLevel(10);
+                gp.setLevelPoint(10);
                 exit = true;
             }
-            gp.getLaneZombies().get(myLane).remove(this);
-
         }
         return exit;
+    }
+
+    @Override
+    public void onLevelUp() {
 
     }
 

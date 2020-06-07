@@ -7,4 +7,5 @@ interface ZombieMovingStrategy {
     public void slow();
     public int getSlowInt();
     public void setSlowInt(int slowInt);
+    void faster();
 }
