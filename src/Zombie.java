@@ -9,6 +9,7 @@ public class Zombie {
     private int speed = 1;
 
     private GamePanel gp;
+    private ZombieMovingStrategy zombieMovingStrategy;
 
     private int posX = 1000;
     private int myLane;
@@ -20,52 +21,13 @@ public class Zombie {
     }
 
     public void advance() {
-        if (isMoving) {
-        	
-            boolean isCollides = false;
-            Collider collided = null;
-            
-            for (int i = myLane * 9; i < (myLane + 1) * 9; i++) {
-            	
-            	/* edited */
-                final boolean intersectPlant = gp.getColliders()[i].assignedPlant != null && gp.getColliders()[i].isInsideCollider(posX);
-                
-				if (intersectPlant) {
-                    isCollides = true;
-                    collided = gp.getColliders()[i];
-                }
-            }
-            if (!isCollides) {
-                if (slowInt > 0) {
-                    if (slowInt % 2 == 0) {
-                        posX--;
-                    }
-                    slowInt--;
-                } else {
-                    posX -= 1;
-                }
-            } else {
-                collided.assignedPlant.setHealth(collided.assignedPlant.getHealth() - 10);
-                
-                /* edited */
-                final boolean planthasHealth = collided.assignedPlant.getHealth() >= 0;
-                
-				if (!planthasHealth) {
-                    collided.removePlant();
-                }
-            }
-            if (posX < 0) {
-                isMoving = false;
-                gp.getMessageDialog().gameOverDialog();
-                GameWindow.begin();
-            }
-        }
+        zombieMovingStrategy.move();
     }
 
     int slowInt = 0;
 
     public void slow() {
-        slowInt = 1000;
+        zombieMovingStrategy.slow();
     }
 
     public static Zombie getZombie(String type, GamePanel parent, int lane) {
@@ -73,9 +35,11 @@ public class Zombie {
         switch (type) {
             case "NormalZombie":
                 z = new NormalZombie(parent, lane);
+                z.setMovingStrategy(new ZombieAdvanceStrategy(parent, lane));
                 break;
             case "ConeHeadZombie":
                 z = new ConeHeadZombie(parent, lane);
+                z.setMovingStrategy(new ZombieAdvanceStrategy(parent, lane));
                 break;
         }
         return z;
@@ -106,11 +70,11 @@ public class Zombie {
     }
 
     public int getPosX() {
-        return posX;
+        return zombieMovingStrategy.getPosX();
     }
 
     public void setPosX(int posX) {
-        this.posX = posX;
+        zombieMovingStrategy.setPosX(posX);
     }
 
     public int getMyLane() {
@@ -122,18 +86,22 @@ public class Zombie {
     }
 
     public boolean isMoving() {
-        return isMoving;
+        return zombieMovingStrategy.isMoving();
     }
 
     public void setMoving(boolean moving) {
-        isMoving = moving;
+        zombieMovingStrategy.setMoving(moving);
     }
 
     public int getSlowInt() {
-        return slowInt;
+        return zombieMovingStrategy.getSlowInt();
     }
 
     public void setSlowInt(int slowInt) {
-        this.slowInt = slowInt;
+        zombieMovingStrategy.setSlowInt(slowInt);
+    }
+
+    public void setMovingStrategy(ZombieMovingStrategy movingStrategy) {
+        this.zombieMovingStrategy = movingStrategy;
     }
 }

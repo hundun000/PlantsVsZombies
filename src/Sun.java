@@ -10,21 +10,16 @@ public class Sun extends JPanel implements MouseListener {
 
     private GamePanel gp;
     private Image sunImage;
-
     private int myX;
     private int myY;
     private int endY;
 
-    private int destruct = 200;
+    private SunMovingStrategy sunMovingStrategy;
 
-    public Sun(GamePanel parent, int startX, int startY, int endY) {
+    public Sun(GamePanel parent) {
         this.gp = parent;
-        this.endY = endY;
         setSize(80, 80);
         setOpaque(false);
-        myX = startX;
-        myY = startY;
-        setLocation(myX, myY);
         sunImage = new ImageIcon(this.getClass().getResource("images/sun.png")).getImage();
         addMouseListener(this);
     }
@@ -36,16 +31,7 @@ public class Sun extends JPanel implements MouseListener {
     }
 
     public void advance() {
-        if (myY < endY) {
-            myY += 4;
-        } else {
-            destruct--;
-            if (destruct < 0) {
-                gp.remove(this);
-                gp.getActiveSuns().remove(this);
-            }
-        }
-        setLocation(myX, myY);
+        sunMovingStrategy.move();
     }
 
     @Override
@@ -74,5 +60,14 @@ public class Sun extends JPanel implements MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
 
+    }
+
+    public void setMovingStrategy(SunMovingStrategy movingStrategy) {
+        this.sunMovingStrategy = movingStrategy;
+    }
+
+    public void deleteSun() {
+        gp.remove(this);
+        gp.getActiveSuns().remove(this);
     }
 }
