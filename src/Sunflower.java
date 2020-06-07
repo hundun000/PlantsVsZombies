@@ -11,8 +11,9 @@ public class Sunflower extends Plant {
     public Sunflower(GamePanel parent, int x, int y) {
         super(parent, x, y);
         sunProduceTimer = new Timer(15000, (ActionEvent e) -> {
-            Sun sta = new Sun(getGp(), 60 + x * 100, 110 + y * 120, 130 + y * 120);
+            Sun sta = new Sun(getGp());
             getGp().getActiveSuns().add(sta);
+            sta.setMovingStrategy( new SunAdvanceStrategy(getGp(), sta, 60 + x * 100, 110 + y * 120, 130 + y * 120));
             getGp().add(sta, new Integer(1));
         });
         sunProduceTimer.start();
