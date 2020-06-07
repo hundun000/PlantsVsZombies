@@ -2,7 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="363587dc-83f6-4633-bb6b-7c57e4dc72c2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Facade.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/FreezePeaAdvanceStrategy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/PeaAdvanceStrategy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/PlantMovingStrategy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/SunAdvanceStrategy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/SunMovingStrategy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ZombieAdvanceStrategy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AdvanceStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdvanceStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FreezePea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FreezePea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FreezePeashooter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FreezePeashooter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GamePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Peashooter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Peashooter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Planting.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PlantingFreezePeashooter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PlantingPeashooter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PlantingSunflower.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Sun.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Sun.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Sunflower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Sunflower.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Zombie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Zombie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ZombieMovingStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ZombieMovingStrategy.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,12 +33,10 @@
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
-  <component name="FavoritesManager">
-    <favorites_list name="jPvZ" />
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -25,21 +44,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="y" value="23" />
-    <option name="width" value="2560" />
-    <option name="height" value="1365" />
-  </component>
   <component name="ProjectId" id="1ceqqKHyVSZAFjPZvrmSs6OTdNq" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545396204491" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
   </component>
@@ -367,6 +383,20 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Reformatted code" />
     <option name="LAST_COMMIT_MESSAGE" value="Reformatted code" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1028" y="404" key="#Project_Structure" timestamp="1591287915450">
+      <screen x="0" y="23" width="3008" height="1603" />
+    </state>
+    <state x="1028" y="404" key="#Project_Structure/0.23.3008.1603@0.23.3008.1603" timestamp="1591287915450" />
+    <state x="1278" y="577" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1591288864488">
+      <screen x="0" y="23" width="3008" height="1603" />
+    </state>
+    <state x="1278" y="577" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.3008.1603@0.23.3008.1603" timestamp="1591288864488" />
+    <state x="1241" y="578" width="598" height="490" key="find.popup" timestamp="1591288195850">
+      <screen x="0" y="23" width="3008" height="1603" />
+    </state>
+    <state x="1241" y="578" width="598" height="490" key="find.popup/0.23.3008.1603@0.23.3008.1603" timestamp="1591288195850" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
