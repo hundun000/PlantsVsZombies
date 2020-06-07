@@ -4,10 +4,14 @@ public class ZombieAdvanceStrategy implements ZombieMovingStrategy{
     private boolean isMoving = true;
     private Facade facade;
     int slowInt = 0;
+    private int speed = 1;
 
     public ZombieAdvanceStrategy(GamePanel gp, int myLane) {
         facade = new Facade(gp);
         this.myLane = myLane;
+        if(gp.getCurrentLevel() == 2) {
+            this.speed += 1;
+        }
     }
 
     public int getPosX() {
@@ -34,6 +38,10 @@ public class ZombieAdvanceStrategy implements ZombieMovingStrategy{
         this.slowInt = slowInt;
     }
 
+    public void faster() {
+        speed += 1;
+    }
+
     public void move() {
         if (isMoving) {
 
@@ -46,11 +54,11 @@ public class ZombieAdvanceStrategy implements ZombieMovingStrategy{
             if (!isCollides) {
                 if (slowInt > 0) {
                     if (slowInt % 2 == 0) {
-                        posX--;
+                        posX -= speed;
                     }
                     slowInt--;
                 } else {
-                    posX -= 1;
+                    posX -= speed;
                 }
             } else {
                 collided.assignedPlant.setHealth(collided.assignedPlant.getHealth() - 10);

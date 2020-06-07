@@ -1,9 +1,7 @@
-import javax.swing.*;
-
 /**
  * Created by Armin on 6/25/2016.
  */
-public class Zombie {
+public class Zombie implements OnLevelUpListener {
 
     private int health = 1000;
     private int speed = 1;
@@ -14,10 +12,12 @@ public class Zombie {
     private int posX = 1000;
     private int myLane;
     private boolean isMoving = true;
+    private static Zombie z;
 
     public Zombie(GamePanel parent, int lane) {
         this.gp = parent;
         myLane = lane;
+        gp.addLevelUpObservers(this);
     }
 
     public void advance() {
@@ -30,8 +30,17 @@ public class Zombie {
         zombieMovingStrategy.slow();
     }
 
+    @Override
+    public void onLevelUp() {
+        try {
+            zombieMovingStrategy.faster();
+        } catch (NullPointerException e) {
+
+        }
+    }
+
     public static Zombie getZombie(String type, GamePanel parent, int lane) {
-        Zombie z = new Zombie(parent, lane);
+        z = new Zombie(parent, lane);
         switch (type) {
             case "NormalZombie":
                 z = new NormalZombie(parent, lane);

@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="363587dc-83f6-4633-bb6b-7c57e4dc72c2" name="Default Changelist" comment="">
+    <list default="true" id="363587dc-83f6-4633-bb6b-7c57e4dc72c2" name="Default Changelist" comment="Reformatted code">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/OnLevelUpListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LEVEL_CONTENT.vbhv" beforeDir="false" afterPath="$PROJECT_DIR$/LEVEL_CONTENT.vbhv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AbstractPea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AbstractPea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FreezePea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FreezePea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SunProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SunProduct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AdvanceStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdvanceStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GamePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Sunflower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Sunflower.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Zombie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Zombie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ZombieAdvanceStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ZombieAdvanceStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ZombieMovingStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ZombieMovingStrategy.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,8 +24,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -322,7 +326,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="7dc5d397-09b3-4108-83f3-9a4e2501e054" name="Default" comment="" />
+      <changelist id="363587dc-83f6-4633-bb6b-7c57e4dc72c2" name="Default Changelist" comment="" />
       <created>1466841968784</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -381,27 +385,40 @@
       <screen x="0" y="23" width="3008" height="1603" />
     </state>
     <state x="1278" y="577" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.3008.1603@0.23.3008.1603" timestamp="1591288864488" />
-    <state width="1714" height="463" key="GridCell.Tab.0.bottom" timestamp="1591507634351">
-      <screen x="0" y="23" width="3008" height="1605" />
+    <state x="980" y="398" key="CommitChangelistDialog2" timestamp="1591513927825">
+      <screen x="0" y="23" width="3008" height="1603" />
     </state>
-    <state width="1714" height="463" key="GridCell.Tab.0.bottom/0.23.3008.1605@0.23.3008.1605" timestamp="1591507634351" />
-    <state width="1714" height="463" key="GridCell.Tab.0.center" timestamp="1591507634351">
-      <screen x="0" y="23" width="3008" height="1605" />
+    <state x="980" y="398" key="CommitChangelistDialog2/0.23.3008.1603@0.23.3008.1603" timestamp="1591513927825" />
+    <state width="1941" height="463" key="GridCell.Tab.0.bottom" timestamp="1591514240617">
+      <screen x="0" y="23" width="3008" height="1603" />
     </state>
-    <state width="1714" height="463" key="GridCell.Tab.0.center/0.23.3008.1605@0.23.3008.1605" timestamp="1591507634351" />
-    <state width="1714" height="463" key="GridCell.Tab.0.left" timestamp="1591507634350">
-      <screen x="0" y="23" width="3008" height="1605" />
+    <state width="1941" height="463" key="GridCell.Tab.0.bottom/0.23.3008.1603@0.23.3008.1603" timestamp="1591514240617" />
+    <state width="1714" height="463" key="GridCell.Tab.0.bottom/0.23.3008.1605@0.23.3008.1605" timestamp="1591507831061" />
+    <state width="1941" height="463" key="GridCell.Tab.0.center" timestamp="1591514240617">
+      <screen x="0" y="23" width="3008" height="1603" />
     </state>
-    <state width="1714" height="463" key="GridCell.Tab.0.left/0.23.3008.1605@0.23.3008.1605" timestamp="1591507634350" />
-    <state width="1714" height="463" key="GridCell.Tab.0.right" timestamp="1591507634351">
-      <screen x="0" y="23" width="3008" height="1605" />
+    <state width="1941" height="463" key="GridCell.Tab.0.center/0.23.3008.1603@0.23.3008.1603" timestamp="1591514240617" />
+    <state width="1714" height="463" key="GridCell.Tab.0.center/0.23.3008.1605@0.23.3008.1605" timestamp="1591507831061" />
+    <state width="1941" height="463" key="GridCell.Tab.0.left" timestamp="1591514240616">
+      <screen x="0" y="23" width="3008" height="1603" />
     </state>
-    <state width="1714" height="463" key="GridCell.Tab.0.right/0.23.3008.1605@0.23.3008.1605" timestamp="1591507634351" />
-    <state x="1241" y="579" width="598" height="491" key="find.popup" timestamp="1591507601059">
-      <screen x="0" y="23" width="3008" height="1606" />
+    <state width="1941" height="463" key="GridCell.Tab.0.left/0.23.3008.1603@0.23.3008.1603" timestamp="1591514240616" />
+    <state width="1714" height="463" key="GridCell.Tab.0.left/0.23.3008.1605@0.23.3008.1605" timestamp="1591507831061" />
+    <state width="1941" height="463" key="GridCell.Tab.0.right" timestamp="1591514240617">
+      <screen x="0" y="23" width="3008" height="1603" />
     </state>
-    <state x="1241" y="578" width="598" height="490" key="find.popup/0.23.3008.1603@0.23.3008.1603" timestamp="1591288195850" />
+    <state width="1941" height="463" key="GridCell.Tab.0.right/0.23.3008.1603@0.23.3008.1603" timestamp="1591514240617" />
+    <state width="1714" height="463" key="GridCell.Tab.0.right/0.23.3008.1605@0.23.3008.1605" timestamp="1591507831061" />
+    <state x="1241" y="578" width="598" height="582" key="find.popup" timestamp="1591514202288">
+      <screen x="0" y="23" width="3008" height="1603" />
+    </state>
+    <state x="1241" y="578" width="598" height="582" key="find.popup/0.23.3008.1603@0.23.3008.1603" timestamp="1591514202288" />
+    <state x="1241" y="578" width="598" height="491" key="find.popup/0.23.3008.1604@0.23.3008.1604" timestamp="1591513728687" />
     <state x="1241" y="579" width="598" height="491" key="find.popup/0.23.3008.1606@0.23.3008.1606" timestamp="1591507601059" />
+    <state x="1068" y="474" width="670" height="676" key="search.everywhere.popup" timestamp="1591510188755">
+      <screen x="0" y="23" width="3008" height="1603" />
+    </state>
+    <state x="1068" y="474" width="670" height="676" key="search.everywhere.popup/0.23.3008.1603@0.23.3008.1603" timestamp="1591510188755" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
