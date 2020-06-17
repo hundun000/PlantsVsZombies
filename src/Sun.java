@@ -70,4 +70,8 @@ public class Sun extends JPanel implements MouseListener {
         gp.remove(this);
         gp.getActiveSuns().remove(this);
     }
+    
+    public SunMovingStrategy getSunMovingStrategy() {
+    	return sunMovingStrategy;
+    }
 }
