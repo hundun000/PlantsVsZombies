@@ -29,5 +29,17 @@ public class SunAdvanceStrategy implements SunMovingStrategy{
         }
         sun.setLocation(myX, myY);
     }
+    
+    public int getMyX() {
+    	return myX;
+    }
+    
+    public int getMyY() {
+    	return myY;
+    }
+    
+    public int getDestruct() {
+    	return destruct;
+    }
 
 }
