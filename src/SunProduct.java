@@ -1,4 +1,3 @@
-import com.sun.glass.events.MouseEvent;
 
 public class SunProduct extends Product {
 	
