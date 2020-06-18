@@ -26,5 +26,9 @@ public class Peashooter extends Plant {
     public void stop() {
         shootTimer.stop();
     }
+    
+    public Pea getPea() {
+    	return pea;
+    }
 
 }

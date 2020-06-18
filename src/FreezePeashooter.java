@@ -27,5 +27,9 @@ public class FreezePeashooter extends Plant {
     public void stop() {
         shootTimer.stop();
     }
+    
+    public FreezePea getFreezePea() {
+    	return freezePea;
+    }
 
 }
