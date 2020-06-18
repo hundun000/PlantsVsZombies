@@ -84,5 +84,7 @@ public class GameWindow extends JFrame {
     public static void main(String[] args) {
         gameWindow = new GameWindow(true);
     }
-
+    public GamePanel getGamePanel() {
+    	return gamePanel;
+    }
 }
