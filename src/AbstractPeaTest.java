@@ -9,7 +9,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TestAbstractPea {
+public class AbstractPeaTest {
 	private AbstractPea testItem;
 	private GamePanel gamePanel;
 	
