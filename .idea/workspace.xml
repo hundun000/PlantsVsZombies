@@ -2,16 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="363587dc-83f6-4633-bb6b-7c57e4dc72c2" name="Default Changelist" comment="Reformatted code">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/OnLevelUpListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/junit_junit_4_2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AbstractPea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AbstractPea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdvanceStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdvanceStrategy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GamePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Sunflower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Sunflower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Zombie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Zombie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ZombieAdvanceStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ZombieAdvanceStrategy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ZombieMovingStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ZombieMovingStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jPvZ.iml" beforeDir="false" afterPath="$PROJECT_DIR$/jPvZ.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AbstractPeaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AbstractPeaTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,14 +32,18 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545396204491" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="PsiViewer.ProjectComponent">
     <option name="HIGHLIGHT" value="false" />
@@ -373,10 +371,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="Reformatted code" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1028" y="404" key="#Project_Structure" timestamp="1591287915450">
+    <state x="1028" y="404" key="#Project_Structure" timestamp="1592728604605">
       <screen x="0" y="23" width="3008" height="1603" />
     </state>
-    <state x="1028" y="404" key="#Project_Structure/0.23.3008.1603@0.23.3008.1603" timestamp="1591287915450" />
+    <state x="1028" y="404" key="#Project_Structure/0.23.3008.1603@0.23.3008.1603" timestamp="1592728604605" />
     <state x="1204" y="538" key="#com.intellij.ide.util.MemberChooser" timestamp="1591507422245">
       <screen x="0" y="23" width="3008" height="1605" />
     </state>
@@ -409,6 +407,10 @@
     </state>
     <state width="1941" height="463" key="GridCell.Tab.0.right/0.23.3008.1603@0.23.3008.1603" timestamp="1591514240617" />
     <state width="1714" height="463" key="GridCell.Tab.0.right/0.23.3008.1605@0.23.3008.1605" timestamp="1591507831061" />
+    <state x="1237" y="722" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1592728598028">
+      <screen x="0" y="23" width="3008" height="1603" />
+    </state>
+    <state x="1237" y="722" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.23.3008.1603@0.23.3008.1603" timestamp="1592728598028" />
     <state x="1241" y="578" width="598" height="582" key="find.popup" timestamp="1591514202288">
       <screen x="0" y="23" width="3008" height="1603" />
     </state>
