@@ -70,6 +70,10 @@ public class GamePanel extends JLayeredPane implements MouseMotionListener, OnLe
         mLevelUpObservers.add(onLevelUpListener);
     }
 
+    public ArrayList<OnLevelUpListener> getLevelUpObservers() {
+        return mLevelUpObservers;
+    }
+
     public int getSunScore() {
         return sunScore;
     }
