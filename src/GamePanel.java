@@ -281,8 +281,10 @@ public class GamePanel extends JLayeredPane implements MouseMotionListener, OnLe
         }
 
     }
+    
+    
 
-    private class PlantActionListener implements ActionListener {
+    class PlantActionListener implements ActionListener {
 
         int x, y;
         Planting planting;
@@ -388,5 +390,9 @@ public class GamePanel extends JLayeredPane implements MouseMotionListener, OnLe
 
     public MessageDialog getMessageDialog() {
     	return messageDialog;
+    }
+    
+    public PlantActionListener getPlantActionListener(int x, int y) {
+    	return new PlantActionListener(x, y);
     }
 }
