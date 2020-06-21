@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="363587dc-83f6-4633-bb6b-7c57e4dc72c2" name="Default Changelist" comment="Reformatted code">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/junit_junit_4_2.xml" afterDir="false" />
+    <list default="true" id="363587dc-83f6-4633-bb6b-7c57e4dc72c2" name="Default Changelist" comment="TestAbstractPea -&gt; AbstractPeaTest, add junit lib">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/junit_junit_4_12.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/junit_junit_4_2.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jPvZ.iml" beforeDir="false" afterPath="$PROJECT_DIR$/jPvZ.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AbstractPeaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AbstractPeaTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +42,7 @@
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545396204491" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.18261719" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="PsiViewer.ProjectComponent">
@@ -58,7 +58,7 @@
       <recent name="C:\Users\Armin\IdeaProjects\jPvZ\resources" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.PeaAdvanceTest.testPea_create">
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
       <module name="" />
       <option name="DEPLOY" value="true" />
@@ -254,6 +254,49 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="FreezePeaAdvanceTest.testFreezePea_create" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="jPvZ" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="FreezePeaAdvanceTest" />
+      <option name="METHOD_NAME" value="testFreezePea_create" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PeaAdvanceTest.testPea_create" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="jPvZ" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="PeaAdvanceTest" />
+      <option name="METHOD_NAME" value="testPea_create" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ZombieAdvanceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="jPvZ" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ZombieAdvanceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ZombieAdvanceTest.testAdvance" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="jPvZ" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ZombieAdvanceTest" />
+      <option name="METHOD_NAME" value="testAdvance" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -315,7 +358,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.PeaAdvanceTest.testPea_create" />
+        <item itemvalue="JUnit.FreezePeaAdvanceTest.testFreezePea_create" />
         <item itemvalue="Application.GameWindow" />
+        <item itemvalue="JUnit.ZombieAdvanceTest" />
+        <item itemvalue="JUnit.ZombieAdvanceTest.testAdvance" />
       </list>
     </recent_temporary>
   </component>
@@ -349,7 +396,14 @@
       <option name="project" value="LOCAL" />
       <updated>1545395229844</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="TestAbstractPea -&gt; AbstractPeaTest, add junit lib">
+      <created>1592728881113</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1592728881113</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -368,13 +422,14 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Reformatted code" />
-    <option name="LAST_COMMIT_MESSAGE" value="Reformatted code" />
+    <MESSAGE value="TestAbstractPea -&gt; AbstractPeaTest, add junit lib" />
+    <option name="LAST_COMMIT_MESSAGE" value="TestAbstractPea -&gt; AbstractPeaTest, add junit lib" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1028" y="404" key="#Project_Structure" timestamp="1592728604605">
+    <state x="1028" y="404" key="#Project_Structure" timestamp="1592729850394">
       <screen x="0" y="23" width="3008" height="1603" />
     </state>
-    <state x="1028" y="404" key="#Project_Structure/0.23.3008.1603@0.23.3008.1603" timestamp="1592728604605" />
+    <state x="1028" y="404" key="#Project_Structure/0.23.3008.1603@0.23.3008.1603" timestamp="1592729850394" />
     <state x="1204" y="538" key="#com.intellij.ide.util.MemberChooser" timestamp="1591507422245">
       <screen x="0" y="23" width="3008" height="1605" />
     </state>
@@ -383,30 +438,34 @@
       <screen x="0" y="23" width="3008" height="1603" />
     </state>
     <state x="1278" y="577" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.3008.1603@0.23.3008.1603" timestamp="1591288864488" />
-    <state x="980" y="398" key="CommitChangelistDialog2" timestamp="1591513927825">
+    <state x="980" y="398" key="CommitChangelistDialog2" timestamp="1592729820434">
       <screen x="0" y="23" width="3008" height="1603" />
     </state>
-    <state x="980" y="398" key="CommitChangelistDialog2/0.23.3008.1603@0.23.3008.1603" timestamp="1591513927825" />
-    <state width="1941" height="463" key="GridCell.Tab.0.bottom" timestamp="1591514240617">
+    <state x="980" y="398" key="CommitChangelistDialog2/0.23.3008.1603@0.23.3008.1603" timestamp="1592729820434" />
+    <state width="1714" height="463" key="GridCell.Tab.0.bottom" timestamp="1592729835821">
       <screen x="0" y="23" width="3008" height="1603" />
     </state>
-    <state width="1941" height="463" key="GridCell.Tab.0.bottom/0.23.3008.1603@0.23.3008.1603" timestamp="1591514240617" />
+    <state width="1714" height="463" key="GridCell.Tab.0.bottom/0.23.3008.1603@0.23.3008.1603" timestamp="1592729835821" />
     <state width="1714" height="463" key="GridCell.Tab.0.bottom/0.23.3008.1605@0.23.3008.1605" timestamp="1591507831061" />
-    <state width="1941" height="463" key="GridCell.Tab.0.center" timestamp="1591514240617">
+    <state width="1714" height="463" key="GridCell.Tab.0.center" timestamp="1592729835821">
       <screen x="0" y="23" width="3008" height="1603" />
     </state>
-    <state width="1941" height="463" key="GridCell.Tab.0.center/0.23.3008.1603@0.23.3008.1603" timestamp="1591514240617" />
+    <state width="1714" height="463" key="GridCell.Tab.0.center/0.23.3008.1603@0.23.3008.1603" timestamp="1592729835821" />
     <state width="1714" height="463" key="GridCell.Tab.0.center/0.23.3008.1605@0.23.3008.1605" timestamp="1591507831061" />
-    <state width="1941" height="463" key="GridCell.Tab.0.left" timestamp="1591514240616">
+    <state width="1714" height="463" key="GridCell.Tab.0.left" timestamp="1592729835820">
       <screen x="0" y="23" width="3008" height="1603" />
     </state>
-    <state width="1941" height="463" key="GridCell.Tab.0.left/0.23.3008.1603@0.23.3008.1603" timestamp="1591514240616" />
+    <state width="1714" height="463" key="GridCell.Tab.0.left/0.23.3008.1603@0.23.3008.1603" timestamp="1592729835820" />
     <state width="1714" height="463" key="GridCell.Tab.0.left/0.23.3008.1605@0.23.3008.1605" timestamp="1591507831061" />
-    <state width="1941" height="463" key="GridCell.Tab.0.right" timestamp="1591514240617">
+    <state width="1714" height="463" key="GridCell.Tab.0.right" timestamp="1592729835821">
       <screen x="0" y="23" width="3008" height="1603" />
     </state>
-    <state width="1941" height="463" key="GridCell.Tab.0.right/0.23.3008.1603@0.23.3008.1603" timestamp="1591514240617" />
+    <state width="1714" height="463" key="GridCell.Tab.0.right/0.23.3008.1603@0.23.3008.1603" timestamp="1592729835821" />
     <state width="1714" height="463" key="GridCell.Tab.0.right/0.23.3008.1605@0.23.3008.1605" timestamp="1591507831061" />
+    <state x="991" y="565" key="Vcs.Push.Dialog.v2" timestamp="1592728882419">
+      <screen x="0" y="23" width="3008" height="1603" />
+    </state>
+    <state x="991" y="565" key="Vcs.Push.Dialog.v2/0.23.3008.1603@0.23.3008.1603" timestamp="1592728882419" />
     <state x="1237" y="722" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1592728598028">
       <screen x="0" y="23" width="3008" height="1603" />
     </state>
