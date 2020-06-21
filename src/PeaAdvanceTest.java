@@ -25,7 +25,7 @@ public class PeaAdvanceTest {
 	 * Purpose: test whether pea is null when peashooter meets zombie
 	 * Input: peashooter (gamePanel,0,(0,4))
 	 * Expected: Return true
-	 * 				pea != null
+	 * 				pea = null
 	 * 
 	 */
 	@Test
@@ -47,13 +47,14 @@ public class PeaAdvanceTest {
 				}
 			}
 		}
-		
+		find = true;
 		while (find) {
 			for (int row = 0; row < 5; row++) {
 				for (Zombie z : laneZombies.get(row)) {
 					if (z != null) {
 						pea =  peashooter[row].getPea();
-						assertNotNull(pea);
+						find = false;
+						assertNull(pea);
 					}
 				}
 			}
