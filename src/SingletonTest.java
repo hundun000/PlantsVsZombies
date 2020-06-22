@@ -13,7 +13,7 @@ public class SingletonTest {
 	 * Input: Singleton.coliderInstance(), Singleton.sunInstance()
 	 * Expected: 
 	 * 			Singleton.coliderInstance() = new Integer(0)
-	 * 			Singleton.sunInstance() = new Integer(1)
+	 * 			Singleton.sunInstance() = new Integer(1) 
 	 */
 	
 	@Test
