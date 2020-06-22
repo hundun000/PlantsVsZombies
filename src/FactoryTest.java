@@ -17,7 +17,7 @@ public class FactoryTest {
 	 * 			creator.createProduct("sun")'s return instance 
 	 * 			= new SunProduct()
 	 * 			creator.createProduct("moon")'s return instance 
-	 * 			= null 
+	 * 			= null  
 	 */
 	
 
