@@ -11,7 +11,7 @@ public class GamePanelTest {
 	 * Purpose: Check if getSunScore operate correctly
 	 * Input: gp.getSunScore()
 	 * Expected: 
-	 * 			gp.getSunScore() = 10
+	 * 			gp.getSunScore() = 10 
 	 */
 	
 	@Test
