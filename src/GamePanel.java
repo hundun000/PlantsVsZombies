@@ -70,6 +70,10 @@ public class GamePanel extends JLayeredPane implements MouseMotionListener, OnLe
         mLevelUpObservers.add(onLevelUpListener);
     }
 
+    public JLabel getsunScoreboard() {
+        return sunScoreboard;
+    }
+    
     public ArrayList<OnLevelUpListener> getLevelUpObservers() {
         return mLevelUpObservers;
     }
@@ -178,11 +182,11 @@ public class GamePanel extends JLayeredPane implements MouseMotionListener, OnLe
         }
 	}
 
-	private int getRow(int collider) {
+	public int getRow(int collider) {
 		return collider / NUM_COLUMN_CONSTANT;
 	}
 
-	private int getColumn(int collider) {
+	public int getColumn(int collider) {
 		return collider % NUM_COLUMN_CONSTANT;
 	}
 

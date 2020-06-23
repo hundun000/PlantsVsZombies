@@ -6,6 +6,7 @@ public class ClickScoreCreator extends ScoreCreator{
 		switch (name) {
         case "sun": return new SunProduct(); 
         //case "moon": return new moonProduct();
+        
         }
 		return null;
 	}
