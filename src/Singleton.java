@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
+
 public class Singleton {
 	private static Integer colliderAdd =  new Integer(0);
 	private static Integer sunAdd =  new Integer(1);
