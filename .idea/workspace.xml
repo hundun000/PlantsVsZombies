@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="363587dc-83f6-4633-bb6b-7c57e4dc72c2" name="Default Changelist" comment="Reformatted code">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/OnLevelUpListener.java" afterDir="false" />
+    <list default="true" id="363587dc-83f6-4633-bb6b-7c57e4dc72c2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/OnLevelUpListenerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AbstractPea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AbstractPea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdvanceStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdvanceStrategy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GamePanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Sunflower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Sunflower.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Zombie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Zombie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ZombieAdvanceStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ZombieAdvanceStrategy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ZombieMovingStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ZombieMovingStrategy.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,14 +33,18 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545396204491" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.18261719" />
+    <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="PsiViewer.ProjectComponent">
     <option name="HIGHLIGHT" value="false" />
@@ -56,11 +55,14 @@
     <option name="AUTOSCROLL_FROM_SOURCE" value="false" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Armin\IdeaProjects\jPvZ\resources" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.OnLevelUpListenerTest">
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
       <module name="" />
       <option name="DEPLOY" value="true" />
@@ -242,16 +244,60 @@
       <recursive>false</recursive>
       <method />
     </configuration>
-    <configuration name="GameWindow" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="GameWindow" />
-      <module name="jPvZ" />
+    <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="Application" factoryName="Application">
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    <configuration name="AbstractPeaTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="jPvZ" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="AbstractPeaTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OnLevelUpListenerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="jPvZ" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="OnLevelUpListenerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PeaAdvanceTest.testPea_create" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="jPvZ" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="PeaAdvanceTest" />
+      <option name="METHOD_NAME" value="testPea_create" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PlnatActionListenerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="jPvZ" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="PlnatActionListenerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ZombieAdvanceTest.testIsMoving_create" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="jPvZ" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ZombieAdvanceTest" />
+      <option name="METHOD_NAME" value="testIsMoving_create" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -317,7 +363,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.GameWindow" />
+        <item itemvalue="JUnit.OnLevelUpListenerTest" />
+        <item itemvalue="JUnit.PlnatActionListenerTest" />
+        <item itemvalue="JUnit.AbstractPeaTest" />
+        <item itemvalue="JUnit.ZombieAdvanceTest.testIsMoving_create" />
+        <item itemvalue="JUnit.PeaAdvanceTest.testPea_create" />
       </list>
     </recent_temporary>
   </component>
@@ -351,7 +401,21 @@
       <option name="project" value="LOCAL" />
       <updated>1545395229844</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="TestAbstractPea -&gt; AbstractPeaTest, add junit lib">
+      <created>1592728881113</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1592728881113</updated>
+    </task>
+    <task id="LOCAL-00003" summary="JUnit 4.2 -&gt; 4.12">
+      <created>1592729864388</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1592729864388</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -370,13 +434,19 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Reformatted code" />
-    <option name="LAST_COMMIT_MESSAGE" value="Reformatted code" />
+    <MESSAGE value="TestAbstractPea -&gt; AbstractPeaTest, add junit lib" />
+    <MESSAGE value="JUnit 4.2 -&gt; 4.12" />
+    <option name="LAST_COMMIT_MESSAGE" value="JUnit 4.2 -&gt; 4.12" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1028" y="404" key="#Project_Structure" timestamp="1591287915450">
+    <state x="1028" y="404" key="#Project_Structure" timestamp="1592729850394">
       <screen x="0" y="23" width="3008" height="1603" />
     </state>
-    <state x="1028" y="404" key="#Project_Structure/0.23.3008.1603@0.23.3008.1603" timestamp="1591287915450" />
+    <state x="1028" y="404" key="#Project_Structure/0.23.3008.1603@0.23.3008.1603" timestamp="1592729850394" />
+    <state x="855" y="487" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1592733476389">
+      <screen x="0" y="23" width="3008" height="1603" />
+    </state>
+    <state x="855" y="487" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.3008.1603@0.23.3008.1603" timestamp="1592733476389" />
     <state x="1204" y="538" key="#com.intellij.ide.util.MemberChooser" timestamp="1591507422245">
       <screen x="0" y="23" width="3008" height="1605" />
     </state>
@@ -385,43 +455,55 @@
       <screen x="0" y="23" width="3008" height="1603" />
     </state>
     <state x="1278" y="577" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.3008.1603@0.23.3008.1603" timestamp="1591288864488" />
-    <state x="980" y="398" key="CommitChangelistDialog2" timestamp="1591513927825">
+    <state x="980" y="398" key="CommitChangelistDialog2" timestamp="1592729864294">
       <screen x="0" y="23" width="3008" height="1603" />
     </state>
-    <state x="980" y="398" key="CommitChangelistDialog2/0.23.3008.1603@0.23.3008.1603" timestamp="1591513927825" />
-    <state width="1941" height="463" key="GridCell.Tab.0.bottom" timestamp="1591514240617">
+    <state x="980" y="398" key="CommitChangelistDialog2/0.23.3008.1603@0.23.3008.1603" timestamp="1592729864294" />
+    <state width="1714" height="463" key="GridCell.Tab.0.bottom" timestamp="1592733659478">
       <screen x="0" y="23" width="3008" height="1603" />
     </state>
-    <state width="1941" height="463" key="GridCell.Tab.0.bottom/0.23.3008.1603@0.23.3008.1603" timestamp="1591514240617" />
+    <state width="1714" height="463" key="GridCell.Tab.0.bottom/0.23.3008.1603@0.23.3008.1603" timestamp="1592733659478" />
     <state width="1714" height="463" key="GridCell.Tab.0.bottom/0.23.3008.1605@0.23.3008.1605" timestamp="1591507831061" />
-    <state width="1941" height="463" key="GridCell.Tab.0.center" timestamp="1591514240617">
+    <state width="1714" height="463" key="GridCell.Tab.0.center" timestamp="1592733659477">
       <screen x="0" y="23" width="3008" height="1603" />
     </state>
-    <state width="1941" height="463" key="GridCell.Tab.0.center/0.23.3008.1603@0.23.3008.1603" timestamp="1591514240617" />
+    <state width="1714" height="463" key="GridCell.Tab.0.center/0.23.3008.1603@0.23.3008.1603" timestamp="1592733659477" />
     <state width="1714" height="463" key="GridCell.Tab.0.center/0.23.3008.1605@0.23.3008.1605" timestamp="1591507831061" />
-    <state width="1941" height="463" key="GridCell.Tab.0.left" timestamp="1591514240616">
+    <state width="1714" height="463" key="GridCell.Tab.0.left" timestamp="1592733659476">
       <screen x="0" y="23" width="3008" height="1603" />
     </state>
-    <state width="1941" height="463" key="GridCell.Tab.0.left/0.23.3008.1603@0.23.3008.1603" timestamp="1591514240616" />
+    <state width="1714" height="463" key="GridCell.Tab.0.left/0.23.3008.1603@0.23.3008.1603" timestamp="1592733659476" />
     <state width="1714" height="463" key="GridCell.Tab.0.left/0.23.3008.1605@0.23.3008.1605" timestamp="1591507831061" />
-    <state width="1941" height="463" key="GridCell.Tab.0.right" timestamp="1591514240617">
+    <state width="1714" height="463" key="GridCell.Tab.0.right" timestamp="1592733659477">
       <screen x="0" y="23" width="3008" height="1603" />
     </state>
-    <state width="1941" height="463" key="GridCell.Tab.0.right/0.23.3008.1603@0.23.3008.1603" timestamp="1591514240617" />
+    <state width="1714" height="463" key="GridCell.Tab.0.right/0.23.3008.1603@0.23.3008.1603" timestamp="1592733659477" />
     <state width="1714" height="463" key="GridCell.Tab.0.right/0.23.3008.1605@0.23.3008.1605" timestamp="1591507831061" />
-    <state x="1241" y="578" width="598" height="582" key="find.popup" timestamp="1591514202288">
+    <state x="991" y="565" key="Vcs.Push.Dialog.v2" timestamp="1592729865346">
       <screen x="0" y="23" width="3008" height="1603" />
     </state>
-    <state x="1241" y="578" width="598" height="582" key="find.popup/0.23.3008.1603@0.23.3008.1603" timestamp="1591514202288" />
+    <state x="991" y="565" key="Vcs.Push.Dialog.v2/0.23.3008.1603@0.23.3008.1603" timestamp="1592729865346" />
+    <state x="1237" y="722" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1592728598028">
+      <screen x="0" y="23" width="3008" height="1603" />
+    </state>
+    <state x="1237" y="722" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.23.3008.1603@0.23.3008.1603" timestamp="1592728598028" />
+    <state x="1241" y="578" width="598" height="582" key="find.popup" timestamp="1592733177736">
+      <screen x="0" y="23" width="3008" height="1603" />
+    </state>
+    <state x="1241" y="578" width="598" height="582" key="find.popup/0.23.3008.1603@0.23.3008.1603" timestamp="1592733177736" />
     <state x="1241" y="578" width="598" height="491" key="find.popup/0.23.3008.1604@0.23.3008.1604" timestamp="1591513728687" />
     <state x="1241" y="579" width="598" height="491" key="find.popup/0.23.3008.1606@0.23.3008.1606" timestamp="1591507601059" />
-    <state x="1068" y="474" width="670" height="676" key="search.everywhere.popup" timestamp="1591510188755">
+    <state x="1068" y="474" width="670" height="676" key="search.everywhere.popup" timestamp="1592732990815">
       <screen x="0" y="23" width="3008" height="1603" />
     </state>
-    <state x="1068" y="474" width="670" height="676" key="search.everywhere.popup/0.23.3008.1603@0.23.3008.1603" timestamp="1591510188755" />
+    <state x="1068" y="474" width="670" height="676" key="search.everywhere.popup/0.23.3008.1603@0.23.3008.1603" timestamp="1592732990815" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/PlantsVsZombies$PlnatActionListenerTest.ic" NAME="PlnatActionListenerTest Coverage Results" MODIFIED="1592733635305" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/PlantsVsZombies$OnLevelUpListenerTest.ic" NAME="OnLevelUpListenerTest Coverage Results" MODIFIED="1592733659465" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

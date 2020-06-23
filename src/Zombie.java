@@ -13,6 +13,7 @@ public class Zombie implements OnLevelUpListener {
     private int myLane;
     private boolean isMoving = true;
     private static Zombie z;
+    public int level = 0;
 
     public Zombie(GamePanel parent, int lane) {
         this.gp = parent;
@@ -34,6 +35,7 @@ public class Zombie implements OnLevelUpListener {
     public void onLevelUp() {
         try {
             zombieMovingStrategy.faster();
+            level++;
         } catch (NullPointerException e) {
 
         }

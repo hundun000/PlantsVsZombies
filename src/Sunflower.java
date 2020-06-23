@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 public class Sunflower extends Plant implements OnLevelUpListener {
 
     private Timer sunProduceTimer;
-    private int delay = 15000;
+    public int delay = 15000;
     int x;
     int y;
 
