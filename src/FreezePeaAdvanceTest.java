@@ -24,7 +24,7 @@ public class FreezePeaAdvanceTest {
 	 * Purpose: test whether freezePeais null when freezePeashooter meets zombie
 	 * Input: freezePeashooter (gamePanel,0,(0,4))
 	 * Expected: Return true
-	 * 				freezePea != null
+	 * 				freezePea = null
 	 * 
 	 */
 	@Test
@@ -46,13 +46,14 @@ public class FreezePeaAdvanceTest {
 				}
 			}
 		}
-		
+		find = true;
 		while (find) {
 			for (int row = 0; row < 5; row++) {
 				for (Zombie z : laneZombies.get(row)) {
 					if (z != null) {
 						freezePea =  freezePeashooter[row].getFreezePea();
-						assertNotNull(freezePea);
+						find = false;
+						assertNull(freezePea);
 					}
 				}
 			}
