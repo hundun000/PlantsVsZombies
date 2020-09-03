@@ -1,21 +1,22 @@
 package game.component;
 
-import game.GamePanel;
+import java.awt.Rectangle;
 
-public class PositionComponent {
+import game.GamePanel;
+import game.manager.GridManager;
+
+public abstract class PositionComponent {
     int posX;
     int posY;
     GamePanel gamePanel;
-    public PositionComponent(int x, int y, GamePanel gamePanel) {
+    public PositionComponent(GamePanel gamePanel, int x, int y) {
         setPosX(x);
         setPosY(y);
         this.gamePanel = gamePanel;
     }
 
 
-    public void move() {
-    
-    }
+    public abstract void move();
     
     
     public int getPosX() {
@@ -34,5 +35,12 @@ public class PositionComponent {
     public void setPosY(int posY) {
         this.posY = posY;
     }
+    
+    @Override
+    public String toString() {
+        return "(" + posX + ", " + posY + ")";
+    }
+    
+    public abstract Rectangle getCoillderBox();
     
 }

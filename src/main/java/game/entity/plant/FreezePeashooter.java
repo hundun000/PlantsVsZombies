@@ -20,5 +20,10 @@ public class FreezePeashooter extends Peashooter {
     protected Pea generatePea() {
         return new FreezePea(getGamePanel(), getPositionComponent().getPosY(), 103 + getPositionComponent().getPosX() * 100);
     }
+    
+    @Override
+    public int getPlantCost() {
+        return 175;
+    }
 
 }

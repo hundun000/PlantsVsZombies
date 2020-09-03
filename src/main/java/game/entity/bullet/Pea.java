@@ -36,11 +36,7 @@ public class Pea extends BaseBullet {
     public void updateLogicFrame() {
         super.updateLogicFrame();
         
-        Rectangle bulletRect = this.getCoillderBox();
-        List<BaseZombie> zombies = gamePanel.getZombieManager().getZombiesIntersected(bulletRect);
-        if (!zombies.isEmpty()) {
-            bulletHitZombie(zombies.get(0));
-        }
+        
     }
     
     
@@ -48,9 +44,5 @@ public class Pea extends BaseBullet {
     public int getDamage() {
         return damage;
     }
-    
-    public Rectangle getCoillderBox() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+
 }

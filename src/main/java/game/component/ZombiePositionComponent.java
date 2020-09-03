@@ -1,61 +1,40 @@
 package game.component;
 
+import java.awt.Rectangle;
+
 import game.GamePanel;
-import game.collision.PlantSlot;
 import game.manager.GridManager;
+import game.planting.PlantSlot;
 
 public class ZombiePositionComponent extends PositionComponent{
     private static int START_POS_X = 1000;
     private boolean isMoving = true;
-    int slowInt = 0;
+    int slowFrame = 0;
     private int speed = 1;
 
     public ZombiePositionComponent(GamePanel gamePanel, int y) {
-        super(START_POS_X, y, gamePanel);
+        super(gamePanel, START_POS_X, y);
         if(gamePanel.getCurrentLevel() == 2) {
             this.speed += 1;
         }
     }
 
-    
-    public boolean isMoving() {
-        return isMoving;
-    }
-    public void setMoving(boolean moving) {
-        this.isMoving = moving;
-    }
-    public void slow() {
-        this.slowInt = 1000;
-    }
-    public int getSlowInt() {
-        return slowInt;
-    }
-
-    public void setSlowInt(int slowInt) {
-        this.slowInt = slowInt;
-    }
-
-    public void faster() {
-        speed += 1;
+    public void setSlowFrame(int slowFrame) {
+        this.slowFrame = slowFrame;
     }
 
     @Override
     public void move() {
         if (isMoving) {
 
-            boolean isCollides = false;
-            PlantSlot collided = gamePanel.getGridManager().getCollideredPlantSlot(posX, true);
+            PlantSlot collided = gamePanel.getGridManager().getCollideredPlantSlot(this);
 
-            if(collided!= null) {
-                isCollides = true;
-            }
-            if (!isCollides) {
-                if (slowInt > 0) {
-                    if (slowInt % 2 == 0) {
-                        posX -= speed;
-                    }
-                    slowInt--;
-                } else {
+            if (collided == null) {
+                if (slowFrame > 0) {
+                    slowFrame--;
+                }
+                
+                if (slowFrame % 2 == 0) {
                     posX -= speed;
                 }
             } else {
@@ -65,7 +44,7 @@ public class ZombiePositionComponent extends PositionComponent{
                 final boolean planthasHealth = collided.assignedPlant.getHealth() >= 0;
 
                 if (!planthasHealth) {
-                    collided.removePlant();
+                    collided.plantDie();
                 }
             }
             if (posX < 0) {
@@ -73,6 +52,11 @@ public class ZombiePositionComponent extends PositionComponent{
                 gamePanel.gameOver();
             }
         }
+    }
+
+    @Override
+    public Rectangle getCoillderBox() {
+        return new Rectangle(this.getPosX(), this.getPosY(), GridManager.GRID_WIDTH, GridManager.GRID_HEIGHT);
     }
 
 }

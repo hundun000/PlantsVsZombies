@@ -17,10 +17,8 @@ public class Peashooter extends BasePlant {
     
     public static String REGISTER_NAME = "peashooter";
 
-    private int gridY;
     public Peashooter(GamePanel parent, int gridX, int gridY) {
         super(parent, gridX, gridY, REGISTER_NAME, 10);
-        this.gridY = gridY;
     }
     
     protected Pea generatePea() {
@@ -43,7 +41,7 @@ public class Peashooter extends BasePlant {
     @Override
     protected void work() {
         BaseBullet pea = generatePea();
-        getGamePanel().getGridManager().addBulletToLane(pea, gridY);
+        getGamePanel().getGridManager().addBullet(pea);
     }
     
     private int attackRangeSpace = 1;
@@ -51,6 +49,11 @@ public class Peashooter extends BasePlant {
     @Override
     public Rectangle getAttackRangeBox() {
         return new Rectangle(getPositionComponent().getPosX() + attackRangeSpace, getPositionComponent().getPosY() + attackRangeSpace, GridManager.GRID_HEIGHT * 3, GridManager.GRID_WIDTH - 2 * attackRangeSpace);
+    }
+
+    @Override
+    public int getPlantCost() {
+        return 100;
     }
 
 }

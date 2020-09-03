@@ -18,8 +18,8 @@ public class Sunflower extends BasePlant implements OnLevelUpListener {
     int x;
     int y;
 
-    public Sunflower(GamePanel parent, int x, int y) {
-        super(parent, x, y, REGISTER_NAME, 10);
+    public Sunflower(GamePanel gamePanel, int x, int y) {
+        super(gamePanel, x, y, REGISTER_NAME, 10);
         this.x = x;
         this.y = y;
 
@@ -57,5 +57,10 @@ public class Sunflower extends BasePlant implements OnLevelUpListener {
     @Override
     public Rectangle getAttackRangeBox() {
         return null;
+    }
+
+    @Override
+    public int getPlantCost() {
+        return 50;
     }
 }

@@ -1,10 +1,12 @@
 package game.component;
+import java.awt.Rectangle;
+
 import game.GamePanel;
 
 public class BulletPositionComponent extends PositionComponent{
     
     public BulletPositionComponent (GamePanel gamePanel, int x,int y) {
-        super(x, y, gamePanel);
+        super(gamePanel, x, y);
     }
 
     @Override
@@ -20,5 +22,10 @@ public class BulletPositionComponent extends PositionComponent{
     @Override
     public void setPosX(int posX) {
         this.posX = posX;
+    }
+    
+    @Override
+    public Rectangle getCoillderBox() {
+        return new Rectangle(this.getPosX(), this.getPosY(), 28, 28);
     }
 }

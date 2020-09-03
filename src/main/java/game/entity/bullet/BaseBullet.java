@@ -1,6 +1,7 @@
 package game.entity.bullet;
 
 import java.awt.Rectangle;
+import java.util.List;
 
 import game.GamePanel;
 import game.component.BulletPositionComponent;
@@ -26,9 +27,7 @@ public abstract class BaseBullet extends GameObject {
     public void addDebuff(BaseZombie zombie) {
     }
     
-    public Rectangle getCoillderBox() {
-        return new Rectangle(getPositionComponent().getPosX(), getPositionComponent().getPosY(), 28, 28);
-    }
+    
     
     @Override
     public PositionComponent getPositionComponent() {
@@ -38,6 +37,14 @@ public abstract class BaseBullet extends GameObject {
     @Override
     public void updateLogicFrame() {
         bulletPositionComponent.move();
+        
+        Rectangle bulletRect = this.getPositionComponent().getCoillderBox();
+        List<BaseZombie> zombies = gamePanel.getZombieManager().getZombiesIntersected(bulletRect);
+        if (!zombies.isEmpty()) {
+            BaseZombie zombie = zombies.get(0);
+            bulletHitZombie(zombie);
+            gamePanel.getGridManager().removeBullet(this);
+        }
     }
     
     public void bulletHitZombie(BaseZombie zombie) {

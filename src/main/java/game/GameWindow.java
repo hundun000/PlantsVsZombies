@@ -11,12 +11,6 @@ public class GameWindow extends JFrame {
     
 	private GamePanel gamePanel;
 	
-    public enum PlantType {
-        None,
-        Sunflower,
-        Peashooter,
-        FreezePeashooter
-    }
     
     private GameWindow() {
         this.setLocationRelativeTo(null);
@@ -37,7 +31,7 @@ public class GameWindow extends JFrame {
     }
 
 	private void setGamePanel() {
-		gamePanel = new GamePanel();
+		gamePanel = new GamePanel(true);
         gamePanel.setLocation(0, 0);
         getLayeredPane().add(gamePanel, new Integer(0));
 	}

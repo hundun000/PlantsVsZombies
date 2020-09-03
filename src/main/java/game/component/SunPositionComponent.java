@@ -1,5 +1,7 @@
 package game.component;
 
+import java.awt.Rectangle;
+
 import game.GamePanel;
 
 public class SunPositionComponent extends PositionComponent {
@@ -8,8 +10,8 @@ public class SunPositionComponent extends PositionComponent {
 
     
     
-    public SunPositionComponent(GamePanel gp, int startX, int startY, int endY) {
-        super(startX, startY, gp);
+    public SunPositionComponent(GamePanel gamePanel, int startX, int startY, int endY) {
+        super(gamePanel, startX, startY);
         this.endY = endY;
     }
 
@@ -24,7 +26,12 @@ public class SunPositionComponent extends PositionComponent {
 
     
     public int getDestruct() {
-    	return destruct;
+        return destruct;
+    }
+    
+    @Override
+    public Rectangle getCoillderBox() {
+        return new Rectangle(posX, posY, 1, 1);
     }
 
 }

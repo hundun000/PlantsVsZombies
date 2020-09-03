@@ -36,6 +36,7 @@ public class GamePanel extends JLayeredPane implements OnLevelUpListener, ILogic
 	private static final int REDRAWTIME_CONSTANT = 45;
 	
 	private static final int CONDITION_LEVEL_CONSTANT = 100;
+    public static final boolean DRAW_DEBUG_BOX = true;
 
 	private Image bgImage;
     
@@ -61,7 +62,7 @@ public class GamePanel extends JLayeredPane implements OnLevelUpListener, ILogic
      * 关卡进度值
      */
     static int totalLevelPoint = 0;
-    public int currentLevel = Integer.parseInt(LevelData.LEVEL_NUMBER);
+    public int currentLevel = 1;
 
     public long logicFrameCounter = 0;
     
@@ -89,10 +90,11 @@ public class GamePanel extends JLayeredPane implements OnLevelUpListener, ILogic
         GameWindow.begin();
     }
 
-    public GamePanel() {
+    public GamePanel(boolean visible) {
         setSize(SCREEN_WIDTH_CONSTANT, SCREEN_HEIGHT_CONSTANT);
         setLayout(null);
-
+        setVisible(visible);
+        
         messageDialog = new MessageDialog(GamePanel.this);
 
         loadBackGroundImage();

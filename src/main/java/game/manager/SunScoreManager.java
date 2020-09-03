@@ -6,6 +6,9 @@ import java.util.ArrayList;
 
 import javax.swing.JLabel;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import game.GamePanel;
 import game.ImageManager;
 import game.entity.item.SunItem;
@@ -15,7 +18,8 @@ import game.entity.item.SunItem;
  * Created on 2020/09/01
  */
 public class SunScoreManager extends BaseManager {
-
+    static Logger logger = LoggerFactory.getLogger(SunScoreManager.class);
+    
     private ArrayList<SunItem> activeSuns;
     
     JLabel scoreLable;
@@ -54,6 +58,7 @@ public class SunScoreManager extends BaseManager {
 
     public void addSunItem(SunItem sunItem) {
         activeSuns.add(sunItem);
+        logger.info("sunitem added: ", sunItem.getPositionComponent().toString());
     }
 
     
@@ -66,9 +71,8 @@ public class SunScoreManager extends BaseManager {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         
-        for (SunItem activeSun : activeSuns) {
-            Image image = ImageManager.getImage(activeSun.getRegisterName());
-            g.drawImage(image, activeSun.getPositionComponent().getPosX(), activeSun.getPositionComponent().getPosY(), null);
+        for (SunItem sunItem : activeSuns) {
+            sunItem.drawSelf(g);
         }
     }
     

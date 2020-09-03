@@ -1,8 +1,7 @@
-package game.entity.planting;
+package game.planting;
 import javax.swing.*;
 
 import game.GamePanel;
-import game.GameWindow.PlantType;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -14,27 +13,24 @@ import java.awt.event.MouseListener;
 public class PlantCard extends JLabel implements MouseListener {
 
     private GamePanel gamePanel;
-    private PlantType plantType;
-    
-    public PlantCard(GamePanel gamePanel, Image image, int x, int y, PlantType plantType) {
+    private String plantRegisterName;
+    private Image image;
+    public PlantCard(GamePanel gamePanel, Image image, int x, int y, String plantRegisterName) {
         super();
         this.gamePanel = gamePanel;
         ImageIcon imageIcon = new ImageIcon(image);
         setIcon(imageIcon);
         setSize(imageIcon.getIconWidth(), imageIcon.getIconHeight());
         setLocation(x, y);
-        this.plantType = plantType;
+        this.plantRegisterName = plantRegisterName;
         addMouseListener(this);
+        this.image = image;
     }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-    }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
+        gamePanel.getGridManager().setPlanting(plantRegisterName);
     }
 
     @Override
@@ -44,7 +40,7 @@ public class PlantCard extends JLabel implements MouseListener {
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        gamePanel.getPlantCardManager().setActivePlantingBrush(plantType);
+        
     }
 
     @Override

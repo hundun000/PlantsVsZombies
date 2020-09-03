@@ -14,11 +14,11 @@ import org.slf4j.LoggerFactory;
 import game.GamePanel;
 import game.GameWindow;
 import game.ImageManager;
-import game.GameWindow.PlantType;
+import game.entity.plant.BasePlant;
 import game.entity.plant.FreezePeashooter;
 import game.entity.plant.Peashooter;
 import game.entity.plant.Sunflower;
-import game.entity.planting.PlantCard;
+import game.planting.PlantCard;
 
 /**
  * @author hundun
@@ -28,7 +28,6 @@ public class PlantCardManager extends BaseManager {
     static Logger logger = LoggerFactory.getLogger(PlantCardManager.class);
     
     private final static int LAYER_CARD = 0;
-    private PlantType activePlantingBrush = PlantType.None;
     private ArrayList<PlantCard> plantCards;
     
     public PlantCardManager(GamePanel gamePanel) {
@@ -37,9 +36,9 @@ public class PlantCardManager extends BaseManager {
     
     
     
-    private void addPlantCard(String registerName, int x, int y, PlantType plantType) {
+    private void addPlantCard(String registerName, int x, int y, String plantRegisterName) {
         Image image = ImageManager.getImage(registerName);
-        PlantCard plantCard = new PlantCard(gamePanel, image, x, y, plantType);
+        PlantCard plantCard = new PlantCard(gamePanel, image, x, y, plantRegisterName);
         plantCards.add(plantCard);
         add(plantCard, LAYER_CARD);
         logger.info("card {} added.", registerName);
@@ -59,22 +58,19 @@ public class PlantCardManager extends BaseManager {
         plantCards = new ArrayList<>();
         
         String sunflowerImage = getCardRegisterName(Sunflower.REGISTER_NAME);
-        this.addPlantCard(sunflowerImage, 110, 8, PlantType.Sunflower);
+        this.addPlantCard(sunflowerImage, 110, 8, Sunflower.REGISTER_NAME);
 
         String peashooterImage = getCardRegisterName(Peashooter.REGISTER_NAME);
-        this.addPlantCard(peashooterImage, 175, 8, PlantType.Peashooter);
+        this.addPlantCard(peashooterImage, 175, 8, Peashooter.REGISTER_NAME);
 
         String freezepeashooterImage = getCardRegisterName(FreezePeashooter.REGISTER_NAME);
-        this.addPlantCard(freezepeashooterImage, 240, 8, PlantType.FreezePeashooter);
+        this.addPlantCard(freezepeashooterImage, 240, 8, FreezePeashooter.REGISTER_NAME);
     }
     
-    public PlantType getActivePlantingBrush() {
-        return activePlantingBrush;
-    }
 
-    public void setActivePlantingBrush(GameWindow.PlantType activePlantingBrush) {
-        this.activePlantingBrush = activePlantingBrush;
-    }
+
+
+    
     
     
 

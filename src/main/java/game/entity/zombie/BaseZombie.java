@@ -2,6 +2,7 @@ package game.entity.zombie;
 
 
 
+import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import org.slf4j.Logger;
@@ -41,16 +42,9 @@ public abstract class BaseZombie extends GameObject implements OnLevelUpListener
     }
 
 
-    int slowFrame = 0;
-
-    public void slow() {
-        zombiePositionComponent.slow();
-    }
-
     @Override
     public void onLevelUp() {
-        zombiePositionComponent.faster();
-        level++;
+
     }
     
     public enum ZombieType {
@@ -82,7 +76,7 @@ public abstract class BaseZombie extends GameObject implements OnLevelUpListener
     }
 
     public void setSlowFrame(int slowInt) {
-        this.slowFrame = slowInt;
+        this.zombiePositionComponent.setSlowFrame(slowInt);
     }
     
     public boolean isMoving() {
@@ -92,10 +86,7 @@ public abstract class BaseZombie extends GameObject implements OnLevelUpListener
     public void setMoving(boolean moving) {
         this.moving = moving;
     }
-    
-    public int getSlowFrame() {
-        return slowFrame;
-    }
+
     
     @Override
     public PositionComponent getPositionComponent() {
@@ -105,17 +96,12 @@ public abstract class BaseZombie extends GameObject implements OnLevelUpListener
     @Override
     public void updateLogicFrame() {
         zombiePositionComponent.move();
-        //logger.debug(instanceName + " move to :" + zombiePositionComponent.getPosX());
-        if (slowFrame > 0) {
-            slowFrame--;
-        }
     }
     
     public String getInstanceName() {
         return instanceName;
     }
 
-    public Rectangle getCoillderBox() {
-        return new Rectangle(getPositionComponent().getPosX(), getPositionComponent().getPosY(), 400, 120);
-    }
+    
+
 }

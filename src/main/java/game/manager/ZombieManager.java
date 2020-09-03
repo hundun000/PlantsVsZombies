@@ -49,8 +49,7 @@ public class ZombieManager extends BaseManager {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         for (BaseZombie zombie : zombies) {
-            Image image = ImageManager.getImage(zombie.getRegisterName());
-            g.drawImage(image, zombie.getPositionComponent().getPosX(), zombie.getPositionComponent().getPosY(), null);
+            zombie.drawSelf(g);
         }
     }
     
@@ -70,7 +69,7 @@ public class ZombieManager extends BaseManager {
     public List<BaseZombie> getZombiesIntersected(Rectangle rect) {
         List<BaseZombie> result = new ArrayList<>();
         for (BaseZombie zombie : zombies) {
-            Rectangle zombieRect = zombie.getCoillderBox(); 
+            Rectangle zombieRect = zombie.getPositionComponent().getCoillderBox(); 
             
             if (rect.intersects(zombieRect)) {
                 result.add(zombie);
