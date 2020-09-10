@@ -3,18 +3,29 @@ package game.component;
 import java.awt.Rectangle;
 
 import game.GamePanel;
+import game.ILogicFrameListener;
 import game.manager.GridManager;
 
-public abstract class PositionComponent {
-    int posX;
-    int posY;
-    GamePanel gamePanel;
-    public PositionComponent(GamePanel gamePanel, int x, int y) {
-        setPosX(x);
-        setPosY(y);
+public abstract class PositionComponent implements ILogicFrameListener {
+    protected int posX;
+    protected int posY;
+    protected GamePanel gamePanel;
+    protected boolean stopped;
+    
+    public PositionComponent(GamePanel gamePanel, int posX, int posY) {
+        this.posX = posX;
+        this.posY = posY;
         this.gamePanel = gamePanel;
+        this.stopped = false;
     }
 
+
+    @Override
+    public void updateLogicFrame() {
+        if (!stopped) {
+            move();
+        } 
+    }
 
     public abstract void move();
     
@@ -22,18 +33,10 @@ public abstract class PositionComponent {
     public int getPosX() {
         return posX;
     }
-
-    public void setPosX(int posX) {
-        this.posX = posX;
-    }
     
     
     public int getPosY() {
         return posY;
-    }
-    
-    public void setPosY(int posY) {
-        this.posY = posY;
     }
     
     @Override

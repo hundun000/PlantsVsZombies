@@ -4,7 +4,7 @@ import java.util.Random;
 
 import game.GamePanel;
 import game.ILogicFrameListener;
-import game.entity.item.SunItem;
+import game.pvz.item.SunItem;
 
 /**
  * @author hundun
@@ -29,8 +29,8 @@ public class NaturalSunProducer implements ILogicFrameListener {
             int sunX = rnd.nextInt(GamePanel.SCREEN_WIDTH_CONSTANT - 200) + 100;
             int sunY = 0;
             int endY = rnd.nextInt(300) + 200;
-            SunItem sta = new SunItem(gamePanel, sunX, sunY, endY);
-            gamePanel.getSunScoreManager().addSunItem(sta);
+            SunItem sunItem = new SunItem(gamePanel, sunX, sunY, endY);
+            gamePanel.getGridManager().addSunItem(sunItem);
             
             workColdDown = workColdDownReset;
         }

@@ -6,32 +6,35 @@ import game.GamePanel;
 
 public class SunPositionComponent extends PositionComponent {
     private int endY;
-    private int destruct = 100;
-
+    private int destructCount = 100;
+    int width = 80;
+    int height = 80;
     
     
     public SunPositionComponent(GamePanel gamePanel, int startX, int startY, int endY) {
         super(gamePanel, startX, startY);
         this.endY = endY;
     }
+    
+    
 
     @Override
     public void move() {
         if (posY < endY) {
-            posY += 4;
+            posY += 2;
         } else {
-            destruct--;
+            destructCount--;
         }
     }
 
     
-    public int getDestruct() {
-        return destruct;
+    public int getDestructCount() {
+        return destructCount;
     }
     
     @Override
     public Rectangle getCoillderBox() {
-        return new Rectangle(posX, posY, 1, 1);
+        return new Rectangle(posX, posY - height, width, height);
     }
 
 }

@@ -53,13 +53,13 @@ public class GameWindow extends JFrame {
 
     private static GameWindow gameWindow;
 
-    public static void begin() {
+    public static void intoFightWindow() {
         gameWindow.dispose();
         gameWindow = fightWindow();
     }
 
     public static void main(String[] args) {
-        gameWindow = menuWindow();
+        gameWindow = fightWindow();
     }
     public GamePanel getGamePanel() {
     	return gamePanel;

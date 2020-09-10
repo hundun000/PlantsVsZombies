@@ -7,8 +7,7 @@ import java.util.Random;
 
 import game.GamePanel;
 import game.ILogicFrameListener;
-import game.entity.zombie.BaseZombie;
-import game.entity.zombie.BaseZombie.ZombieType;
+import game.gameobject.zombie.BaseZombie;
 
 /**
  * @author hundun
@@ -22,19 +21,19 @@ public class NaturalZombieProducer implements ILogicFrameListener {
     
     public NaturalZombieProducer(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
-        rules.add(new NaturalZombieSpawnRule(ZombieType.NORMAL_ZOMBIE, 60));
-        rules.add(new NaturalZombieSpawnRule(ZombieType.NORMAL_ZOMBIE, 100));
-        rules.add(new NaturalZombieSpawnRule(ZombieType.CONEHEAD_ZOMBIE, 100));
+        rules.add(new NaturalZombieSpawnRule("normal_zombie", 10));
+        rules.add(new NaturalZombieSpawnRule("normal_zombie", 20));
+        rules.add(new NaturalZombieSpawnRule("conehead_zombie", 20));
     }
     
     class NaturalZombieSpawnRule {
         
-        ZombieType type;
+        String zombieRegisterName;
         int startFrame;
         
-        public NaturalZombieSpawnRule(ZombieType type, int startFrame) {
+        public NaturalZombieSpawnRule(String zombieRegisterName, int startFrame) {
             super();
-            this.type = type;
+            this.zombieRegisterName = zombieRegisterName;
             this.startFrame = startFrame;
         }
         
@@ -42,8 +41,8 @@ public class NaturalZombieProducer implements ILogicFrameListener {
             return startFrame;
         }
         
-        public ZombieType getType() {
-            return type;
+        public String getZombieRegisterName() {
+            return zombieRegisterName;
         }
     }
     
@@ -54,9 +53,8 @@ public class NaturalZombieProducer implements ILogicFrameListener {
             while (iterator.hasNext()) {
                 NaturalZombieSpawnRule rule = iterator.next();
                 if (rule.getStartFrame() == gamePanel.logicFrameCounter) {
-                    int lane = rnd.nextInt(5);
-                    BaseZombie zombie = BaseZombie.getZombie(rule.getType(), gamePanel, lane);
-                    gamePanel.getZombieManager().addZombie(zombie);
+                    int lane = rnd.nextInt(GridManager.NUM_ROW_CONSTANT);
+                    gamePanel.getZombieManager().addZombie(rule.getZombieRegisterName(), lane);
                     iterator.remove();
                 }
             }

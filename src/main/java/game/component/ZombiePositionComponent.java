@@ -3,60 +3,65 @@ package game.component;
 import java.awt.Rectangle;
 
 import game.GamePanel;
+import game.gameobject.plant.PlantSlot;
+import game.gameobject.zombie.ZombieInstanceParams;
+import game.gameobject.zombie.ZombieModel;
 import game.manager.GridManager;
-import game.planting.PlantSlot;
+import game.manager.ZombieManager;
 
 public class ZombiePositionComponent extends PositionComponent{
-    private static int START_POS_X = 1000;
-    private boolean isMoving = true;
-    int slowFrame = 0;
-    private int speed = 1;
+    private static int START_POS_X = GridManager.GRID_WIDTH * (GridManager.NUM_COLUMN_CONSTANT + 1);
+    int freezeFrame = 0;
+    private int fullSpeed;
+    private ZombieModel model;
 
-    public ZombiePositionComponent(GamePanel gamePanel, int y) {
-        super(gamePanel, START_POS_X, y);
-        if(gamePanel.getCurrentLevel() == 2) {
-            this.speed += 1;
-        }
+    public ZombiePositionComponent(GamePanel gamePanel, ZombieModel model, ZombieInstanceParams params) {
+        super(gamePanel, 
+                ZombieManager.MANAGER_WIDTH, 
+                (params.gridY + 1) * GridManager.GRID_HEIGHT);
+        this.model = model;
+        this.fullSpeed = GridManager.gridPerSecondToPixelPerFrame(0.5);
     }
 
-    public void setSlowFrame(int slowFrame) {
-        this.slowFrame = slowFrame;
+
+
+    public void setFreezeFrame(int slowFrame) {
+        this.freezeFrame = slowFrame;
     }
 
     @Override
     public void move() {
-        if (isMoving) {
+        PlantSlot collided = gamePanel.getGridManager().getCollideredPlantSlot(this);
 
-            PlantSlot collided = gamePanel.getGridManager().getCollideredPlantSlot(this);
-
-            if (collided == null) {
-                if (slowFrame > 0) {
-                    slowFrame--;
-                }
-                
-                if (slowFrame % 2 == 0) {
-                    posX -= speed;
-                }
-            } else {
-                collided.assignedPlant.setHealth(collided.assignedPlant.getHealth() - 10);
-
-                /* edited */
-                final boolean planthasHealth = collided.assignedPlant.getHealth() >= 0;
-
-                if (!planthasHealth) {
-                    collided.plantDie();
-                }
+        if (collided == null) {
+            if (freezeFrame > 0) {
+                freezeFrame--;
             }
-            if (posX < 0) {
-                isMoving = false;
-                gamePanel.gameOver();
+            
+            int currentSpeed;
+            if (freezeFrame % 2 == 0) {
+                currentSpeed = fullSpeed;
+            } else {
+                currentSpeed = 0;
+            }
+            
+            posX -= currentSpeed;
+        } else {
+            collided.getPlant().damageHealth(10);
+
+            if (!collided.getPlant().alive()) {
+                collided.plantDie();
             }
         }
+        if (posX < 0) {
+            stopped = true;
+        }
     }
-
+    
     @Override
     public Rectangle getCoillderBox() {
-        return new Rectangle(this.getPosX(), this.getPosY(), GridManager.GRID_WIDTH, GridManager.GRID_HEIGHT);
+        int coillderBoxX = posX + model.coillderBoxOffsetX;
+        int coillderBoxY = posY + model.coillderBoxOffsetY;
+        return new Rectangle(coillderBoxX, coillderBoxY, model.coillderBoxWidth, model.coillderBoxHeight);
     }
-
 }

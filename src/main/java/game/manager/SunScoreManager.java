@@ -10,8 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import game.GamePanel;
-import game.ImageManager;
-import game.entity.item.SunItem;
+import game.gameobject.Spirit;
+import game.pvz.item.SunItem;
 
 /**
  * @author hundun
@@ -20,26 +20,24 @@ import game.entity.item.SunItem;
 public class SunScoreManager extends BaseManager {
     static Logger logger = LoggerFactory.getLogger(SunScoreManager.class);
     
-    private ArrayList<SunItem> activeSuns;
+    private Spirit sunItemSpirit;
     
     JLabel scoreLable;
     private int sunScore = 0;
     
     public SunScoreManager(GamePanel gamePanel, int initSunScore) {
-        super(gamePanel);
+        super(gamePanel, 0, 0, 50, 50, 0, 0);
         addSunScore(initSunScore);
     }
 
     @Override
     public void updateLogicFrame() {
-        for (int object = 0; object < activeSuns.size(); object++) {
-            activeSuns.get(object).updateLogicFrame();
-        }
+        
     }
 
     @Override
     public void initChild() {
-        activeSuns = new ArrayList<>();
+        
         
         this.scoreLable = new JLabel("sunScore");
         scoreLable.setLocation(0, 0);
@@ -56,33 +54,22 @@ public class SunScoreManager extends BaseManager {
         return this.sunScore >= cost;
     }
 
-    public void addSunItem(SunItem sunItem) {
-        activeSuns.add(sunItem);
-        logger.info("sunitem added: ", sunItem.getPositionComponent().toString());
-    }
-
     
-    public void deleteSun(SunItem sun) {
-        //this.remove(sun);
-        this.activeSuns.remove(sun);
-    }
     
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         
-        for (SunItem sunItem : activeSuns) {
-            sunItem.drawSelf(g);
-        }
     }
     
-    /**
-     * 执行加费
-     * @param chargePoint 
-     */
-    public void chargeSunPointAndDelete(SunItem sumItem) {
-        this.addSunScore(sumItem.getChargePoint());
-        this.activeSuns.remove(sumItem);
+    
+    public void setSunItemSpirit(Spirit sunItemSpirit) {
+        this.sunItemSpirit = sunItemSpirit;
     }
+    
+    public Spirit getSunItemSpirit() {
+        return sunItemSpirit;
+    }
+    
 
 }

@@ -84,7 +84,7 @@ public class Menu extends JPanel {
 
     private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
         // TODO add your handling code here:
-        GameWindow.begin();
+        GameWindow.intoFightWindow();
     }//GEN-LAST:event_jPanel1MouseClicked
 
 
