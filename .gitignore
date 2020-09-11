@@ -1,4 +1,23 @@
 /build/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+/out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
 /dist/
-/bin/
-out/
+/nbdist/
+/.nb-gradle/
+
+### Eclipse IDE ###
+.classpath
+.project
+.settings/
+/bin
+/.gradle/
+/target/
