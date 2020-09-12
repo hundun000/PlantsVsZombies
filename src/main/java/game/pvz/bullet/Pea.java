@@ -4,7 +4,6 @@ import java.util.List;
 
 import game.GamePanel;
 import game.ILogicFrameListener;
-import game.OnLevelUpListener;
 import game.component.BulletPositionComponent;
 import game.component.PositionComponent;
 import game.gameobject.GameObject;

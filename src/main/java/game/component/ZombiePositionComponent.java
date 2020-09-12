@@ -50,7 +50,7 @@ public class ZombiePositionComponent extends PositionComponent{
             collided.getPlant().damageHealth(10);
 
             if (!collided.getPlant().alive()) {
-                collided.plantDie();
+                collided.clearPlant();
             }
         }
         if (posX < 0) {

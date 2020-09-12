@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import game.GamePanel;
 import game.gameobject.Spirit;
-import game.pvz.item.SunItem;
+import game.pvz.drop.SunItem;
 
 /**
  * @author hundun
@@ -19,8 +19,6 @@ import game.pvz.item.SunItem;
  */
 public class SunScoreManager extends BaseManager {
     static Logger logger = LoggerFactory.getLogger(SunScoreManager.class);
-    
-    private Spirit sunItemSpirit;
     
     JLabel scoreLable;
     private int sunScore = 0;
@@ -61,15 +59,7 @@ public class SunScoreManager extends BaseManager {
         super.paintComponent(g);
         
     }
-    
-    
-    public void setSunItemSpirit(Spirit sunItemSpirit) {
-        this.sunItemSpirit = sunItemSpirit;
-    }
-    
-    public Spirit getSunItemSpirit() {
-        return sunItemSpirit;
-    }
+
     
 
 }

@@ -4,14 +4,14 @@ import java.awt.Rectangle;
 
 import game.GamePanel;
 
-public class SunPositionComponent extends PositionComponent {
+public class DropPositionComponent extends PositionComponent {
     private int endY;
     private int destructCount = 100;
     int width = 80;
     int height = 80;
     
     
-    public SunPositionComponent(GamePanel gamePanel, int startX, int startY, int endY) {
+    public DropPositionComponent(GamePanel gamePanel, int startX, int startY, int endY) {
         super(gamePanel, startX, startY);
         this.endY = endY;
     }

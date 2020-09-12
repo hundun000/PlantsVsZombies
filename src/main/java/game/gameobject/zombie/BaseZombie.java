@@ -10,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import game.GamePanel;
-import game.OnLevelUpListener;
 import game.component.PositionComponent;
 import game.component.ZombiePositionComponent;
 import game.gameobject.GameObject;
@@ -22,7 +21,7 @@ import game.pvz.zombie.NormalZombie;
 /**
  * Created by Armin on 6/25/2016.
  */
-public abstract class BaseZombie extends GameObject implements OnLevelUpListener {
+public abstract class BaseZombie extends GameObject {
     static Logger logger = LoggerFactory.getLogger(BaseZombie.class);
     private int health = 1000;
 
@@ -39,11 +38,6 @@ public abstract class BaseZombie extends GameObject implements OnLevelUpListener
         this.zombiePositionComponent = new ZombiePositionComponent(parent, model, params);
     }
 
-
-    @Override
-    public void onLevelUp() {
-
-    }
 
     public int getHealth() {
         return health;

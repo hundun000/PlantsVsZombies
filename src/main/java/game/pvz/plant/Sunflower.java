@@ -2,12 +2,13 @@ package game.pvz.plant;
 import javax.swing.*;
 
 import game.GamePanel;
-import game.OnLevelUpListener;
+import game.gameobject.drop.BaseDrop;
+import game.gameobject.drop.DropInstanceParams;
 import game.gameobject.plant.BasePlant;
 import game.gameobject.plant.PlantInstanceParams;
 import game.gameobject.plant.PlantModel;
 import game.manager.GridManager;
-import game.pvz.item.SunItem;
+import game.pvz.drop.SunItem;
 
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -15,7 +16,7 @@ import java.awt.event.ActionEvent;
 /**
  * Created by Armin on 6/28/2016.
  */
-public class Sunflower extends BasePlant implements OnLevelUpListener {
+public class Sunflower extends BasePlant {
     
     public static final String NAME = "sunflower";
 
@@ -27,14 +28,11 @@ public class Sunflower extends BasePlant implements OnLevelUpListener {
         int startX = getBulletStartX();
         int startY = getBulletStartY();
         int endY = startY + (GridManager.GRID_HEIGHT / 2);
-        SunItem sunItem = new SunItem(gamePanel, startX, startY, endY);
-        gamePanel.getGridManager().addSunItem(sunItem);
+        DropInstanceParams params = new DropInstanceParams(startX, startY, endY);
+        BaseDrop drop = gamePanel.getDropFactory().getInstacne(model.dropRegisterName, gamePanel, params);
+        gamePanel.getGridManager().addDrop(drop);
     }
 
-    @Override
-    public void onLevelUp() {
-
-    }
 
     @Override
     protected boolean wantWork() {

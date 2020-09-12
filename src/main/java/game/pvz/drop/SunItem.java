@@ -1,34 +1,33 @@
-package game.pvz.item;
+package game.pvz.drop;
 import game.GamePanel;
 import game.ILogicFrameListener;
 import game.component.PositionComponent;
-import game.component.SunPositionComponent;
+import game.component.DropPositionComponent;
 import game.gameobject.GameObject;
+import game.gameobject.drop.BaseDrop;
+import game.gameobject.drop.DropInstanceParams;
+import game.gameobject.drop.DropModel;
 import game.manager.GridManager;
 
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+
 /**
  * Created by Armin on 6/27/2016.
  */
-public class SunItem extends GameObject implements MouseListener, ILogicFrameListener {
+public class SunItem extends BaseDrop implements MouseListener {
     public static String REGISTER_NAME = "sun";
     
-    private int chargePoint = 25;
-    protected SunPositionComponent sunPositionComponent;
-    
-    public SunItem(GamePanel gamePanel, int startX, int startY, int endY) {
-        super(gamePanel, REGISTER_NAME);
-        super.spirit = gamePanel.getSunScoreManager().getSunItemSpirit();
-        this.sunPositionComponent = new SunPositionComponent(gamePanel, startX, startY, endY);
+    public SunItem(GamePanel gamePanel, DropModel model, DropInstanceParams params) {
+        super(gamePanel, model, params);
     }
 
     @Override
     public void updateLogicFrame() {
-        sunPositionComponent.move();
-        if (sunPositionComponent.getDestructCount() < 0) {
+        dropPositionComponent.move();
+        if (dropPositionComponent.getDestructCount() < 0) {
             gamePanel.getGridManager().deleteSun(this);
         }
     }
@@ -66,12 +65,10 @@ public class SunItem extends GameObject implements MouseListener, ILogicFrameLis
 
     @Override
     public PositionComponent getPositionComponent() {
-        return sunPositionComponent;
+        return dropPositionComponent;
     }
     
-    public int getChargePoint() {
-        return chargePoint;
-    }
+    
 
 
 

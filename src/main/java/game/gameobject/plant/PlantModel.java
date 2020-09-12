@@ -1,6 +1,7 @@
 package game.gameobject.plant;
 
 import game.facroty.BulletFactory;
+import game.facroty.DropFactory;
 import game.gameobject.GameObjectModel;
 import game.gameobject.Spirit;
 import game.manager.GridManager;
@@ -34,5 +35,5 @@ public class PlantModel extends GameObjectModel<BasePlant> {
     public int attackRangeWidth = GridManager.GRID_WIDTH * 3 ;
     public int attackRangeHeight = coillderBoxHeight ;
     
-    
+    public String dropRegisterName = DropFactory.DEFAULT_DROP_REGISTER_NAME;
 }

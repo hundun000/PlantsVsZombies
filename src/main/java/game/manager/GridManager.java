@@ -14,15 +14,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import game.GamePanel;
+import game.ILevelListener;
 import game.component.PositionComponent;
 import game.component.ZombiePositionComponent;
 import game.gameobject.bullet.BaseBullet;
+import game.gameobject.drop.BaseDrop;
 import game.gameobject.plant.BasePlant;
 import game.gameobject.plant.PlantModel;
 import game.gameobject.plant.PlantSlot;
 import game.gameobject.zombie.BaseZombie;
+import game.level.GameLevel;
 import game.pvz.bullet.Pea;
-import game.pvz.item.SunItem;
 import game.pvz.plant.FreezePeashooter;
 import game.pvz.plant.Peashooter;
 import game.pvz.plant.Sunflower;
@@ -31,7 +33,7 @@ import game.pvz.plant.Sunflower;
  * @author hundun
  * Created on 2020/09/02
  */
-public class GridManager extends BaseManager implements MouseListener {
+public class GridManager extends BaseManager implements MouseListener, ILevelListener {
     static Logger logger = LoggerFactory.getLogger(GridManager.class);
     
     public static final int NUM_ROW_CONSTANT = 5;
@@ -55,7 +57,7 @@ public class GridManager extends BaseManager implements MouseListener {
 
     private PlantSlot[][] plantSlots;
     private ArrayList<BaseBullet> bullets;
-    private ArrayList<SunItem> sunItems;
+    private ArrayList<BaseDrop> drops;
     
     public GridManager(GamePanel gamePanel) {
         super(gamePanel, MANAGER_START_X, MANAGER_START_Y, MANAGER_WIDTH, MANAGER_HEIGHT, 0, 0);
@@ -83,22 +85,24 @@ public class GridManager extends BaseManager implements MouseListener {
         }
         
         {
-            Iterator<SunItem> iterator = sunItems.iterator();
+            Iterator<BaseDrop> iterator = drops.iterator();
             while (iterator.hasNext()) {
-                SunItem sunItem = iterator.next();
-                sunItem.updateLogicFrame();
-                if (sunItem.isDestroyed()) {
+                BaseDrop drop = iterator.next();
+                drop.updateLogicFrame();
+                if (drop.isDestroyed()) {
                     iterator.remove();
-                    removeMouseListener(sunItem);
+                    removeMouseListener(drop);
                 }
             }
         }
     }
     
-    public void addSunItem(SunItem sunItem) {
-        sunItems.add(sunItem);
-        addMouseListener(sunItem);
-        logger.info("sunitem added: ", sunItem.getPositionComponent().toString());
+    public void addDrop(BaseDrop drop) {
+        if (drop != null) {
+            drops.add(drop);
+            addMouseListener(drop);
+            logger.info("drop added: ", drop.getPositionComponent().toString());
+        }
     }
 
     
@@ -120,8 +124,8 @@ public class GridManager extends BaseManager implements MouseListener {
             bullet.drawSelf(g);
         }
         
-        for (SunItem sunItem : sunItems) {
-            sunItem.drawSelf(g);
+        for (BaseDrop drop : drops) {
+            drop.drawSelf(g);
         }
     }
     
@@ -130,7 +134,7 @@ public class GridManager extends BaseManager implements MouseListener {
     protected void initChild() {
         super.initChild();
         
-        plantSlots = new PlantSlot[ NUM_COLUMN_CONSTANT][NUM_ROW_CONSTANT];
+        plantSlots = new PlantSlot[NUM_COLUMN_CONSTANT][NUM_ROW_CONSTANT];
         for (int i = 0; i < NUM_COLUMN_CONSTANT; i++) {
             for (int j = 0; j < NUM_ROW_CONSTANT; j++) {
                 PlantSlot plantSlot = new PlantSlot(gamePanel, i, j);
@@ -142,7 +146,7 @@ public class GridManager extends BaseManager implements MouseListener {
         
         bullets = new ArrayList<>();
         
-        sunItems = new ArrayList<>();
+        drops = new ArrayList<>();
     }
     
     public static int gridPerSecondToPixelPerFrame(double gridPerSecond) {
@@ -203,13 +207,13 @@ public class GridManager extends BaseManager implements MouseListener {
      * 执行加费
      * @param chargePoint 
      */
-    public void chargeSunPointAndDelete(SunItem sunItem) {
-        gamePanel.getSunScoreManager().addSunScore(sunItem.getChargePoint());
-        deleteSun(sunItem);
+    public void chargeSunPointAndDelete(BaseDrop drop) {
+        gamePanel.getSunScoreManager().addSunScore(drop.getChargePoint());
+        deleteSun(drop);
     }
 
-    public void deleteSun(SunItem sunItem) {
-        sunItem.setDestroyed();;
+    public void deleteSun(BaseDrop drop) {
+        drop.setDestroyed();
     }
 
     @Override
@@ -240,6 +244,26 @@ public class GridManager extends BaseManager implements MouseListener {
 
     @Override
     public void mouseExited(MouseEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void levelStart(GameLevel level) {
+        for (int i = 0; i < NUM_COLUMN_CONSTANT; i++) {
+            for (int j = 0; j < NUM_ROW_CONSTANT; j++) {
+                PlantSlot plantSlot = plantSlots[i][j];
+                plantSlot.clearPlant();
+            }
+        }
+        bullets.clear();
+        
+        drops.clear();
+        
+    }
+
+    @Override
+    public void levelEnd() {
         // TODO Auto-generated method stub
         
     }

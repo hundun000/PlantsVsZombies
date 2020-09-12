@@ -5,25 +5,28 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import game.facroty.BulletFactory;
+import game.facroty.DropFactory;
 import game.facroty.PlantFactory;
 import game.facroty.ZombieFactory;
+import game.level.GameLevel;
 import game.manager.GridManager;
 import game.manager.PlantCardManager;
 import game.manager.SunScoreManager;
 import game.manager.ZombieManager;
 import game.pvz.PvzMod;
-import game.pvz.item.SunItem;
+import game.pvz.drop.SunItem;
 import game.pvz.plant.Sunflower;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
  * Created by Armin on 6/25/2016.
  */
-public class GamePanel extends JLayeredPane implements OnLevelUpListener, ILogicFrameListener {
+public class GamePanel extends JLayeredPane implements ILogicFrameListener, ILevelListener {
     static Logger logger = LoggerFactory.getLogger(GamePanel.class);
     public static final int SCREEN_HEIGHT_CONSTANT = 752;
 	public static final int SCREEN_WIDTH_CONSTANT = 1000;
@@ -66,24 +69,14 @@ public class GamePanel extends JLayeredPane implements OnLevelUpListener, ILogic
     private PlantFactory plantFactory ;
     private ZombieFactory zombieFactory;
     private BulletFactory bulletFactory;
+    private DropFactory dropFactory ;
     /**
      * 关卡进度值
      */
     static int totalLevelPoint = 0;
-    public int currentLevel = 1;
 
     public long logicFrameCounter = 0;
-    
-    
 
-    public int getCurrentLevel() {
-        return currentLevel;
-    }
-
-    @Override
-    public void onLevelUp() {
-        
-    }
     
     public ZombieManager getZombieManager() {
         return zombieManager;
@@ -95,6 +88,10 @@ public class GamePanel extends JLayeredPane implements OnLevelUpListener, ILogic
     
     public ZombieFactory getZombieFactory() {
         return zombieFactory;
+    }
+    
+    public DropFactory getDropFactory() {
+        return dropFactory;
     }
     
     public void gameOver() {
@@ -114,6 +111,7 @@ public class GamePanel extends JLayeredPane implements OnLevelUpListener, ILogic
         this.plantFactory = new PlantFactory();
         this.zombieFactory = new ZombieFactory();
         this.bulletFactory = new BulletFactory();
+        this.dropFactory = new DropFactory();
         
         setRedrawTimer(REDRAWTIME_CONSTANT);
         setAdvanceTimer(ADVANCETIME_CONSTANT);
@@ -131,8 +129,14 @@ public class GamePanel extends JLayeredPane implements OnLevelUpListener, ILogic
         add(gridManager, LAYER_GRIDS_MANAGER);
          
         PvzMod pvzMod = new PvzMod();
-        pvzMod.load(plantFactory, zombieFactory, plantCardManager, bulletFactory, sunScoreManager);
-
+        pvzMod.load(
+                plantFactory, 
+                zombieFactory, 
+                plantCardManager, 
+                bulletFactory, 
+                dropFactory);
+        
+        levelStart(pvzMod.levels.get(0));
         
         logger.debug("gamepannel constructed.");
     }
@@ -220,6 +224,17 @@ public class GamePanel extends JLayeredPane implements OnLevelUpListener, ILogic
 
     public MessageDialog getMessageDialog() {
     	return messageDialog;
+    }
+
+    @Override
+    public void levelStart(GameLevel level) {
+        zombieManager.getNaturalZombieProducer().levelStart(level);
+    }
+
+    @Override
+    public void levelEnd() {
+        // TODO Auto-generated method stub
+        
     }
     
     

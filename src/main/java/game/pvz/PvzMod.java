@@ -1,8 +1,11 @@
 package game.pvz;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
+import javax.swing.DropMode;
 import javax.swing.ImageIcon;
 
 import org.slf4j.Logger;
@@ -11,15 +14,20 @@ import org.slf4j.LoggerFactory;
 import game.GamePanel;
 import game.GameWindow;
 import game.facroty.BulletFactory;
+import game.facroty.DropFactory;
 import game.facroty.PlantFactory;
 import game.facroty.ZombieFactory;
 import game.gameobject.Spirit;
 import game.gameobject.bullet.BulletModel;
+import game.gameobject.drop.DropModel;
 import game.gameobject.plant.PlantModel;
 import game.gameobject.zombie.ZombieModel;
+import game.level.GameLevel;
+import game.level.NaturalZombieSpawnRule;
 import game.manager.PlantCardManager;
 import game.manager.SunScoreManager;
 import game.pvz.bullet.Pea;
+import game.pvz.drop.SunItem;
 import game.pvz.plant.FreezePeashooter;
 import game.pvz.plant.Peashooter;
 import game.pvz.plant.Sunflower;
@@ -36,21 +44,39 @@ public class PvzMod {
      
     String modName = "pvz";
     
+    public List<GameLevel> levels = new ArrayList<>(); 
+    
     public void load(
             PlantFactory plantFactory, 
             ZombieFactory zombieFactory, 
             PlantCardManager plantCardManager, 
             BulletFactory bulletFactory, 
-            SunScoreManager sunScoreManager
+            DropFactory dropFactory
             ) {
         loadBulletModeles(bulletFactory);
         loadPlantModeles(plantFactory);
         loadZombieModeles(zombieFactory);
+        loadDrops(dropFactory);
+        
         loadCardSpirits(plantFactory, plantCardManager);
         
-        sunScoreManager.setSunItemSpirit(new Spirit(ImageLoadTool.loadSunItemImage(modName)));
+        
+        List<NaturalZombieSpawnRule> rules;
+        rules = new ArrayList<>();
+        rules.add(new NaturalZombieSpawnRule("normal_zombie", 10));
+        rules.add(new NaturalZombieSpawnRule("normal_zombie", 20));
+        rules.add(new NaturalZombieSpawnRule("conehead_zombie", 20));
+        levels.add(new GameLevel(rules));
     }
     
+    private void loadDrops(DropFactory dropFactory) {
+        DropModel model;
+        
+        model = new DropModel(SunItem.REGISTER_NAME, SunItem.class);
+        model.spirit = new Spirit(ImageLoadTool.loadOneDropImage(modName, model.registerName));
+        dropFactory.registerModel(model);
+    }
+
     private void loadBulletModeles(BulletFactory bulletFactory) {
         BulletModel model;
         
@@ -58,6 +84,7 @@ public class PvzMod {
         model.spirit = new Spirit(ImageLoadTool.loadOneBulletImage(modName, model.registerName));
         bulletFactory.registerModel(model);
     }
+
 
     private void loadCardSpirits(PlantFactory plantFactory, PlantCardManager plantCardManager) {
         Collection<PlantModel> models = plantFactory.getModels();
@@ -79,6 +106,7 @@ public class PvzMod {
         model.workColdDownReset = 50;
         model.attackRangeWidth = -1;
         model.attackRangeHeight = -1;
+        model.dropRegisterName = "sun";
         plantFactory.registerModel(model);
         
         model = new PlantModel(Peashooter.NAME, Peashooter.class);

@@ -6,50 +6,30 @@ import java.util.List;
 import java.util.Random;
 
 import game.GamePanel;
+import game.ILevelListener;
 import game.ILogicFrameListener;
 import game.gameobject.zombie.BaseZombie;
+import game.level.GameLevel;
+import game.level.NaturalZombieSpawnRule;
 
 /**
  * @author hundun
  * Created on 2020/08/31
  */
-public class NaturalZombieProducer implements ILogicFrameListener {
-    List<NaturalZombieSpawnRule> rules = new ArrayList<>();
+public class NaturalZombieProducer implements ILogicFrameListener, ILevelListener {
+    GameLevel level;
     
     protected final GamePanel gamePanel;
     Random rnd = new Random();
     
     public NaturalZombieProducer(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
-        rules.add(new NaturalZombieSpawnRule("normal_zombie", 10));
-        rules.add(new NaturalZombieSpawnRule("normal_zombie", 20));
-        rules.add(new NaturalZombieSpawnRule("conehead_zombie", 20));
     }
-    
-    class NaturalZombieSpawnRule {
-        
-        String zombieRegisterName;
-        int startFrame;
-        
-        public NaturalZombieSpawnRule(String zombieRegisterName, int startFrame) {
-            super();
-            this.zombieRegisterName = zombieRegisterName;
-            this.startFrame = startFrame;
-        }
-        
-        public int getStartFrame() {
-            return startFrame;
-        }
-        
-        public String getZombieRegisterName() {
-            return zombieRegisterName;
-        }
-    }
-    
+
     @Override
     public void updateLogicFrame() {
-        if (!rules.isEmpty()) {
-            Iterator<NaturalZombieSpawnRule> iterator = rules.iterator();
+        if (level != null) {
+            Iterator<NaturalZombieSpawnRule> iterator = level.getRules().iterator();
             while (iterator.hasNext()) {
                 NaturalZombieSpawnRule rule = iterator.next();
                 if (rule.getStartFrame() == gamePanel.logicFrameCounter) {
@@ -59,6 +39,17 @@ public class NaturalZombieProducer implements ILogicFrameListener {
                 }
             }
         }
+    }
+    
+    @Override
+    public void levelStart(GameLevel level) {
+        this.level = level;
+    }
+
+    @Override
+    public void levelEnd() {
+        // TODO Auto-generated method stub
+        
     }
 
 }

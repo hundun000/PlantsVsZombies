@@ -58,7 +58,7 @@ public class PlantSlot extends GameObject implements MouseListener, MouseMotionL
 
 
 
-    public void plantDie() {
+    public void clearPlant() {
         plant = null;
     }
     

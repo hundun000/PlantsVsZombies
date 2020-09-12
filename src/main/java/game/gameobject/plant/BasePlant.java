@@ -52,13 +52,13 @@ public abstract class BasePlant extends GameObject {
             if (wantWork() && alive()) {
                 work();
                 workColdDown = model.workColdDownReset;
-                logger.debug("{} work", instanceName);
+                //logger.debug("{} work", instanceName);
             } else {
-                logger.debug("{} not work", instanceName);
+                //logger.debug("{} not work", instanceName);
             }
         } else {
             workColdDown --;
-            logger.debug("{} work cold down", instanceName);
+            //logger.debug("{} work cold down", instanceName);
         }
     }
     

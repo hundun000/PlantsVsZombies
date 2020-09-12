@@ -44,7 +44,9 @@ public class ZombieManager extends BaseManager {
 
     @Override
     public void updateLogicFrame() {
-        naturalZombieProducer.updateLogicFrame();
+        if (naturalZombieProducer != null) {
+            naturalZombieProducer.updateLogicFrame();
+        }
         
         for (BaseZombie zombie : zombies) {
             zombie.updateLogicFrame();
@@ -102,4 +104,8 @@ public class ZombieManager extends BaseManager {
         return result;
     }
 
+    
+    public NaturalZombieProducer getNaturalZombieProducer() {
+        return naturalZombieProducer;
+    }
 }

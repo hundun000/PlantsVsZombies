@@ -39,6 +39,11 @@ public class ImageLoadTool {
         String extend = "png";
         return loadOneImage(folder, registerName, extend);
     }
+    public static ImageIcon loadOneDropImage(String modName, String registerName) {
+        String folder = modName + "/drops/";
+        String extend = "png";
+        return loadOneImage(folder, registerName, extend);
+    }
     private static ImageIcon loadOneImage(String folder, String registerName, String extend) {
         String fileName = IMAGES_FOLDER + folder + registerName + "." + extend;
         File file = new File(fileName);
@@ -50,10 +55,5 @@ public class ImageLoadTool {
             return null;
         }
     }
-    public static ImageIcon loadSunItemImage(String modName) {
-        String folder = modName + "/others/";
-        String registerName = "sun";
-        String extend = "png";
-        return loadOneImage(folder, registerName, extend);
-    }
+    
 }
