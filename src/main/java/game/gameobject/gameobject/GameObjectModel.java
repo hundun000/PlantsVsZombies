@@ -1,4 +1,4 @@
-package game.gameobject;
+package game.gameobject.gameobject;
 
 import game.gameobject.bullet.BaseBullet;
 

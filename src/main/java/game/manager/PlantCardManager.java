@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 import game.GamePanel;
 import game.GameWindow;
 import game.facroty.PlantFactory;
-import game.gameobject.Spirit;
+import game.gameobject.gameobject.Spirit;
 import game.gameobject.plant.BasePlant;
 import game.gameobject.plant.PlantCard;
 import game.gameobject.plant.PlantModel;
@@ -38,7 +38,7 @@ public class PlantCardManager extends BaseManager {
     public final static int CARD_HEIGHT = 90;
     private ArrayList<PlantCard> plantCards;
     
-    public final static int PlantCardManager_WIDTH = 300;
+    public final static int PlantCardManager_WIDTH = 600;
     public final static int PlantCardManager_HEIGHT = 100;
     
     private Map<String, Spirit> cardSpirits = new HashMap<>();

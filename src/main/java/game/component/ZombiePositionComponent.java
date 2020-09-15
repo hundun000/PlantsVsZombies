@@ -47,9 +47,9 @@ public class ZombiePositionComponent extends PositionComponent{
             
             posX -= currentSpeed;
         } else {
-            collided.getPlant().damageHealth(10);
+            collided.getPlant().getStatus().subtractHealth(10);
 
-            if (!collided.getPlant().alive()) {
+            if (!collided.getPlant().getStatus().alive()) {
                 collided.clearPlant();
             }
         }

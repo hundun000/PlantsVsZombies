@@ -17,9 +17,10 @@ import game.facroty.BulletFactory;
 import game.facroty.DropFactory;
 import game.facroty.PlantFactory;
 import game.facroty.ZombieFactory;
-import game.gameobject.Spirit;
 import game.gameobject.bullet.BulletModel;
 import game.gameobject.drop.DropModel;
+import game.gameobject.gameobject.Spirit;
+import game.gameobject.gameobject.WorkStatus.WorkState;
 import game.gameobject.plant.PlantModel;
 import game.gameobject.zombie.ZombieModel;
 import game.level.GameLevel;
@@ -28,6 +29,7 @@ import game.manager.PlantCardManager;
 import game.manager.SunScoreManager;
 import game.pvz.bullet.Pea;
 import game.pvz.drop.SunItem;
+import game.pvz.plant.DoublePeashooter;
 import game.pvz.plant.FreezePeashooter;
 import game.pvz.plant.Peashooter;
 import game.pvz.plant.Sunflower;
@@ -42,7 +44,7 @@ import game.utils.ImageLoadTool;
 public class PvzMod {
     static Logger logger = LoggerFactory.getLogger(PvzMod.class);
      
-    String modName = "pvz";
+    public String modName = "pvz";
     
     public List<GameLevel> levels = new ArrayList<>(); 
     
@@ -101,23 +103,42 @@ public class PvzMod {
         PlantModel model;
         
         model = new PlantModel(Sunflower.NAME, Sunflower.class);
-        model.spirit = new Spirit(ImageLoadTool.loadOnePlantImage(modName, model.registerName));
+        model.spirit = new Spirit(
+                ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.IDLE),
+                ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.WORKING)
+                );
         model.plantCost = 50;
-        model.workColdDownReset = 50;
+        model.workColdDownFrameNum = 120;
         model.attackRangeWidth = -1;
         model.attackRangeHeight = -1;
         model.dropRegisterName = "sun";
         plantFactory.registerModel(model);
         
         model = new PlantModel(Peashooter.NAME, Peashooter.class);
-        model.spirit = new Spirit(ImageLoadTool.loadOnePlantImage(modName, model.registerName));
+        model.spirit = new Spirit(
+                ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.IDLE),
+                ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.WORKING)
+                );
         model.plantCost = 100;
         model.bulletRegisterName = "pea";
         plantFactory.registerModel(model);
         
         model = new PlantModel(FreezePeashooter.NAME, FreezePeashooter.class);
-        model.spirit = new Spirit(ImageLoadTool.loadOnePlantImage(modName, model.registerName));
+        model.spirit = new Spirit(
+                ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.IDLE),
+                ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.WORKING)
+                );
         model.plantCost = 175;
+        model.bulletRegisterName = "pea";
+        plantFactory.registerModel(model);
+        
+        model = new PlantModel(DoublePeashooter.NAME, DoublePeashooter.class);
+        model.spirit = new Spirit(
+                ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.IDLE),
+                ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.WORKING)
+                );
+        model.plantCost = 200;
+        model.workContinuousTime = 2;
         model.bulletRegisterName = "pea";
         plantFactory.registerModel(model);
     }

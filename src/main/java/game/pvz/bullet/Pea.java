@@ -6,10 +6,11 @@ import game.GamePanel;
 import game.ILogicFrameListener;
 import game.component.BulletPositionComponent;
 import game.component.PositionComponent;
-import game.gameobject.GameObject;
 import game.gameobject.bullet.BaseBullet;
 import game.gameobject.bullet.BulletInstanceParams;
 import game.gameobject.bullet.BulletModel;
+import game.gameobject.gameobject.GameObject;
+import game.gameobject.gameobject.GameObjectStatus;
 import game.gameobject.zombie.BaseZombie;
 import game.manager.GridManager;
 
@@ -30,5 +31,7 @@ public class Pea extends BaseBullet {
     public Pea(GamePanel gamePanel, BulletModel model, BulletInstanceParams params) {
         super(gamePanel, model, params);
     }
+
+    
 
 }

@@ -6,7 +6,7 @@ import game.GamePanel;
 
 public class DropPositionComponent extends PositionComponent {
     private int endY;
-    private int destructCount = 100;
+    
     int width = 80;
     int height = 80;
     
@@ -22,14 +22,7 @@ public class DropPositionComponent extends PositionComponent {
     public void move() {
         if (posY < endY) {
             posY += 2;
-        } else {
-            destructCount--;
         }
-    }
-
-    
-    public int getDestructCount() {
-        return destructCount;
     }
     
     @Override

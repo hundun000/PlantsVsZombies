@@ -3,10 +3,11 @@ import game.GamePanel;
 import game.ILogicFrameListener;
 import game.component.PositionComponent;
 import game.component.DropPositionComponent;
-import game.gameobject.GameObject;
 import game.gameobject.drop.BaseDrop;
 import game.gameobject.drop.DropInstanceParams;
 import game.gameobject.drop.DropModel;
+import game.gameobject.gameobject.GameObject;
+import game.gameobject.gameobject.GameObjectStatus;
 import game.manager.GridManager;
 
 import java.awt.Rectangle;
@@ -22,14 +23,6 @@ public class SunItem extends BaseDrop implements MouseListener {
     
     public SunItem(GamePanel gamePanel, DropModel model, DropInstanceParams params) {
         super(gamePanel, model, params);
-    }
-
-    @Override
-    public void updateLogicFrame() {
-        dropPositionComponent.move();
-        if (dropPositionComponent.getDestructCount() < 0) {
-            gamePanel.getGridManager().deleteSun(this);
-        }
     }
     
 
@@ -63,10 +56,9 @@ public class SunItem extends BaseDrop implements MouseListener {
 
     }
 
-    @Override
-    public PositionComponent getPositionComponent() {
-        return dropPositionComponent;
-    }
+    
+
+    
     
     
 

@@ -12,6 +12,7 @@ import game.pvz.drop.SunItem;
 
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
+import java.util.Random;
 
 /**
  * Created by Armin on 6/28/2016.
@@ -19,7 +20,8 @@ import java.awt.event.ActionEvent;
 public class Sunflower extends BasePlant {
     
     public static final String NAME = "sunflower";
-
+    private Random random = new Random();
+    
     public Sunflower(GamePanel gamePanel, PlantModel model, PlantInstanceParams params) {
         super(gamePanel, model, params);
     }

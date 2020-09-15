@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import game.GameWindow;
+import game.gameobject.gameobject.WorkStatus.WorkState;
 import game.manager.PlantCardManager;
 import game.pvz.PvzMod;
 
@@ -24,15 +25,21 @@ public class ImageLoadTool {
         String extend = "png";
         return loadOneImage(folder, registerName, extend);
     }
+    public static ImageIcon loadOneOtherImage(String modName, String registerName) {
+        String folder = modName + "/others/";
+        String extend = "png";
+        return loadOneImage(folder, registerName, extend);
+    }
     public static ImageIcon loadOneZombieImage(String modName, String registerName) {
         String folder = modName + "/zombies/";
         String extend = "png";
         return loadOneImage(folder, registerName, extend);
     }
-    public static ImageIcon loadOnePlantImage(String modName, String registerName) {
-        String folder = modName + "/plants/";
+    public static ImageIcon loadOnePlantImage(String modName, String registerName, WorkState workState) {
+        String folder = modName + "/plants/" + registerName + "/";
         String extend = "gif";
-        return loadOneImage(folder, registerName, extend);
+        String fileName = workState.name().toLowerCase();
+        return loadOneImage(folder, fileName, extend);
     }
     public static ImageIcon loadOneBulletImage(String modName, String registerName) {
         String folder = modName + "/bullets/";
@@ -44,14 +51,14 @@ public class ImageLoadTool {
         String extend = "png";
         return loadOneImage(folder, registerName, extend);
     }
-    private static ImageIcon loadOneImage(String folder, String registerName, String extend) {
-        String fileName = IMAGES_FOLDER + folder + registerName + "." + extend;
-        File file = new File(fileName);
+    private static ImageIcon loadOneImage(String folder, String fileName, String extend) {
+        String filePath = IMAGES_FOLDER + folder + fileName + "." + extend;
+        File file = new File(filePath);
         if (file.exists()) {
-            ImageIcon image = new ImageIcon(fileName);
+            ImageIcon image = new ImageIcon(filePath);
             return image;
         } else {
-            logger.warn("file {} not found", fileName);
+            logger.warn("file {} not found", filePath);
             return null;
         }
     }

@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import game.GamePanel;
-import game.gameobject.Spirit;
+import game.gameobject.gameobject.Spirit;
 import game.pvz.drop.SunItem;
 
 /**
@@ -24,7 +24,7 @@ public class SunScoreManager extends BaseManager {
     private int sunScore = 0;
     
     public SunScoreManager(GamePanel gamePanel, int initSunScore) {
-        super(gamePanel, 0, 0, 50, 50, 0, 0);
+        super(gamePanel, 30, 80, 50, 20, 0, 0);
         addSunScore(initSunScore);
     }
 

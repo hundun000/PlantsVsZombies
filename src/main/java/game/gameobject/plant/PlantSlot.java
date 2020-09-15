@@ -10,7 +10,8 @@ import game.ILogicFrameListener;
 import game.component.IdlePositionComponent;
 import game.component.PositionComponent;
 import game.facroty.PlantFactory;
-import game.gameobject.GameObject;
+import game.gameobject.gameobject.GameObject;
+import game.gameobject.gameobject.GameObjectStatus;
 import game.manager.GridManager;
 import game.pvz.plant.FreezePeashooter;
 import game.pvz.plant.Peashooter;
@@ -37,6 +38,7 @@ public class PlantSlot extends GameObject implements MouseListener, MouseMotionL
     int gridX, gridY;
     private BasePlant plant;
     protected PositionComponent positionComponent;
+    protected GameObjectStatus status;
     
     public PlantSlot(GamePanel gamePanel, int gridX, int gridY) {
         super(gamePanel, REGISTER_NAME);
@@ -46,6 +48,16 @@ public class PlantSlot extends GameObject implements MouseListener, MouseMotionL
         int posX = gridX * GridManager.GRID_WIDTH;
         int posY = (gridY + 1) * GridManager.GRID_HEIGHT;
         this.positionComponent = new IdlePositionComponent(gamePanel, posX, posY, 0, - GridManager.GRID_HEIGHT , GridManager.GRID_WIDTH, GridManager.GRID_HEIGHT);
+        this.status = new GameObjectStatus(this);
+    }
+    
+    @Override
+    public void updateLogicFrame() {
+        super.updateLogicFrame();
+        
+        if (plant != null) {
+            plant.updateLogicFrame();
+        }
     }
     
     public BasePlant getPlant() {
@@ -73,6 +85,24 @@ public class PlantSlot extends GameObject implements MouseListener, MouseMotionL
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        
+        
+    }
+    
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        int eventGridsX = e.getX() - GridManager.POSITION_START_X;
+        int eventGridsY = e.getY() - GridManager.POSITION_START_Y;
+        if (!getPositionComponent().getCoillderBox().contains(eventGridsX, eventGridsY)) {
+            setHighLight(false);
+            return;
+        } else {
+            setHighLight(true);
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
         int eventGridsX = e.getX() - GridManager.POSITION_START_X;
         int eventGridsY = e.getY() - GridManager.POSITION_START_Y;
         if (!getPositionComponent().getCoillderBox().contains(eventGridsX, eventGridsY)) {
@@ -100,24 +130,6 @@ public class PlantSlot extends GameObject implements MouseListener, MouseMotionL
                 gamePanel.getGridManager().clearPlanting();
             }
         }
-        
-    }
-    
-    @Override
-    public void mouseMoved(MouseEvent e) {
-        int eventGridsX = e.getX() - GridManager.POSITION_START_X;
-        int eventGridsY = e.getY() - GridManager.POSITION_START_Y;
-        if (!getPositionComponent().getCoillderBox().contains(eventGridsX, eventGridsY)) {
-            setHighLight(false);
-            return;
-        } else {
-            setHighLight(true);
-        }
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
     }
 
     @Override
@@ -142,16 +154,6 @@ public class PlantSlot extends GameObject implements MouseListener, MouseMotionL
 
 
 
-    @Override
-    public void updateLogicFrame() {
-        if (plant != null) {
-            //logger.debug("{} start update its plant", this);
-            plant.updateLogicFrame();
-        }
-    }
-
-
-
 
     @Override
     public PositionComponent getPositionComponent() {
@@ -160,6 +162,24 @@ public class PlantSlot extends GameObject implements MouseListener, MouseMotionL
 
     @Override
     public void mouseDragged(MouseEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public GameObjectStatus getStatus() {
+        // TODO Auto-generated method stub
+        return status;
+    }
+
+    @Override
+    protected boolean wantWork() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    protected void work() {
         // TODO Auto-generated method stub
         
     }

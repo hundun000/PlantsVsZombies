@@ -1,4 +1,4 @@
-package game.gameobject;
+package game.gameobject.gameobject;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -22,7 +22,7 @@ public abstract class GameObject implements ILogicFrameListener {
     public static Font healthBarFont = new Font(Font.SERIF, Font.PLAIN, (int) (GridManager.GRID_HEIGHT * 0.2));
     public static Font positionFont = new Font(Font.SERIF, Font.PLAIN, (int) (GridManager.GRID_HEIGHT * 0.1));
     
-    protected String registerName;
+    protected final String registerName;
     
     protected ImageIcon selfImageIcon;
     protected final GamePanel gamePanel;
@@ -31,7 +31,6 @@ public abstract class GameObject implements ILogicFrameListener {
     protected final String instanceName;
     private static int instanceCounter = 0;
     protected Spirit spirit;
-    protected boolean destroyed = false;
     
     public GameObject(GamePanel gamePanel, String registerName) {
         super();
@@ -44,21 +43,22 @@ public abstract class GameObject implements ILogicFrameListener {
         return registerName;
     }
     
+    public abstract GameObjectStatus getStatus();
+    
     public abstract PositionComponent getPositionComponent();
-
+    
+    protected abstract boolean wantWork();
+    protected abstract void work();
     
     
 //    public GamePanel getGamePanel() {
 //        return gamePanel;
 //    }
     
-    public void setRegisterName(String registerName) {
-        this.registerName = registerName;
-    }
-    
     public void drawSelf(Graphics g) {
-        if (spirit != null && spirit.idleImageIcon != null) {
-            g.drawImage(spirit.idleImageIcon.getImage(), this.getPositionComponent().getPosX(), this.getPositionComponent().getPosY() - spirit.idleImageIcon.getIconHeight(), null);
+        if (spirit != null) {
+            ImageIcon imageIcon = spirit.getImage(getStatus().getWorkStatus().workState);
+            g.drawImage(imageIcon.getImage(), this.getPositionComponent().getPosX(), this.getPositionComponent().getPosY() - imageIcon.getIconHeight(), null);
         }
         if (GamePanel.DRAW_DEBUG_BOX) {
             Color last = g.getColor();
@@ -80,16 +80,21 @@ public abstract class GameObject implements ILogicFrameListener {
             int drawPosY = getPositionComponent().getPosY() - coillderBox.height + positionFont.getSize();
             g.drawString(getPositionComponent().toString(), drawPosX, drawPosY);
             
+            if (!getStatus().isUncountableHealth()) {
+                g.setFont(healthBarFont);
+                int hpBarX = getPositionComponent().getPosX();
+                int hpBarY = getPositionComponent().getPosY() - healthBarFont.getSize();
+                g.drawString(String.valueOf(getStatus().getHealth()), hpBarX, hpBarY);
+            }
+            
+
             g.setColor(last);
+            
+            
         }
     }
     
-    public void drawHealthBar(Graphics g, int health) {
-        g.setFont(healthBarFont);
-        int hpBarX = getPositionComponent().getPosX();
-        int hpBarY = getPositionComponent().getPosY() - healthBarFont.getSize();
-        g.drawString(String.valueOf(health), hpBarX, hpBarY);
-    }
+    
     
     @Override
     public String toString() {
@@ -99,14 +104,16 @@ public abstract class GameObject implements ILogicFrameListener {
     public void setHighLight(boolean highLight) {
         this.highLight = highLight;
     }
+
     
-    public void setDestroyed() {
-        this.destroyed = true;
+    @Override
+    public void updateLogicFrame() {
+        getPositionComponent().updateLogicFrame();
+        
+        getStatus().updateLogicFrame();
+        
     }
-    
-    public boolean isDestroyed() {
-        return destroyed;
-    }
+
    
 
 }

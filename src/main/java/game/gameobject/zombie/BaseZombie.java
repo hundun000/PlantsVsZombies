@@ -12,7 +12,9 @@ import org.slf4j.LoggerFactory;
 import game.GamePanel;
 import game.component.PositionComponent;
 import game.component.ZombiePositionComponent;
-import game.gameobject.GameObject;
+import game.gameobject.gameobject.GameObject;
+import game.gameobject.gameobject.GameObjectStatus;
+import game.gameobject.plant.PlantSlot;
 import game.manager.GridManager;
 import game.manager.ZombieManager;
 import game.pvz.zombie.ConeHeadZombie;
@@ -23,28 +25,18 @@ import game.pvz.zombie.NormalZombie;
  */
 public abstract class BaseZombie extends GameObject {
     static Logger logger = LoggerFactory.getLogger(BaseZombie.class);
-    private int health = 1000;
-
-    
+  
     protected ZombiePositionComponent zombiePositionComponent;
     protected ZombieModel model;
+    protected GameObjectStatus status;
     
     public BaseZombie(GamePanel parent, ZombieModel model, ZombieInstanceParams params) {
         super(parent, model.registerName);
         super.spirit = model.spirit;
         super.coillderBoxColor = Color.DARK_GRAY;
         this.model = model;
-        this.health = model.health;
         this.zombiePositionComponent = new ZombiePositionComponent(parent, model, params);
-    }
-
-
-    public int getHealth() {
-        return health;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
+        this.status = new GameObjectStatus(this, model, params);
     }
 
     public void setSlowFrame(int slowInt) {
@@ -56,19 +48,30 @@ public abstract class BaseZombie extends GameObject {
     public PositionComponent getPositionComponent() {
         return zombiePositionComponent;
     }
+
     
     @Override
-    public void updateLogicFrame() {
-        zombiePositionComponent.move();
+    public GameObjectStatus getStatus() {
+        return status;
     }
     
     @Override
-    public void drawSelf(Graphics g) {
-        super.drawSelf(g);
-        if (GamePanel.DRAW_DEBUG_BOX) {
-            drawHealthBar(g, health);
+    protected boolean wantWork() {
+        PlantSlot collided = gamePanel.getGridManager().getCollideredPlantSlot(getPositionComponent());
+        return collided != null;
+    }
+
+    @Override
+    protected void work() {
+        PlantSlot collided = gamePanel.getGridManager().getCollideredPlantSlot(getPositionComponent());
+
+        if (collided != null) {
+            collided.getPlant().getStatus().subtractHealth(10);
+
+            if (!collided.getPlant().getStatus().alive()) {
+                collided.clearPlant();
+            }
         }
     }
-    
 
 }

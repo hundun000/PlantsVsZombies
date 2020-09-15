@@ -2,9 +2,11 @@ package game.manager;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,8 +16,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import game.GamePanel;
+import game.gameobject.bullet.BaseBullet;
 import game.gameobject.zombie.BaseZombie;
 import game.gameobject.zombie.ZombieInstanceParams;
+import game.utils.ImageLoadTool;
 
 /**
  * @author hundun
@@ -32,14 +36,15 @@ public class ZombieManager extends BaseManager {
     public static final int POSITION_START_Y = 110;
     
     public static final int MANAGER_WIDTH = GamePanel.SCREEN_WIDTH_CONSTANT;
-    public static final int MANAGER_HEIGHT = GamePanel.SCREEN_HEIGHT_CONSTANT;
+    public static final int MANAGER_HEIGHT = GamePanel.SCREEN_HEIGHT_CONSTANT + 100;
     
     private List<BaseZombie> zombies;
     private NaturalZombieProducer naturalZombieProducer;
     
     public ZombieManager(GamePanel gamePanel) {
         super(gamePanel, ZombieManager.MANAGER_START_X, ZombieManager.MANAGER_START_Y, ZombieManager.MANAGER_WIDTH, ZombieManager.MANAGER_HEIGHT, POSITION_START_X, POSITION_START_Y);
-        //setBorder(BorderFactory.createLineBorder(Color.YELLOW, 1));
+        super.boardColor = Color.RED;
+        super.boardImage = ImageLoadTool.loadOneOtherImage(gamePanel.pvzMod.modName, "zombie_manager").getImage();
     }
 
     @Override
@@ -48,9 +53,18 @@ public class ZombieManager extends BaseManager {
             naturalZombieProducer.updateLogicFrame();
         }
         
-        for (BaseZombie zombie : zombies) {
-            zombie.updateLogicFrame();
+        
+        {
+            Iterator<BaseZombie> iterator = zombies.iterator();
+            while (iterator.hasNext()) {
+                BaseZombie zombie = iterator.next();
+                zombie.updateLogicFrame();
+                if (!zombie.getStatus().alive()) {
+                    iterator.remove();
+                }
+            }
         }
+        
     }
 
     @Override

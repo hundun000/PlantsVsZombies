@@ -1,6 +1,8 @@
 package game.manager;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
@@ -28,6 +30,7 @@ import game.pvz.bullet.Pea;
 import game.pvz.plant.FreezePeashooter;
 import game.pvz.plant.Peashooter;
 import game.pvz.plant.Sunflower;
+import game.utils.ImageLoadTool;
 
 /**
  * @author hundun
@@ -60,8 +63,10 @@ public class GridManager extends BaseManager implements MouseListener, ILevelLis
     private ArrayList<BaseDrop> drops;
     
     public GridManager(GamePanel gamePanel) {
-        super(gamePanel, MANAGER_START_X, MANAGER_START_Y, MANAGER_WIDTH, MANAGER_HEIGHT, 0, 0);
+        super(gamePanel, MANAGER_START_X, MANAGER_START_Y, MANAGER_WIDTH, MANAGER_HEIGHT, POSITION_START_X, POSITION_START_Y);
         addMouseListener(this);
+        super.boardColor = Color.BLUE;
+        super.boardImage = ImageLoadTool.loadOneOtherImage(gamePanel.pvzMod.modName, "grid_manager").getImage();
     }
 
     @Override
@@ -78,7 +83,7 @@ public class GridManager extends BaseManager implements MouseListener, ILevelLis
             while (iterator.hasNext()) {
                 BaseBullet bullet = iterator.next();
                 bullet.updateLogicFrame();
-                if (bullet.isDestroyed()) {
+                if (!bullet.getStatus().alive()) {
                     iterator.remove();
                 }
             }
@@ -89,7 +94,7 @@ public class GridManager extends BaseManager implements MouseListener, ILevelLis
             while (iterator.hasNext()) {
                 BaseDrop drop = iterator.next();
                 drop.updateLogicFrame();
-                if (drop.isDestroyed()) {
+                if (!drop.getStatus().alive()) {
                     iterator.remove();
                     removeMouseListener(drop);
                 }
@@ -111,7 +116,6 @@ public class GridManager extends BaseManager implements MouseListener, ILevelLis
         super.paintComponent(g);
         g.translate(POSITION_START_X, POSITION_START_Y);
         
-        
         for (int i = 0; i < GridManager.NUM_COLUMN_CONSTANT; i++) {
             for (int j = 0; j < GridManager.NUM_ROW_CONSTANT; j++) {
                 PlantSlot plantSlot = plantSlots[i][j];
@@ -127,6 +131,7 @@ public class GridManager extends BaseManager implements MouseListener, ILevelLis
         for (BaseDrop drop : drops) {
             drop.drawSelf(g);
         }
+       
     }
     
 
@@ -151,7 +156,7 @@ public class GridManager extends BaseManager implements MouseListener, ILevelLis
     
     public static int gridPerSecondToPixelPerFrame(double gridPerSecond) {
         double pixelPerSecond = gridPerSecond * GridManager.GRID_WIDTH;
-        double f = 1000.0 / GamePanel.ADVANCETIME_CONSTANT;
+        double f = GamePanel.LOGICAL_FRAME_NUM_PER_SECOND;
         double pixelPerFrame = pixelPerSecond / f;
         return (int) pixelPerFrame;
     }
@@ -185,9 +190,6 @@ public class GridManager extends BaseManager implements MouseListener, ILevelLis
         return null;
     }
 
-    public void removeBullet(BaseBullet bullet) {
-        bullet.setDestroyed();; 
-    }
 
     public void clearPlanting() {
         logger.info("plating will be cleared: {}", planting);
@@ -209,25 +211,21 @@ public class GridManager extends BaseManager implements MouseListener, ILevelLis
      */
     public void chargeSunPointAndDelete(BaseDrop drop) {
         gamePanel.getSunScoreManager().addSunScore(drop.getChargePoint());
-        deleteSun(drop);
+        drop.getStatus().forceKilled();
     }
 
-    public void deleteSun(BaseDrop drop) {
-        drop.setDestroyed();
-    }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        logger.debug("mouse click at origin({}, {})", e.getX(), e.getY());
-        int eventGridsX = e.getX() - GridManager.POSITION_START_X;
-        int eventGridsY = e.getY() - GridManager.POSITION_START_Y;
-        logger.debug("mouse click at Grids({}, {})", eventGridsX, eventGridsY);
+        
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        // TODO Auto-generated method stub
-        
+        logger.debug("mouse pressed at origin({}, {})", e.getX(), e.getY());
+        int eventGridsX = e.getX() - GridManager.POSITION_START_X;
+        int eventGridsY = e.getY() - GridManager.POSITION_START_Y;
+        logger.debug("mouse pressed at Grids({}, {})", eventGridsX, eventGridsY);
     }
 
     @Override

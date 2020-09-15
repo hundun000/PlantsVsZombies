@@ -1,7 +1,7 @@
 package game.gameobject.zombie;
 
-import game.gameobject.GameObjectModel;
-import game.gameobject.Spirit;
+import game.gameobject.gameobject.GameObjectModel;
+import game.gameobject.gameobject.Spirit;
 import game.manager.GridManager;
 
 /**
@@ -20,4 +20,5 @@ public class ZombieModel extends GameObjectModel<BaseZombie> {
     public int coillderBoxOffsetY = - GridManager.GRID_HEIGHT + defaultOffset;
     public int coillderBoxWidth = GridManager.GRID_WIDTH - defaultOffset * 2;
     public int coillderBoxHeight = GridManager.GRID_HEIGHT - defaultOffset * 2;
+
 }

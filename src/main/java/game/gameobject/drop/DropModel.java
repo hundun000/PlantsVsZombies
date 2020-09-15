@@ -1,6 +1,6 @@
 package game.gameobject.drop;
 
-import game.gameobject.GameObjectModel;
+import game.gameobject.gameobject.GameObjectModel;
 import game.gameobject.plant.BasePlant;
 
 /**
@@ -14,5 +14,5 @@ public class DropModel extends GameObjectModel<BaseDrop> {
     }
     
     public int chargePoint = 25;
-
+    public int disappearFrame = 100;
 }

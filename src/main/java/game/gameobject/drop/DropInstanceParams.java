@@ -8,6 +8,8 @@ public class DropInstanceParams {
     public int startX;
     public int startY;
     public int endY;
+    
+    
     public DropInstanceParams(int startX, int startY, int endY) {
         super();
         this.startX = startX;

@@ -16,4 +16,6 @@ public class ConeHeadZombie extends BaseZombie {
     public ConeHeadZombie(GamePanel parent, ZombieModel model, ZombieInstanceParams params) {
         super(parent, model, params);
     }
+
+    
 }

@@ -41,13 +41,13 @@ public class GamePanel extends JLayeredPane implements ILogicFrameListener, ILev
     private final static int LAYER_CARDS_MANAGER = 3;
 	
 	/**
-	 * 逻辑帧间隔毫秒
+	 * 每秒逻辑帧数
 	 */
-	public static final int ADVANCETIME_CONSTANT = 50;
+	public static final int LOGICAL_FRAME_NUM_PER_SECOND = 20;
 	/**
-	 * 渲染帧间隔毫秒
+	 * 每秒渲染帧数
 	 */
-	private static final int REDRAWTIME_CONSTANT = 45;
+	private static final int DRAW_FRAME_NUM_PER_SECOND = 40;
 	
     public static final boolean DRAW_DEBUG_BOX = true;
 
@@ -60,7 +60,7 @@ public class GamePanel extends JLayeredPane implements ILogicFrameListener, ILev
     
     //private int mouseX, mouseY;
 
-    
+    public PvzMod pvzMod = new PvzMod();
     //  ======  manager ======
     private SunScoreManager sunScoreManager;
     private ZombieManager zombieManager;
@@ -113,22 +113,24 @@ public class GamePanel extends JLayeredPane implements ILogicFrameListener, ILev
         this.bulletFactory = new BulletFactory();
         this.dropFactory = new DropFactory();
         
-        setRedrawTimer(REDRAWTIME_CONSTANT);
-        setAdvanceTimer(ADVANCETIME_CONSTANT);
+        setRedrawTimer(1000 / DRAW_FRAME_NUM_PER_SECOND);
+        setAdvanceTimer(1000 / LOGICAL_FRAME_NUM_PER_SECOND);
 
         this.plantCardManager = new PlantCardManager(this);
         add(plantCardManager, LAYER_CARDS_MANAGER);
         
-        this.sunScoreManager = new SunScoreManager(this, 150);
+        this.sunScoreManager = new SunScoreManager(this, 300);
         add(sunScoreManager, LAYER_IMAGE_MANAGER);
+        
+        this.gridManager = new GridManager(this);
+        add(gridManager, LAYER_GRIDS_MANAGER);
+        
         
         this.zombieManager = new ZombieManager(this);
         add(zombieManager, LAYER_IMAGE_MANAGER);
         
-        this.gridManager = new GridManager(this);
-        add(gridManager, LAYER_GRIDS_MANAGER);
          
-        PvzMod pvzMod = new PvzMod();
+        
         pvzMod.load(
                 plantFactory, 
                 zombieFactory, 
@@ -162,14 +164,14 @@ public class GamePanel extends JLayeredPane implements ILogicFrameListener, ILev
 		logicFrameTimer = new Timer(advanceTime, (ActionEvent e) -> {
 		    updateLogicFrame();
 		});
-        logicFrameTimer.start();
+        
 	}
 
 	private void setRedrawTimer(int redrawTime) {
 		redrawTimer = new Timer(redrawTime, (ActionEvent e) -> {
 		    repaint();
         });
-        redrawTimer.start();
+        
 	}
 
 	
@@ -229,6 +231,9 @@ public class GamePanel extends JLayeredPane implements ILogicFrameListener, ILev
     @Override
     public void levelStart(GameLevel level) {
         zombieManager.getNaturalZombieProducer().levelStart(level);
+        
+        redrawTimer.start();
+        logicFrameTimer.start();
     }
 
     @Override

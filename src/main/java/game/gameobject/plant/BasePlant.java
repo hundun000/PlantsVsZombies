@@ -10,7 +10,8 @@ import org.slf4j.LoggerFactory;
 import game.GamePanel;
 import game.component.IdlePositionComponent;
 import game.component.PositionComponent;
-import game.gameobject.GameObject;
+import game.gameobject.gameobject.GameObject;
+import game.gameobject.gameobject.GameObjectStatus;
 import game.manager.GridManager;
 import game.manager.ZombieManager;
 
@@ -19,18 +20,21 @@ import game.manager.ZombieManager;
  */
 public abstract class BasePlant extends GameObject {
     private static Logger logger = LoggerFactory.getLogger(BasePlant.class);
-    protected int health;
+    
     protected PositionComponent positionComponent;
     protected PlantModel model;
+    protected GameObjectStatus status;
     
-    private int workColdDown = 0;
     
+    /**
+     * 子类通过Factory构造，可能使用反射。
+     */
     public BasePlant(GamePanel gamePanel, PlantModel model, PlantInstanceParams params) {
         super(gamePanel, model.registerName);
         super.spirit = model.spirit;
-        this.health = model.health;
         this.positionComponent = new IdlePositionComponent(gamePanel, model, params);
         this.model = model;
+        this.status = new GameObjectStatus(this, model, params);
     }
    
     protected int getBulletStartX() {
@@ -47,20 +51,11 @@ public abstract class BasePlant extends GameObject {
     }
     
     @Override
-    public void updateLogicFrame() {
-        if(workColdDown == 0) {
-            if (wantWork() && alive()) {
-                work();
-                workColdDown = model.workColdDownReset;
-                //logger.debug("{} work", instanceName);
-            } else {
-                //logger.debug("{} not work", instanceName);
-            }
-        } else {
-            workColdDown --;
-            //logger.debug("{} work cold down", instanceName);
-        }
+    public GameObjectStatus getStatus() {
+        return status;
     }
+    
+    
     
     @Override
     public void drawSelf(Graphics g) {
@@ -73,14 +68,12 @@ public abstract class BasePlant extends GameObject {
                 g.drawRect((int)box.getX(), (int)box.getY(), (int)box.getWidth(), (int)box.getHeight());
                 g.setColor(last);
             }
-            drawHealthBar(g, health);
         }
     }
     
     
     
-    protected abstract boolean wantWork();
-    protected abstract void work();
+    
     
     
     public Rectangle getAttackRangeBox() {
@@ -98,11 +91,6 @@ public abstract class BasePlant extends GameObject {
         return model;
     }
 
-    public boolean alive() {
-        return health > 0;
-    }
+    
 
-    public void damageHealth(int damage) {
-        health = Math.max(health - damage, 0);
-    }
 }

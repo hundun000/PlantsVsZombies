@@ -5,8 +5,9 @@ import game.GamePanel;
 import game.component.IdlePositionComponent;
 import game.component.PositionComponent;
 import game.facroty.PlantFactory;
-import game.gameobject.GameObject;
-import game.gameobject.Spirit;
+import game.gameobject.gameobject.GameObject;
+import game.gameobject.gameobject.GameObjectStatus;
+import game.gameobject.gameobject.Spirit;
 import game.manager.PlantCardManager;
 import game.utils.ImageLoadTool;
 
@@ -22,6 +23,7 @@ public class PlantCard extends GameObject implements MouseListener {
     private PlantModel plantModel;
     
     private PositionComponent positionComponent;
+    private GameObjectStatus status;
     
     public PlantCard(GamePanel gamePanel, int posX, int posY, String plantRegisterName, String cardRegisterName, Spirit spirit) {
         super(gamePanel, cardRegisterName);
@@ -29,21 +31,22 @@ public class PlantCard extends GameObject implements MouseListener {
         this.plantModel = gamePanel.getPlantFactory().getModel(plantRegisterName);
         this.positionComponent = new IdlePositionComponent(
                 gamePanel, posX, posY, 0, - PlantCardManager.CARD_HEIGHT, PlantCardManager.CARD_WIDTH, PlantCardManager.CARD_HEIGHT);
+        this.status = new GameObjectStatus(this);
     }
 
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
         if (!getPositionComponent().getCoillderBox().contains(e.getX(), e.getY())) {
             return;
         }
         
         gamePanel.getGridManager().setPlanting(plantModel);
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
     }
 
     @Override
@@ -62,15 +65,28 @@ public class PlantCard extends GameObject implements MouseListener {
     }
 
     @Override
-    public void updateLogicFrame() {
+    public PositionComponent getPositionComponent() {
+        return positionComponent;
+    }
+
+
+    @Override
+    public GameObjectStatus getStatus() {
+        return status;
+    }
+
+
+    @Override
+    protected boolean wantWork() {
+        return false;
+    }
+
+
+    @Override
+    protected void work() {
         boolean hasEnoughSunScore = gamePanel.getSunScoreManager().hasEnoughSunScore(plantModel.plantCost);
         if (hasEnoughSunScore) {
             setHighLight(true);
         }
-    }
-
-    @Override
-    public PositionComponent getPositionComponent() {
-        return positionComponent;
     }
 }

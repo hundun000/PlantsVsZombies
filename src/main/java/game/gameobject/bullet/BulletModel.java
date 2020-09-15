@@ -1,7 +1,7 @@
 package game.gameobject.bullet;
 
-import game.gameobject.GameObjectModel;
-import game.gameobject.Spirit;
+import game.gameobject.gameobject.GameObjectModel;
+import game.gameobject.gameobject.Spirit;
 import game.gameobject.zombie.BaseZombie;
 import game.manager.GridManager;
 
@@ -27,5 +27,5 @@ public class BulletModel extends GameObjectModel<BaseBullet> {
     
     public int speedX = 15;
     public int speedY = 0;
-    public int damage = 300;
+    public int damage = 100;
 }

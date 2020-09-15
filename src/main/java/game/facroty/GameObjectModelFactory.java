@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import game.GamePanel;
-import game.gameobject.GameObjectModel;
+import game.gameobject.gameobject.GameObjectModel;
 import game.gameobject.plant.BasePlant;
 import game.gameobject.plant.PlantInstanceParams;
 import game.gameobject.plant.PlantModel;
