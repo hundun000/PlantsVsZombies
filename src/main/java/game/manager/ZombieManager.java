@@ -16,9 +16,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import game.GamePanel;
-import game.gameobject.bullet.BaseBullet;
-import game.gameobject.zombie.BaseZombie;
-import game.gameobject.zombie.ZombieInstanceParams;
+import game.entity.bullet.BaseBullet;
+import game.entity.zombie.BaseZombie;
+import game.entity.zombie.ZombieInstanceParams;
 import game.utils.ImageLoadTool;
 
 /**
@@ -44,7 +44,7 @@ public class ZombieManager extends BaseManager {
     public ZombieManager(GamePanel gamePanel) {
         super(gamePanel, ZombieManager.MANAGER_START_X, ZombieManager.MANAGER_START_Y, ZombieManager.MANAGER_WIDTH, ZombieManager.MANAGER_HEIGHT, POSITION_START_X, POSITION_START_Y);
         super.boardColor = Color.RED;
-        super.boardImage = ImageLoadTool.loadOneOtherImage(gamePanel.pvzMod.modName, "zombie_manager").getImage();
+        //super.boardImage = ImageLoadTool.loadOneOtherImage(gamePanel.mod.getModName(), "zombie_manager").getImage();
     }
 
     @Override
@@ -59,7 +59,7 @@ public class ZombieManager extends BaseManager {
             while (iterator.hasNext()) {
                 BaseZombie zombie = iterator.next();
                 zombie.updateLogicFrame();
-                if (!zombie.getStatus().alive()) {
+                if (!zombie.getHealthComponent().alive()) {
                     iterator.remove();
                 }
             }

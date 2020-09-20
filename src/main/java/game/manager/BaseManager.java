@@ -33,15 +33,20 @@ public abstract class BaseManager extends JComponent implements ILogicFrameListe
     public BaseManager(GamePanel gamePanel, int x, int y, int width, int height, int positionStartX, int positionStartY) {
         super();
         setLocation(x, y);
+        updateBaseManagerSize(width, height);
+        this.gamePanel = gamePanel;
+        this.positionStartX = positionStartX;
+        this.positionStartY = positionStartY;
+        setLayout(null);
+        initChild();
+        
+    }
+    
+    protected void updateBaseManagerSize(int width, int height) {
         setSize(width, height);
         // setBorder(BorderFactory.createLineBorder(Color.BLUE, 2));
         this.width = width;
         this.height = height;
-        this.gamePanel = gamePanel;
-        this.positionStartX = positionStartX;
-        this.positionStartY = positionStartY;
-        initChild();
-        
     }
 
     
@@ -51,6 +56,7 @@ public abstract class BaseManager extends JComponent implements ILogicFrameListe
     
     @Override
     protected void paintComponent(Graphics g) {
+        
         if (boardImage != null) {
             g.drawImage(boardImage, 0, 0, null);
         }
@@ -59,6 +65,7 @@ public abstract class BaseManager extends JComponent implements ILogicFrameListe
         int r = 4;
         g.fillOval(0 - r, 0 - r, r * 2, r * 2);
         
+        super.paintComponent(g);
     }
     
     

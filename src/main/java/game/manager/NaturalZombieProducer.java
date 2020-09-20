@@ -6,9 +6,10 @@ import java.util.List;
 import java.util.Random;
 
 import game.GamePanel;
+import game.GamePanel.GameState;
+import game.entity.zombie.BaseZombie;
 import game.ILevelListener;
 import game.ILogicFrameListener;
-import game.gameobject.zombie.BaseZombie;
 import game.level.GameLevel;
 import game.level.NaturalZombieSpawnRule;
 
@@ -29,7 +30,7 @@ public class NaturalZombieProducer implements ILogicFrameListener, ILevelListene
     @Override
     public void updateLogicFrame() {
         if (level != null) {
-            Iterator<NaturalZombieSpawnRule> iterator = level.getRules().iterator();
+            Iterator<NaturalZombieSpawnRule> iterator = level.getNaturalZombieSpawnRules().iterator();
             while (iterator.hasNext()) {
                 NaturalZombieSpawnRule rule = iterator.next();
                 if (rule.getStartFrame() == gamePanel.logicFrameCounter) {
@@ -48,6 +49,12 @@ public class NaturalZombieProducer implements ILogicFrameListener, ILevelListene
 
     @Override
     public void levelEnd() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void updateGameState(GameState gameState) {
         // TODO Auto-generated method stub
         
     }

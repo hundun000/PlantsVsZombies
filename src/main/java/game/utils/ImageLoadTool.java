@@ -8,9 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import game.GameWindow;
-import game.gameobject.gameobject.WorkStatus.WorkState;
+import game.entity.gameobject.WorkStatus.WorkState;
 import game.manager.PlantCardManager;
-import game.pvz.PvzMod;
+import game.mod.pvz.PvzMod;
 
 /**
  * @author hundun
@@ -19,7 +19,7 @@ import game.pvz.PvzMod;
 public class ImageLoadTool {
     private static Logger logger = LoggerFactory.getLogger(ImageLoadTool.class);
     private static final String IMAGES_FOLDER = GameWindow.RESOURCE_FOLDER + "images/";
-    
+    public static ImageIcon defaultIcon = loadOneImage("", "default", "png");
     public static ImageIcon loadOnePlantCardImage(String modName, String registerName) {
         String folder = modName + "/cards/";
         String extend = "png";
@@ -37,7 +37,7 @@ public class ImageLoadTool {
     }
     public static ImageIcon loadOnePlantImage(String modName, String registerName, WorkState workState) {
         String folder = modName + "/plants/" + registerName + "/";
-        String extend = "gif";
+        String extend = "png";
         String fileName = workState.name().toLowerCase();
         return loadOneImage(folder, fileName, extend);
     }
@@ -59,7 +59,7 @@ public class ImageLoadTool {
             return image;
         } else {
             logger.warn("file {} not found", filePath);
-            return null;
+            return defaultIcon;
         }
     }
     

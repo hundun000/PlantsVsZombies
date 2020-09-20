@@ -16,20 +16,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import game.GamePanel;
+import game.GamePanel.GameState;
 import game.ILevelListener;
-import game.component.PositionComponent;
-import game.component.ZombiePositionComponent;
-import game.gameobject.bullet.BaseBullet;
-import game.gameobject.drop.BaseDrop;
-import game.gameobject.plant.BasePlant;
-import game.gameobject.plant.PlantModel;
-import game.gameobject.plant.PlantSlot;
-import game.gameobject.zombie.BaseZombie;
+import game.entity.bullet.BaseBullet;
+import game.entity.component.PositionComponent;
+import game.entity.component.ZombiePositionComponent;
+import game.entity.drop.BaseDrop;
+import game.entity.plant.BasePlant;
+import game.entity.plant.PlantModel;
+import game.entity.plant.PlantSlot;
+import game.entity.zombie.BaseZombie;
 import game.level.GameLevel;
-import game.pvz.bullet.Pea;
-import game.pvz.plant.FreezePeashooter;
-import game.pvz.plant.Peashooter;
-import game.pvz.plant.Sunflower;
+import game.mod.pvz.bullet.Pea;
+import game.mod.pvz.plant.FrozenPeashooter;
+import game.mod.pvz.plant.Peashooter;
+import game.mod.pvz.plant.Sunflower;
 import game.utils.ImageLoadTool;
 
 /**
@@ -66,7 +67,7 @@ public class GridManager extends BaseManager implements MouseListener, ILevelLis
         super(gamePanel, MANAGER_START_X, MANAGER_START_Y, MANAGER_WIDTH, MANAGER_HEIGHT, POSITION_START_X, POSITION_START_Y);
         addMouseListener(this);
         super.boardColor = Color.BLUE;
-        super.boardImage = ImageLoadTool.loadOneOtherImage(gamePanel.pvzMod.modName, "grid_manager").getImage();
+        //super.boardImage = ImageLoadTool.loadOneOtherImage(gamePanel.mod.getModName(), "grid_manager").getImage();
     }
 
     @Override
@@ -83,7 +84,7 @@ public class GridManager extends BaseManager implements MouseListener, ILevelLis
             while (iterator.hasNext()) {
                 BaseBullet bullet = iterator.next();
                 bullet.updateLogicFrame();
-                if (!bullet.getStatus().alive()) {
+                if (!bullet.getHealthComponent().alive()) {
                     iterator.remove();
                 }
             }
@@ -94,7 +95,7 @@ public class GridManager extends BaseManager implements MouseListener, ILevelLis
             while (iterator.hasNext()) {
                 BaseDrop drop = iterator.next();
                 drop.updateLogicFrame();
-                if (!drop.getStatus().alive()) {
+                if (!drop.getHealthComponent().alive()) {
                     iterator.remove();
                     removeMouseListener(drop);
                 }
@@ -160,10 +161,7 @@ public class GridManager extends BaseManager implements MouseListener, ILevelLis
         double pixelPerFrame = pixelPerSecond / f;
         return (int) pixelPerFrame;
     }
-    
-    public PlantSlot[][] getPlantSlots() {
-        return plantSlots;
-    }
+
     
     public void addBullet(BaseBullet bullet) {
         bullets.add(bullet);
@@ -172,7 +170,6 @@ public class GridManager extends BaseManager implements MouseListener, ILevelLis
     
     public PlantSlot getCollideredPlantSlot(PositionComponent positionComponent) {
 
-        PlantSlot[][] plantSlots = gamePanel.getGridManager().getPlantSlots();
         for (int i = 0; i < GridManager.NUM_COLUMN_CONSTANT; i++) {
             for (int j = 0; j < GridManager.NUM_ROW_CONSTANT; j++) {
                 PlantSlot plantSlot = plantSlots[i][j];
@@ -211,7 +208,7 @@ public class GridManager extends BaseManager implements MouseListener, ILevelLis
      */
     public void chargeSunPointAndDelete(BaseDrop drop) {
         gamePanel.getSunScoreManager().addSunScore(drop.getChargePoint());
-        drop.getStatus().forceKilled();
+        drop.getHealthComponent().forceKilled();
     }
 
 
@@ -222,7 +219,7 @@ public class GridManager extends BaseManager implements MouseListener, ILevelLis
 
     @Override
     public void mousePressed(MouseEvent e) {
-        logger.debug("mouse pressed at origin({}, {})", e.getX(), e.getY());
+        //logger.debug("mouse pressed at origin({}, {})", e.getX(), e.getY());
         int eventGridsX = e.getX() - GridManager.POSITION_START_X;
         int eventGridsY = e.getY() - GridManager.POSITION_START_Y;
         logger.debug("mouse pressed at Grids({}, {})", eventGridsX, eventGridsY);
@@ -262,6 +259,12 @@ public class GridManager extends BaseManager implements MouseListener, ILevelLis
 
     @Override
     public void levelEnd() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void updateGameState(GameState gameState) {
         // TODO Auto-generated method stub
         
     }

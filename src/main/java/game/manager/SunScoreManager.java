@@ -4,14 +4,16 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import game.GamePanel;
-import game.gameobject.gameobject.Spirit;
-import game.pvz.drop.SunItem;
+import game.entity.gameobject.Spirit;
+import game.mod.pvz.drop.SunItem;
+import game.utils.ImageLoadTool;
 
 /**
  * @author hundun
@@ -24,8 +26,9 @@ public class SunScoreManager extends BaseManager {
     private int sunScore = 0;
     
     public SunScoreManager(GamePanel gamePanel, int initSunScore) {
-        super(gamePanel, 30, 80, 50, 20, 0, 0);
+        super(gamePanel, 0, 0, 96, 109, 30, 80);
         addSunScore(initSunScore);
+        super.boardImage = ImageLoadTool.loadOneOtherImage(gamePanel.mod.getModName(), "sun_manager").getImage();
     }
 
     @Override
@@ -38,7 +41,7 @@ public class SunScoreManager extends BaseManager {
         
         
         this.scoreLable = new JLabel("sunScore");
-        scoreLable.setLocation(0, 0);
+        scoreLable.setLocation(30, 80);
         scoreLable.setSize(60, 20);
         this.add(scoreLable);
     }

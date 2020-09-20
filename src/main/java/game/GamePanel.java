@@ -4,18 +4,22 @@ import javax.swing.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import game.facroty.BulletFactory;
-import game.facroty.DropFactory;
-import game.facroty.PlantFactory;
-import game.facroty.ZombieFactory;
+import game.entity.gameobject.Spirit;
+import game.entity.plant.PlantModel;
+import game.factory.BulletFactory;
+import game.factory.DropFactory;
+import game.factory.PlantFactory;
+import game.factory.ZombieFactory;
 import game.level.GameLevel;
 import game.manager.GridManager;
 import game.manager.PlantCardManager;
 import game.manager.SunScoreManager;
 import game.manager.ZombieManager;
-import game.pvz.PvzMod;
-import game.pvz.drop.SunItem;
-import game.pvz.plant.Sunflower;
+import game.mod.Mod;
+import game.mod.pvz.PvzMod;
+import game.mod.pvz.drop.SunItem;
+import game.mod.pvz.plant.Sunflower;
+import game.utils.ImageLoadTool;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -44,23 +48,24 @@ public class GamePanel extends JLayeredPane implements ILogicFrameListener, ILev
 	 * 每秒逻辑帧数
 	 */
 	public static final int LOGICAL_FRAME_NUM_PER_SECOND = 20;
-	/**
-	 * 每秒渲染帧数
-	 */
-	private static final int DRAW_FRAME_NUM_PER_SECOND = 40;
-	
+//	/**
+//	 * 每秒渲染帧数
+//	 */
+//	private static final int DRAW_FRAME_NUM_PER_SECOND = 40;
+//	
     public static final boolean DRAW_DEBUG_BOX = true;
 
 	private Image boardImage;
     
-    private Timer redrawTimer;
-    private Timer logicFrameTimer;
+    //private Timer redrawTimer;
+    private Timer logicAndDrawFrameTimer;
     
     private static MessageDialog messageDialog;
     
     //private int mouseX, mouseY;
-
-    public PvzMod pvzMod = new PvzMod();
+    List<GameLevel> levels;
+    
+    public Mod mod;
     //  ======  manager ======
     private SunScoreManager sunScoreManager;
     private ZombieManager zombieManager;
@@ -94,9 +99,23 @@ public class GamePanel extends JLayeredPane implements ILogicFrameListener, ILev
         return dropFactory;
     }
     
+    public GameState gameState;
+    public enum GameState {
+        GAME_PAUSE,
+        PREPARE_CARDS,
+        FIGHT
+    }
+    
     public void gameOver() {
         this.getMessageDialog().gameOverDialog();
         GameWindow.intoFightWindow();
+    }
+    
+    public static int perSecondToPerFrame(int input) {
+        return (int) (input / GamePanel.LOGICAL_FRAME_NUM_PER_SECOND);
+    }
+    public static double perSecondToPerFrame(double input) {
+        return (double) (input / GamePanel.LOGICAL_FRAME_NUM_PER_SECOND);
     }
 
     public GamePanel(boolean visible) {
@@ -106,14 +125,14 @@ public class GamePanel extends JLayeredPane implements ILogicFrameListener, ILev
         
         messageDialog = new MessageDialog(GamePanel.this);
 
-        loadBackGroundImage();
+        this.mod = new PvzMod();
         
         this.plantFactory = new PlantFactory();
         this.zombieFactory = new ZombieFactory();
         this.bulletFactory = new BulletFactory();
         this.dropFactory = new DropFactory();
         
-        setRedrawTimer(1000 / DRAW_FRAME_NUM_PER_SECOND);
+//        setRedrawTimer(1000 / DRAW_FRAME_NUM_PER_SECOND);
         setAdvanceTimer(1000 / LOGICAL_FRAME_NUM_PER_SECOND);
 
         this.plantCardManager = new PlantCardManager(this);
@@ -129,18 +148,30 @@ public class GamePanel extends JLayeredPane implements ILogicFrameListener, ILev
         this.zombieManager = new ZombieManager(this);
         add(zombieManager, LAYER_IMAGE_MANAGER);
         
-         
+        loadModEntities();
         
-        pvzMod.load(
-                plantFactory, 
-                zombieFactory, 
-                plantCardManager, 
-                bulletFactory, 
-                dropFactory);
-        
-        levelStart(pvzMod.levels.get(0));
+        logicAndDrawFrameTimer.start();
+        updateGameState(GameState.PREPARE_CARDS);
         
         logger.debug("gamepannel constructed.");
+    }
+    
+    
+    private void loadModEntities() {
+        
+        mod.loadBulletModeles().forEach(item -> bulletFactory.registerModel(item));
+        mod.loadDrops().forEach(item -> dropFactory.registerModel(item));
+        mod.loadZombieModeles().forEach(item -> zombieFactory.registerModel(item));
+        mod.loadPlantModeles().forEach(item -> plantFactory.registerModel(item));
+        this.levels = mod.loadGameLevels();
+        
+        for (PlantModel model : plantFactory.getModels()) {
+            String cardRegisterName = PlantCardManager.getCardRegisterName(model.registerName);
+            Spirit spirit = new Spirit(ImageLoadTool.loadOnePlantCardImage(mod.getModName(), cardRegisterName));
+            plantCardManager.registerPlantCard(model.registerName, spirit);
+        }
+        
+        loadBackGroundImage();
     }
     
     public PlantFactory getPlantFactory() {
@@ -161,18 +192,21 @@ public class GamePanel extends JLayeredPane implements ILogicFrameListener, ILev
     }
 
 	private void setAdvanceTimer(int advanceTime) {
-		logicFrameTimer = new Timer(advanceTime, (ActionEvent e) -> {
-		    updateLogicFrame();
+		logicAndDrawFrameTimer = new Timer(advanceTime, (ActionEvent e) -> {
+		    if (gameState == GameState.FIGHT) {
+		        updateLogicFrame();
+		    }
+		    repaint();
 		});
         
 	}
 
-	private void setRedrawTimer(int redrawTime) {
-		redrawTimer = new Timer(redrawTime, (ActionEvent e) -> {
-		    repaint();
-        });
-        
-	}
+//	private void setRedrawTimer(int redrawTime) {
+//		redrawTimer = new Timer(redrawTime, (ActionEvent e) -> {
+//		    repaint();
+//        });
+//        
+//	}
 
 	
 
@@ -181,7 +215,7 @@ public class GamePanel extends JLayeredPane implements ILogicFrameListener, ILev
 	
 
 	private void loadBackGroundImage() {
-	    ImageIcon imageIcon = new ImageIcon(GameWindow.RESOURCE_FOLDER + "images/mainBG.png");
+	    ImageIcon imageIcon = ImageLoadTool.loadOneOtherImage(mod.getModName(), "main");
 		boardImage = imageIcon.getImage();
 	}
 
@@ -231,15 +265,29 @@ public class GamePanel extends JLayeredPane implements ILogicFrameListener, ILev
     @Override
     public void levelStart(GameLevel level) {
         zombieManager.getNaturalZombieProducer().levelStart(level);
+        plantCardManager.levelStart(level);
+        //redrawTimer.start();
         
-        redrawTimer.start();
-        logicFrameTimer.start();
     }
 
     @Override
     public void levelEnd() {
         // TODO Auto-generated method stub
         
+    }
+
+    @Override
+    public void updateGameState(GameState gameState) {
+        this.gameState = gameState;
+        switch (gameState) {
+        case FIGHT:
+            levelStart(this.levels.get(0));
+            break;
+        default:
+            break;
+        }
+        plantCardManager.updateGameState(gameState);
+        logger.info("state update to {}", gameState);
     }
     
     

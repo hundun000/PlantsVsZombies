@@ -4,9 +4,9 @@ import java.util.Random;
 
 import game.GamePanel;
 import game.ILogicFrameListener;
-import game.gameobject.drop.BaseDrop;
-import game.gameobject.drop.DropInstanceParams;
-import game.pvz.drop.SunItem;
+import game.entity.drop.BaseDrop;
+import game.entity.drop.DropInstanceParams;
+import game.mod.pvz.drop.SunItem;
 
 /**
  * @author hundun
@@ -32,7 +32,7 @@ public class NaturalSunProducer implements ILogicFrameListener {
             int startY = 0;
             int endY = rnd.nextInt(300) + 200;
             DropInstanceParams params = new DropInstanceParams(startX, startY, endY);
-            BaseDrop sunItem = gamePanel.getDropFactory().getInstacne(SunItem.REGISTER_NAME, gamePanel, params);
+            BaseDrop sunItem = gamePanel.getDropFactory().getInstacne(SunItem.NAME, gamePanel, params);
             gamePanel.getGridManager().addDrop(sunItem);
             
             workColdDown = workColdDownReset;

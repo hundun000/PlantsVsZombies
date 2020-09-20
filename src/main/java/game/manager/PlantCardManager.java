@@ -2,68 +2,85 @@ package game.manager;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import game.GamePanel;
 import game.GameWindow;
-import game.facroty.PlantFactory;
-import game.gameobject.gameobject.Spirit;
-import game.gameobject.plant.BasePlant;
-import game.gameobject.plant.PlantCard;
-import game.gameobject.plant.PlantModel;
-import game.pvz.plant.FreezePeashooter;
-import game.pvz.plant.Peashooter;
-import game.pvz.plant.Sunflower;
+import game.ILevelListener;
+import game.GamePanel.GameState;
+import game.entity.gameobject.Spirit;
+import game.entity.plant.BasePlant;
+import game.entity.plant.PlantCard;
+import game.entity.plant.PlantModel;
+import game.factory.PlantFactory;
+import game.level.GameLevel;
+import game.mod.pvz.plant.FrozenPeashooter;
+import game.mod.pvz.plant.Peashooter;
+import game.mod.pvz.plant.Sunflower;
+import game.utils.ImageLoadTool;
 
 /**
  * @author hundun
  * Created on 2020/09/01
  */
-public class PlantCardManager extends BaseManager {
+public class PlantCardManager extends BaseManager implements ILevelListener, MouseListener {
     static Logger logger = LoggerFactory.getLogger(PlantCardManager.class);
-    
-    private final static int LAYER_CARD = 0;
-    private final static int CARDS_Y = 8;
-    private final static int CARDS_X = 110;
+    public final static int FIGHT_STATE_WIDTH = 600;
+    public final static int FIGHT_STATE_HEIGHT = 100;
+    public final static int PREPARE_STATE_WIDTH = 600;
+    public final static int PREPARE_STATE_HEIGHT = 436;
     public final static int CARD_WIDTH = 65;
     public final static int CARD_HEIGHT = 90;
-    private ArrayList<PlantCard> plantCards;
+    private final static int ACTIVATED_CARDS_START_X = 110;
+    private final static int ACTIVATED_CARDS_START_Y = 8 + CARD_HEIGHT;
+    private final static int PREPARE_DONE_BUTTON_X = ACTIVATED_CARDS_START_X;
+    private final static int PREPARE_DONE_BUTTON_Y = ACTIVATED_CARDS_START_Y + 8;
+    private final static int REGISTERED_CARDS_START_X = ACTIVATED_CARDS_START_X;
+    private final static int REGISTERED_CARDS_START_Y = PREPARE_DONE_BUTTON_Y + 100 + CARD_HEIGHT;
     
-    public final static int PlantCardManager_WIDTH = 600;
-    public final static int PlantCardManager_HEIGHT = 100;
     
-    private Map<String, Spirit> cardSpirits = new HashMap<>();
+    private List<PlantCard> activatedCards;
+    private List<PlantCard> registeredCards;
+    private int maxActiveCardNum = 6;
+    
+    
     
     public PlantCardManager(GamePanel gamePanel) {
-        super(gamePanel, 0, 0, PlantCardManager_WIDTH, PlantCardManager_HEIGHT, 0, 0);
-        setSize(PlantCardManager_WIDTH, PlantCardManager_HEIGHT);
+        super(gamePanel, 0, 0, 0, 0, 0, 0);
+        addMouseListener(this);
+        super.boardImage = ImageLoadTool.loadOneOtherImage(gamePanel.mod.getModName(), "card_manager").getImage();
     }
+
     
     
-    
-    public void addPlantCard(String plantRegisterName) {
+    public void registerPlantCard(String plantRegisterName, Spirit spirit) {
         String cardRegisterName = getCardRegisterName(plantRegisterName);
-        int x = CARDS_X + CARD_WIDTH * plantCards.size();
-        int y = CARDS_Y + CARD_HEIGHT;
-        Spirit spirit = cardSpirits.get(cardRegisterName);
-        PlantCard plantCard = new PlantCard(gamePanel, x, y, plantRegisterName, cardRegisterName, spirit);
-        plantCards.add(plantCard);
+        int posX = REGISTERED_CARDS_START_X + CARD_WIDTH * registeredCards.size();
+        int posY = REGISTERED_CARDS_START_Y;
+        PlantCard plantCard = new PlantCard(gamePanel, posX, posY, plantRegisterName, cardRegisterName, spirit);
+        registeredCards.add(plantCard);
         addMouseListener(plantCard);
-        logger.info("card {} added.", cardRegisterName);
+        logger.info("card {} registered.", cardRegisterName);
     }
 
     @Override
     public void updateLogicFrame() {
-        for (PlantCard plantCard : plantCards) {
+        for (PlantCard plantCard : activatedCards) {
             plantCard.updateLogicFrame();
         }
     }
@@ -72,9 +89,17 @@ public class PlantCardManager extends BaseManager {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         
-        for (PlantCard plantCard : plantCards) {
+        for (PlantCard plantCard : activatedCards) {
             plantCard.drawSelf(g);
         }
+        
+        if (gamePanel.gameState == GameState.PREPARE_CARDS) {
+            for (PlantCard plantCard : registeredCards) {
+                plantCard.drawSelf(g);
+            }
+        }
+        
+        
     }
     
     public static String getCardRegisterName(String plantRegisterName) {
@@ -84,15 +109,114 @@ public class PlantCardManager extends BaseManager {
 
     @Override
     public void initChild() {
-        plantCards = new ArrayList<>();
+        registeredCards = new ArrayList<>();
+        activatedCards = new ArrayList<>();
+        
+        JButton prepareDoneButton = new JButton("开始");
+        prepareDoneButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gamePanel.updateGameState(GameState.FIGHT);
+            }
+        });
+        prepareDoneButton.setBounds(PREPARE_DONE_BUTTON_X, PREPARE_DONE_BUTTON_Y, 100, 30);
+        add(prepareDoneButton);
+    }
+
+
+
+    @Override
+    public void levelStart(GameLevel level) {
+
+    }
+
+
+
+    @Override
+    public void levelEnd() {
+        activatedCards.forEach(item -> unactiveCard(item));
     }
     
-
-    public Map<String, Spirit> getCardSpirits() {
-        return cardSpirits;
+    
+    
+    
+    public void cardSelected(PlantCard plantCard) {
+        if (gamePanel.gameState == GameState.PREPARE_CARDS) {
+            if (!activatedCards.contains(plantCard)) {
+                if (activatedCards.size() < maxActiveCardNum) {
+                    activeCard(plantCard);
+                }
+            } else {
+                unactiveCard(plantCard);
+            }
+        } else if (gamePanel.gameState == GameState.FIGHT) {
+            gamePanel.getGridManager().planting = plantCard.getPlantModel();
+        }
+    }
+    
+    private void unactiveCard(PlantCard plantCard) {
+        activatedCards.remove(plantCard);
+        removeMouseListener(plantCard);
+        logger.info("card {} unactivated.", plantCard);
+    }
+    
+    private void activeCard(PlantCard registeredCard) {
+        int posX = ACTIVATED_CARDS_START_X + CARD_WIDTH * activatedCards.size();
+        int posY = ACTIVATED_CARDS_START_Y;
+        PlantCard activatedCard = registeredCard.clone(posX, posY);
+        activatedCards.add(activatedCard);
+        addMouseListener(activatedCard);
+        logger.info("card {} activated.", activatedCard);
     }
 
-    
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        logger.debug("mouse pressed at CardBoard({}, {})", e.getX(), e.getY());
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
+
+
+    @Override
+    public void updateGameState(GameState gameState) {
+        switch (gameState) {
+            case PREPARE_CARDS:
+                updateBaseManagerSize(PREPARE_STATE_WIDTH, PREPARE_STATE_HEIGHT);
+                break;
+            case FIGHT:
+                updateBaseManagerSize(FIGHT_STATE_WIDTH, FIGHT_STATE_HEIGHT);
+                break;
+            case GAME_PAUSE:
+            default:
+                updateBaseManagerSize(0, 0);
+                break;
+        }
+        
+    }
+
     
     
 
