@@ -29,7 +29,7 @@ public class BulletPositionComponent extends PositionComponent {
             posY += model.speedY;
         }
         if (!wantMoveX && !wantMoveY) {
-            stopped = true;
+            moveDone = true;
         }
     }
 

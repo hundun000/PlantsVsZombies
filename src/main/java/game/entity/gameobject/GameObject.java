@@ -10,7 +10,9 @@ import javax.swing.ImageIcon;
 
 import game.GamePanel;
 import game.ILogicFrameListener;
+import game.entity.component.HealthComponent;
 import game.entity.component.PositionComponent;
+import game.entity.gameobject.WorkStatus.WorkState;
 import game.manager.GridManager;
 
 /**
@@ -19,11 +21,12 @@ import game.manager.GridManager;
  */
 public abstract class GameObject implements ILogicFrameListener {
     
-    public static Font healthBarFont = new Font(Font.SERIF, Font.PLAIN, (int) (GridManager.GRID_HEIGHT * 0.2));
+    public static Font healthBarFont = new Font(Font.SERIF, Font.PLAIN, (int) (GridManager.GRID_HEIGHT * 0.1));
     public static Font positionFont = new Font(Font.SERIF, Font.PLAIN, (int) (GridManager.GRID_HEIGHT * 0.1));
     
     protected final String registerName;
-    
+    public static final int NO_SUBTYPE_INDEX = 0;
+    private int subTypeId = NO_SUBTYPE_INDEX;
     protected ImageIcon selfImageIcon;
     protected final GamePanel gamePanel;
     private boolean highLight = false;
@@ -51,9 +54,13 @@ public abstract class GameObject implements ILogicFrameListener {
 //        return gamePanel;
 //    }
     
+    protected ImageIcon getSpiritImageIcon() {
+        return spirit.getImage(getSubTypeId());
+    }
+    
     public void drawSelf(Graphics g) {
         if (spirit != null) {
-            ImageIcon imageIcon = spirit.getImage();
+            ImageIcon imageIcon = getSpiritImageIcon();
             g.drawImage(imageIcon.getImage(), this.getPositionComponent().getPosX(), this.getPositionComponent().getPosY() - imageIcon.getIconHeight(), null);
         }
         if (GamePanel.DRAW_DEBUG_BOX) {
@@ -63,7 +70,7 @@ public abstract class GameObject implements ILogicFrameListener {
             // draw coillderBox
             Rectangle coillderBox = getPositionComponent().getCoillderBox();
             if (highLight) {
-                g.fillRect((int)coillderBox.getX(), (int)coillderBox.getY(), (int)coillderBox.getWidth(), (int)coillderBox.getHeight());
+                g.draw3DRect((int)coillderBox.getX(), (int)coillderBox.getY(), (int)coillderBox.getWidth(), (int)coillderBox.getHeight(), true);
             } else {
                 g.drawRect((int)coillderBox.getX(), (int)coillderBox.getY(), (int)coillderBox.getWidth(), (int)coillderBox.getHeight());
             }
@@ -97,12 +104,23 @@ public abstract class GameObject implements ILogicFrameListener {
     }
 
     
+    
     @Override
     public void updateLogicFrame() {
-        getPositionComponent().updateLogicFrame();
-        
+        if (wantMove()) {
+            getPositionComponent().updateLogicFrame();
+        }
     }
 
-   
+    protected abstract boolean wantMove();
+
+    public int getSubTypeId() {
+        return subTypeId;
+    }
+    
+    public void setSubTypeId(int subTypeId) {
+        this.subTypeId = subTypeId;
+    }
+    
 
 }

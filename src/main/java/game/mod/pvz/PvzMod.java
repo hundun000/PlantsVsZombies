@@ -15,11 +15,20 @@ import org.slf4j.LoggerFactory;
 import game.GamePanel;
 import game.GameWindow;
 import game.entity.bullet.BulletModel;
+import game.entity.bullet.template.DebuffBullect;
+import game.entity.bullet.template.Explosion;
+import game.entity.bullet.template.DebuffBullect.DebuffType;
 import game.entity.drop.DropModel;
 import game.entity.gameobject.Spirit;
 import game.entity.gameobject.WorkStatus.WorkState;
 import game.entity.plant.PlantModel;
+import game.entity.plant.template.BombPlant;
+import game.entity.plant.template.DropPlant;
+import game.entity.plant.template.IldePlant;
+import game.entity.plant.template.MinePlant;
+import game.entity.plant.template.ShooterPlant;
 import game.entity.zombie.ZombieModel;
+import game.entity.zombie.template.NormalZombie;
 import game.factory.BulletFactory;
 import game.factory.DropFactory;
 import game.factory.PlantFactory;
@@ -30,18 +39,20 @@ import game.manager.GridManager;
 import game.manager.PlantCardManager;
 import game.manager.SunScoreManager;
 import game.mod.Mod;
-import game.mod.pvz.bullet.Explosion;
-import game.mod.pvz.bullet.Pea;
+import game.mod.pvz.bullet.CherrybombExplosionBuilder;
+import game.mod.pvz.bullet.PeaBuilder;
+import game.mod.pvz.bullet.PotetoMineExplosionBuilder;
+import game.mod.pvz.bullet.ZombieHitBuilder;
 import game.mod.pvz.drop.SunItem;
-import game.mod.pvz.plant.Cherrybomb;
-import game.mod.pvz.plant.DoublePeashooter;
-import game.mod.pvz.plant.FrozenPeashooter;
-import game.mod.pvz.plant.Peashooter;
-import game.mod.pvz.plant.PotetoMine;
-import game.mod.pvz.plant.Sunflower;
-import game.mod.pvz.plant.Wallnut;
-import game.mod.pvz.zombie.ConeHeadZombie;
-import game.mod.pvz.zombie.NormalZombie;
+import game.mod.pvz.plant.CherrybombBuilder;
+import game.mod.pvz.plant.DoublePeashooterBuilder;
+import game.mod.pvz.plant.FrozenPeashooterBuilder;
+import game.mod.pvz.plant.PeashooterBuilder;
+import game.mod.pvz.plant.PotetoMineBuilder;
+import game.mod.pvz.plant.SunflowerBuilder;
+import game.mod.pvz.plant.WallnutBuilder;
+import game.mod.pvz.zombie.ConeheadZombieBuilder;
+import game.mod.pvz.zombie.PlainZombieBuilder;
 import game.utils.ImageLoadTool;
 
 /**
@@ -50,9 +61,9 @@ import game.utils.ImageLoadTool;
  */
 public class PvzMod extends Mod{
     static Logger logger = LoggerFactory.getLogger(PvzMod.class);
-    
+    public static String NAME = "pvz";
     public PvzMod() {
-        super("pvz");
+        super(NAME);
     }
     
     public List<GameLevel> loadGameLevels() {
@@ -60,9 +71,10 @@ public class PvzMod extends Mod{
         
         List<NaturalZombieSpawnRule> rules;
         rules = new ArrayList<>();
-        rules.add(new NaturalZombieSpawnRule("normal_zombie", 10));
-        rules.add(new NaturalZombieSpawnRule("normal_zombie", 20));
-        rules.add(new NaturalZombieSpawnRule("conehead_zombie", 20));
+        rules.add(new NaturalZombieSpawnRule(PlainZombieBuilder.NAME, 10));
+        rules.add(new NaturalZombieSpawnRule(PlainZombieBuilder.NAME, 15));
+        rules.add(new NaturalZombieSpawnRule(PlainZombieBuilder.NAME, 20));
+        rules.add(new NaturalZombieSpawnRule(ConeheadZombieBuilder.NAME, 20));
         levels.add(new GameLevel(rules));
         
         return levels;
@@ -74,6 +86,7 @@ public class PvzMod extends Mod{
         
         model = new DropModel(SunItem.NAME, SunItem.class);
         model.spirit = new Spirit(ImageLoadTool.loadOneDropImage(modName, model.registerName));
+        model.chargePoint = 25;
         models.add(model);
         
         return models;
@@ -81,46 +94,14 @@ public class PvzMod extends Mod{
 
     public List<BulletModel> loadBulletModeles() {
         List<BulletModel> models = new ArrayList<>();
-        BulletModel model;
         
-        model = new BulletModel(Pea.NAME, Pea.class);
-        model.spirit = new Spirit(
-                Arrays.asList(
-                        ImageLoadTool.loadOneBulletImage(modName, model.registerName + "_0"),
-                        ImageLoadTool.loadOneBulletImage(modName, model.registerName + "_1")
-                        )
-                );
-        models.add(model);
+        models.add(new ZombieHitBuilder().model());
         
-        model = new BulletModel(Explosion.CHERRYBOMB_EXPLOSION_NAME, Explosion.class);
-        model.spirit = new Spirit(
-                Arrays.asList(
-                        ImageLoadTool.loadOneBulletImage(modName, model.registerName)
-                        )
-                );
-        model.coillderBoxHeight = GridManager.GRID_HEIGHT * 3;
-        model.coillderBoxWidth = GridManager.GRID_WIDTH * 3;
-        model.coillderBoxOffsetX = 0;
-        model.coillderBoxOffsetY = - GridManager.GRID_HEIGHT * 3;
-        model.speedX = 0;
-        model.speedY = 0;
-        model.damage = 1000;
-        models.add(model);
+        models.add(new PeaBuilder().model());
         
-        model = new BulletModel(Explosion.POTETO_MINE_EXPLOSION_NAME, Explosion.class);
-        model.spirit = new Spirit(
-                Arrays.asList(
-                        ImageLoadTool.loadOneBulletImage(modName, model.registerName)
-                        )
-                );
-        model.coillderBoxHeight = (int) (GridManager.GRID_HEIGHT * 1);
-        model.coillderBoxWidth = (int) (GridManager.GRID_WIDTH * 1.2);
-        model.coillderBoxOffsetX = 0;
-        model.coillderBoxOffsetY = - GridManager.GRID_HEIGHT * 1;
-        model.speedX = 0;
-        model.speedY = 0;
-        model.damage = 1000;
-        models.add(model);
+        models.add(new CherrybombExplosionBuilder().model());
+        
+        models.add(new PotetoMineExplosionBuilder().model());
         
         return models;
     }
@@ -130,71 +111,23 @@ public class PvzMod extends Mod{
 
     public List<PlantModel> loadPlantModeles() {
         List<PlantModel> models = new ArrayList<>();
-        PlantModel model;
         
-        model = new PlantModel(Sunflower.NAME, Sunflower.class);
-        model.spirit = new Spirit(ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.IDLE))
-                .build(WorkState.WORKING, ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.WORKING));
-        model.plantCost = 50;
-        model.attackColdDownFrameNum = 120;
-        model.dropRegisterName = SunItem.NAME;
-        models.add(model);
         
-        model = new PlantModel(Peashooter.NAME, Peashooter.class);
-        model.spirit = new Spirit(ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.IDLE))
-                .build(WorkState.WORKING, ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.WORKING))
-                ;
-        model.plantCost = 100;
-        model.bulletRegisterName = Pea.NAME;
-        models.add(model);
+
+        models.add(new SunflowerBuilder().model());
         
-        model = new PlantModel(FrozenPeashooter.NAME, FrozenPeashooter.class);
-        model.spirit = new Spirit(ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.IDLE))
-                .build(WorkState.WORKING, ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.WORKING))
-                ;
-        model.plantCost = 175;
-        model.bulletRegisterName = Pea.NAME;
-        models.add(model);
+        models.add(new PeashooterBuilder().model());
         
-        model = new PlantModel(DoublePeashooter.NAME, DoublePeashooter.class);
-        model.spirit = new Spirit(ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.IDLE))
-                .build(WorkState.WORKING, ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.WORKING))
-                ;
-        model.plantCost = 200;
-        model.attackContinuousTime = 2;
-        model.bulletRegisterName = Pea.NAME;
-        models.add(model);
+        models.add(new FrozenPeashooterBuilder().model());
         
-        model = new PlantModel(Cherrybomb.NAME, Cherrybomb.class);
-        model.spirit = new Spirit(ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.IDLE))
-                .build(WorkState.WORKING, ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.WORKING))
-                ;
-        model.plantCost = 150;
-        model.attackColdDownFrameNum = (int) (GamePanel.LOGICAL_FRAME_NUM_PER_SECOND * 0.5);
-        model.bulletRegisterName = Explosion.CHERRYBOMB_EXPLOSION_NAME;
-        model.bulletStartOffsetX = - GridManager.GRID_WIDTH;
-        model.bulletStartOffsetY = GridManager.GRID_HEIGHT;
-        models.add(model);
+        models.add(new DoublePeashooterBuilder().model());
         
-        model = new PlantModel(PotetoMine.NAME, PotetoMine.class);
-        model.spirit = new Spirit(ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.IDLE))
-                .build(WorkState.WORK_READY, ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.WORK_READY))
-                .build(WorkState.WORKING, ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.WORKING))
-                ;
-        model.plantCost = 25;
-        model.attackRangeWidth = (int) (GridManager.GRID_WIDTH * 1);
-        model.attackColdDownFrameNum = GamePanel.LOGICAL_FRAME_NUM_PER_SECOND * 4;
-        model.bulletRegisterName = Explosion.POTETO_MINE_EXPLOSION_NAME;
-        model.bulletStartOffsetX = - 0;
-        model.bulletStartOffsetY = 0;
-        models.add(model);
+        models.add(new CherrybombBuilder().model());
         
-        model = new PlantModel(Wallnut.NAME, Wallnut.class);
-        model.spirit = new Spirit(ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.IDLE))
-                ;
-        model.plantCost = 50;
-        model.health = 600;
-        models.add(model);
+        
+        models.add(new PotetoMineBuilder().model());
+        
+        models.add(new WallnutBuilder().model());
         
         return models;
     }
@@ -203,15 +136,10 @@ public class PvzMod extends Mod{
 
     public List<ZombieModel> loadZombieModeles() {
         List<ZombieModel> models = new ArrayList<>();
-        ZombieModel model;
         
-        model = new ZombieModel(NormalZombie.NAME, NormalZombie.class);
-        model.spirit = new Spirit(ImageLoadTool.loadOneZombieImage(modName, model.registerName));
-        models.add(model);
+        models.add(new PlainZombieBuilder().model());
         
-        model = new ZombieModel(ConeHeadZombie.NAME, ConeHeadZombie.class);
-        model.spirit = new Spirit(ImageLoadTool.loadOneZombieImage(modName, model.registerName));
-        models.add(model);
+        models.add(new ConeheadZombieBuilder().model());
         
         return models;
     }

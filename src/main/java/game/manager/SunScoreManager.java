@@ -3,6 +3,9 @@ package game.manager;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -23,11 +26,37 @@ public class SunScoreManager extends BaseManager {
     static Logger logger = LoggerFactory.getLogger(SunScoreManager.class);
     
     JLabel scoreLable;
-    private int sunScore = 0;
+    
+    public interface WealthType {
+        String getName();
+    }
+    
+    public enum BasicWealth implements WealthType {
+        SUN_POINT("sun"),
+        COIN_POINT("$")
+        ;
+        
+        String name;
+        
+        private BasicWealth(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String getName() {
+            return this.name;
+        }
+        
+    }
+    
+
+    Map<WealthType, Integer> wealths;
+    
     
     public SunScoreManager(GamePanel gamePanel, int initSunScore) {
         super(gamePanel, 0, 0, 96, 109, 30, 80);
-        addSunScore(initSunScore);
+        
+        addWealth(BasicWealth.SUN_POINT, initSunScore);
         super.boardImage = ImageLoadTool.loadOneOtherImage(gamePanel.mod.getModName(), "sun_manager").getImage();
     }
 
@@ -38,22 +67,15 @@ public class SunScoreManager extends BaseManager {
 
     @Override
     public void initChild() {
+        this.wealths = new HashMap<>();
+        registerWealthType(BasicWealth.SUN_POINT);
         
-        
-        this.scoreLable = new JLabel("sunScore");
+        this.scoreLable = new JLabel("wealths");
         scoreLable.setLocation(30, 80);
         scoreLable.setSize(60, 20);
         this.add(scoreLable);
     }
 
-    public void addSunScore(int addtion) {
-        this.sunScore += addtion;
-        scoreLable.setText(String.valueOf(sunScore));
-    }
-
-    public boolean hasEnoughSunScore(int cost) {
-        return this.sunScore >= cost;
-    }
 
     
     
@@ -62,7 +84,35 @@ public class SunScoreManager extends BaseManager {
         super.paintComponent(g);
         
     }
-
     
+    public void registerWealthType(WealthType wealthType) {
+        wealths.put(wealthType, 0);
+    }
+    
+    public boolean hasEnoughWealth(WealthType wealthType, int want) {
+        if (!wealths.containsKey(wealthType)) {
+            throw new UnsupportedOperationException();
+        }
+        
+        return wealths.get(wealthType) >= want;
+    }
+
+    public void addWealth(WealthType wealthType, int addtion) {
+        if (!wealths.containsKey(wealthType)) {
+            throw new UnsupportedOperationException();
+        }
+        
+        wealths.compute(wealthType, (k, v) -> Math.max(v + addtion, 0));
+        updateWealthsLable();
+    }
+    
+    
+    private void updateWealthsLable() {
+        StringBuilder builder = new StringBuilder();
+        for (Entry<WealthType, Integer> entry : wealths.entrySet()) {
+            builder.append(entry.getKey().getName()).append(": ").append(entry.getValue()).append("\n");
+        }
+        scoreLable.setText(builder.toString());
+    }
 
 }

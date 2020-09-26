@@ -35,7 +35,7 @@ public class NaturalZombieProducer implements ILogicFrameListener, ILevelListene
                 NaturalZombieSpawnRule rule = iterator.next();
                 if (rule.getStartFrame() == gamePanel.logicFrameCounter) {
                     int lane = rnd.nextInt(GridManager.NUM_ROW_CONSTANT);
-                    gamePanel.getZombieManager().addZombie(rule.getZombieRegisterName(), lane);
+                    gamePanel.getGridManager().addZombie(rule.getZombieRegisterName(), lane);
                     iterator.remove();
                 }
             }

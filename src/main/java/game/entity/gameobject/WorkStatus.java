@@ -21,9 +21,10 @@ import game.entity.zombie.ZombieModel;
 public class WorkStatus {
     private static Logger logger = LoggerFactory.getLogger(WorkStatus.class);
     
-    public int workProcess = 0;
-    public WorkState workState;
-    public WorkType workType;
+    private int workProgress = 0;
+    private int targetProgress = 1;
+    private WorkState workState;
+    private WorkType workType;
     /**
      * 工作循环【冷却】长度
      */
@@ -50,15 +51,22 @@ public class WorkStatus {
 
     public enum WorkType {
         /**
-         * 工作循环：IDLE -(coldDownCount)-> WORK_READY -(want work)-> WORKING -(count continuous-time)-> IDLE
+         * 工作循环：
+         * (1): [IDLE] -(coldDownCount)-> [WORK_READY] 
+         * (2): [WORK_READY] -(want work)-> [WORKING]
+         * (3.1): [WORKING] -(count workStartFrameNum)-> workHappen
+         * (3.2): [WORKING] -(not want work)-> [IDLE]
+         * (4): workHappen -(count workContinuousDelayFrameNum)-> arrive workContinuousTime?
+         * (5.1): arrive workContinuousTime? -(T)-> [IDLE]
+         * (5.2): arrive workContinuousTime? -(F)-> [WORKING]
          */
         LOOP,
         /**
-         * 工作循环：WORK_READY -(want work)-> WORKING -(not want work)-> WORK_READY
+         * 工作循环：[WORK_READY] -(want work)-> [WORKING] -(not want work)-> [WORK_READY]
          */
         WORK_IF_WANT,
         /**
-         * 一直处于：IDLE
+         * 一直处于：[IDLE]
          */
         ALWAY_IDLE
     }
@@ -66,27 +74,7 @@ public class WorkStatus {
     public WorkStatus() {
         this(WorkType.ALWAY_IDLE, WorkState.IDLE, -1, -1, -1, -1);
     }
-    @Deprecated
-    public WorkStatus(DropModel model, DropInstanceParams params) {
-        this(WorkType.WORK_IF_WANT, WorkState.WORKING, -1, -1, -1, -1);
-    }
-    @Deprecated
-    public WorkStatus(BulletModel model, BulletInstanceParams params) {
-        this(WorkType.WORK_IF_WANT, WorkState.WORKING, -1, -1, -1, -1);
-    }
-    @Deprecated
-    public WorkStatus(ZombieModel model, ZombieInstanceParams params) {
-        this(WorkType.WORK_IF_WANT, WorkState.IDLE, -1, 20, -1, 10);
-    }
 
-    @Deprecated
-    public WorkStatus(PlantModel model, PlantInstanceParams params) {
-        this(WorkType.LOOP, WorkState.IDLE, 
-                model.attackColdDownFrameNum,
-                model.attackStartFrameNum,
-                model.attackContinuousTime,
-                model.attackContinuousDelayFrameNum);
-    }
     
     public WorkStatus(
             WorkType workType,
@@ -109,35 +97,51 @@ public class WorkStatus {
     public boolean transition(boolean wantWork) {
         boolean workHappen = false;
         WorkState nextWorkStatus = workState;
+        
         switch (workState) {
             case IDLE:
                 if (workType != WorkType.ALWAY_IDLE) {
-                    if (workProcess >= workColdDownFrameNum) {
+                    if (workProgress >= workColdDownFrameNum) {
                         nextWorkStatus = WorkState.WORK_READY;
-                        workProcess = 0;
+                        workProgress = 0;
                     } else {
-                        workProcess++;
+                        workProgress++;
                     }
+                    targetProgress = workColdDownFrameNum;
+                } else {
+                    workProgress = 0;
+                    targetProgress = 1;
                 }
                 break;
             case WORK_READY:
                 if (wantWork) {
                     nextWorkStatus = WorkState.WORKING;
-                    workProcess = 0;
+                    workProgress = 0;
                     currntWorkTime = 0;
                 }
+                targetProgress = 0;
                 break;
             case WORKING:
                 if (workType == WorkType.LOOP) {
-                    if (workProcess % workStartFrameNum == 0) {
-                        workHappen = true;
-                        currntWorkTime++;
-                    }
-                    if (currntWorkTime >= workContinuousTime) {
-                        nextWorkStatus = WorkState.IDLE;
-                        workProcess = 0;
+                    if (wantWork) {
+                        if (workProgress == workStartFrameNum) {
+                            workHappen = true;
+                            currntWorkTime++;
+                        }
+                        targetProgress = workStartFrameNum + workContinuousDelayFrameNum;
+                        if (currntWorkTime >= workContinuousTime) {
+                            nextWorkStatus = WorkState.IDLE;
+                            workProgress = 0;
+                        } else {
+                            if (workHappen) {
+                                workProgress = 0;
+                                workProgress = workStartFrameNum - workContinuousDelayFrameNum;
+                            }
+                            workProgress ++;
+                        }
                     } else {
-                        workProcess++;
+                        nextWorkStatus = WorkState.IDLE;
+                        workProgress = 0;
                     }
                 } else if(workType == WorkType.WORK_IF_WANT) {
                     if (wantWork) {
@@ -153,6 +157,18 @@ public class WorkStatus {
         }
         workState = nextWorkStatus;
         return workHappen;
+    }
+    
+    public WorkState getWorkState() {
+        return workState;
+    }
+    
+    public double getProgressRate() {
+        if (targetProgress == 0) {
+            return 1;
+        } else {
+            return workProgress * 1.0 / targetProgress;
+        }
     }
 }
 

@@ -1,5 +1,6 @@
 package game.entity.bullet;
 
+import game.entity.gameobject.FightData;
 import game.entity.gameobject.GameObjectModel;
 import game.entity.gameobject.Spirit;
 import game.entity.zombie.BaseZombie;
@@ -22,10 +23,30 @@ public class BulletModel extends GameObjectModel<BaseBullet> {
     public int coillderBoxOffsetY = - coillderBoxHeight;
     
     
-    public int endDeltaX = 10 * GridManager.GRID_WIDTH;
-    public int endDeltaY = 0;
+    public Integer endDeltaX;
+    public Integer endDeltaY;
     
-    public int speedX = 15;
-    public int speedY = 0;
-    public int damage = 100;
+    public Integer speedX;
+    public Integer speedY;
+    
+    public void buildeDefaultSpeedAndRange() {
+        this.speedX = 15;
+        this.speedY = 0;
+        this.endDeltaX = 10 * GridManager.GRID_WIDTH;
+        this.endDeltaY = 0;
+    }
+    
+    public void buildeNoSpeedAndRange() {
+        this.speedX = 0;
+        this.speedY = 0;
+        this.endDeltaX = 0;
+        this.endDeltaY = 0;
+    }
+    
+    public Integer damage = 100;
+    public FightData fightData;
+    
+    
+    
+    
 }

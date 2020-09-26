@@ -10,21 +10,21 @@ public abstract class PositionComponent implements ILogicFrameListener {
     protected int posX;
     protected int posY;
     protected GamePanel gamePanel;
-    protected boolean stopped;
+    protected boolean moveDone;
     
     public PositionComponent(GamePanel gamePanel, int posX, int posY) {
         this.posX = posX;
         this.posY = posY;
         this.gamePanel = gamePanel;
-        this.stopped = false;
+        this.moveDone = false;
     }
 
 
     @Override
     public void updateLogicFrame() {
-        if (!stopped) {
+        if (!moveDone) {
             move();
-        } 
+        }
     }
 
     public abstract void move();
@@ -45,5 +45,5 @@ public abstract class PositionComponent implements ILogicFrameListener {
     }
     
     public abstract Rectangle getCoillderBox();
-    
+
 }

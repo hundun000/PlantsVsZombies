@@ -1,5 +1,6 @@
 package game.entity.zombie;
 
+import game.entity.gameobject.FightData;
 import game.entity.gameobject.GameObjectModel;
 import game.entity.gameobject.Spirit;
 import game.manager.GridManager;
@@ -21,8 +22,10 @@ public class ZombieModel extends GameObjectModel<BaseZombie> {
     public int coillderBoxWidth = GridManager.GRID_WIDTH - defaultOffset * 2;
     public int coillderBoxHeight = GridManager.GRID_HEIGHT - defaultOffset * 2;
 
-    public double gridPerSecondSpeedX = 0.5;
+    public double speedXGridPerSecond = 0.5;
 
     public int damagePerSecond = 200;
+
+    public FightData fightData = new FightData();
 
 }

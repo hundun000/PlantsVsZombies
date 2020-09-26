@@ -10,6 +10,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -19,18 +20,20 @@ import game.GamePanel;
 import game.GamePanel.GameState;
 import game.ILevelListener;
 import game.entity.bullet.BaseBullet;
+import game.entity.bullet.template.DebuffBullect;
 import game.entity.component.PositionComponent;
 import game.entity.component.ZombiePositionComponent;
 import game.entity.drop.BaseDrop;
+import game.entity.gameobject.FightObject;
+import game.entity.gameobject.FightObject.FightSide;
+import game.entity.others.PlantSlot;
 import game.entity.plant.BasePlant;
 import game.entity.plant.PlantModel;
-import game.entity.plant.PlantSlot;
+import game.entity.plant.template.DropPlant;
+import game.entity.plant.template.ShooterPlant;
 import game.entity.zombie.BaseZombie;
+import game.entity.zombie.ZombieInstanceParams;
 import game.level.GameLevel;
-import game.mod.pvz.bullet.Pea;
-import game.mod.pvz.plant.FrozenPeashooter;
-import game.mod.pvz.plant.Peashooter;
-import game.mod.pvz.plant.Sunflower;
 import game.utils.ImageLoadTool;
 
 /**
@@ -62,6 +65,10 @@ public class GridManager extends BaseManager implements MouseListener, ILevelLis
     private PlantSlot[][] plantSlots;
     private ArrayList<BaseBullet> bullets;
     private ArrayList<BaseDrop> drops;
+    private List<BaseZombie> zombies;
+    
+    private NaturalZombieProducer naturalZombieProducer;
+    
     
     public GridManager(GamePanel gamePanel) {
         super(gamePanel, MANAGER_START_X, MANAGER_START_Y, MANAGER_WIDTH, MANAGER_HEIGHT, POSITION_START_X, POSITION_START_Y);
@@ -72,6 +79,22 @@ public class GridManager extends BaseManager implements MouseListener, ILevelLis
 
     @Override
     public void updateLogicFrame() {
+        if (naturalZombieProducer != null) {
+            naturalZombieProducer.updateLogicFrame();
+        }
+        
+        
+        {
+            Iterator<BaseZombie> iterator = zombies.iterator();
+            while (iterator.hasNext()) {
+                BaseZombie zombie = iterator.next();
+                zombie.updateLogicFrame();
+                if (!zombie.getHealthComponent().alive()) {
+                    iterator.remove();
+                }
+            }
+        }
+        
         for (int i = 0; i < GridManager.NUM_COLUMN_CONSTANT; i++) {
             for (int j = 0; j < GridManager.NUM_ROW_CONSTANT; j++) {
                 PlantSlot plantSlot = plantSlots[i][j];
@@ -132,6 +155,10 @@ public class GridManager extends BaseManager implements MouseListener, ILevelLis
         for (BaseDrop drop : drops) {
             drop.drawSelf(g);
         }
+        
+        for (BaseZombie zombie : zombies) {
+            zombie.drawSelf(g);
+        }
        
     }
     
@@ -153,6 +180,10 @@ public class GridManager extends BaseManager implements MouseListener, ILevelLis
         bullets = new ArrayList<>();
         
         drops = new ArrayList<>();
+        
+        zombies = new LinkedList<>();
+
+        naturalZombieProducer = new NaturalZombieProducer(gamePanel);
     }
     
     public static int gridPerSecondToPixelPerFrame(double gridPerSecond) {
@@ -167,25 +198,7 @@ public class GridManager extends BaseManager implements MouseListener, ILevelLis
         bullets.add(bullet);
         logger.debug("{} created", bullet.toString());
     }
-    
-    public PlantSlot getCollideredPlantSlot(PositionComponent positionComponent) {
 
-        for (int i = 0; i < GridManager.NUM_COLUMN_CONSTANT; i++) {
-            for (int j = 0; j < GridManager.NUM_ROW_CONSTANT; j++) {
-                PlantSlot plantSlot = plantSlots[i][j];
-                if (plantSlot.hasPlant()) {
-                    Rectangle plantBox = plantSlot.getPlant().getPositionComponent().getCoillderBox();
-                    Rectangle zombieBox = positionComponent.getCoillderBox();
-                    boolean intersectPlant = plantBox.intersects(zombieBox);
-                    if (intersectPlant) {
-                        return plantSlot;
-                    }
-                }
-            }
-        }
-        
-        return null;
-    }
 
 
     public void clearPlanting() {
@@ -202,14 +215,6 @@ public class GridManager extends BaseManager implements MouseListener, ILevelLis
         return planting;
     }
 
-    /**
-     * 执行加费
-     * @param chargePoint 
-     */
-    public void chargeSunPointAndDelete(BaseDrop drop) {
-        gamePanel.getSunScoreManager().addSunScore(drop.getChargePoint());
-        drop.getHealthComponent().forceKilled();
-    }
 
 
     @Override
@@ -245,6 +250,8 @@ public class GridManager extends BaseManager implements MouseListener, ILevelLis
 
     @Override
     public void levelStart(GameLevel level) {
+        naturalZombieProducer.levelStart(level);
+        
         for (int i = 0; i < NUM_COLUMN_CONSTANT; i++) {
             for (int j = 0; j < NUM_ROW_CONSTANT; j++) {
                 PlantSlot plantSlot = plantSlots[i][j];
@@ -269,6 +276,51 @@ public class GridManager extends BaseManager implements MouseListener, ILevelLis
         
     }
 
+    public void addZombie(String zombieRegisterName, int lane) {
+        ZombieInstanceParams params = new ZombieInstanceParams(lane);
+        
+        BaseZombie zombie = gamePanel.getZombieFactory().getInstacne(zombieRegisterName, gamePanel, params);
+        if (zombie != null) {
+            zombies.add(zombie);
+            logger.info(zombie.toString() + " created");
+        }
+    }
     
+    public List<BaseZombie> getZombies() {
+        return zombies;
+    }
+
+    public void removeZombie(BaseZombie zombie) {
+        zombies.remove(zombie);
+    }
+
+    
+    public List<FightObject> getIntersectedOtherSideFightObjects(Rectangle rect, FightSide attacterSide) {
+        List<FightObject> result = new ArrayList<>();
+        if (attacterSide == FightSide.PLAYER) {
+            for (BaseZombie zombie : zombies) {
+                Rectangle zombieRect = zombie.getPositionComponent().getCoillderBox(); 
+                
+                if (rect.intersects(zombieRect)) {
+                    result.add(zombie);
+                }
+            }
+        } else {
+            for (int i = 0; i < GridManager.NUM_COLUMN_CONSTANT; i++) {
+                for (int j = 0; j < GridManager.NUM_ROW_CONSTANT; j++) {
+                    PlantSlot plantSlot = plantSlots[i][j];
+                    if (plantSlot.hasPlant()) {
+                        Rectangle plantBox = plantSlot.getPlant().getPositionComponent().getCoillderBox();
+                        boolean intersectPlant = plantBox.intersects(rect);
+                        if (intersectPlant) {
+                            result.add(plantSlot.getPlant());
+                        }
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
 
 }

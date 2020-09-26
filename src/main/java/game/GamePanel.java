@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 
 import game.entity.gameobject.Spirit;
 import game.entity.plant.PlantModel;
+import game.entity.plant.template.DropPlant;
 import game.factory.BulletFactory;
 import game.factory.DropFactory;
 import game.factory.PlantFactory;
@@ -14,11 +15,9 @@ import game.level.GameLevel;
 import game.manager.GridManager;
 import game.manager.PlantCardManager;
 import game.manager.SunScoreManager;
-import game.manager.ZombieManager;
 import game.mod.Mod;
 import game.mod.pvz.PvzMod;
 import game.mod.pvz.drop.SunItem;
-import game.mod.pvz.plant.Sunflower;
 import game.utils.ImageLoadTool;
 
 import java.awt.*;
@@ -68,7 +67,6 @@ public class GamePanel extends JLayeredPane implements ILogicFrameListener, ILev
     public Mod mod;
     //  ======  manager ======
     private SunScoreManager sunScoreManager;
-    private ZombieManager zombieManager;
     private GridManager gridManager;
     private PlantCardManager plantCardManager;
     private PlantFactory plantFactory ;
@@ -82,10 +80,6 @@ public class GamePanel extends JLayeredPane implements ILogicFrameListener, ILev
 
     public long logicFrameCounter = 0;
 
-    
-    public ZombieManager getZombieManager() {
-        return zombieManager;
-    }
     
     public GridManager getGridManager() {
         return gridManager;
@@ -138,15 +132,12 @@ public class GamePanel extends JLayeredPane implements ILogicFrameListener, ILev
         this.plantCardManager = new PlantCardManager(this);
         add(plantCardManager, LAYER_CARDS_MANAGER);
         
-        this.sunScoreManager = new SunScoreManager(this, 300);
+        this.sunScoreManager = new SunScoreManager(this, 1000);
         add(sunScoreManager, LAYER_IMAGE_MANAGER);
         
         this.gridManager = new GridManager(this);
         add(gridManager, LAYER_GRIDS_MANAGER);
         
-        
-        this.zombieManager = new ZombieManager(this);
-        add(zombieManager, LAYER_IMAGE_MANAGER);
         
         loadModEntities();
         
@@ -226,9 +217,8 @@ public class GamePanel extends JLayeredPane implements ILogicFrameListener, ILev
         
         // ====== notify managers ======
         sunScoreManager.updateLogicFrame();
-        zombieManager.updateLogicFrame();
         gridManager.updateLogicFrame();
-
+        plantCardManager.updateLogicFrame();
         // ====== notify entities ======
         
         
@@ -264,7 +254,7 @@ public class GamePanel extends JLayeredPane implements ILogicFrameListener, ILev
 
     @Override
     public void levelStart(GameLevel level) {
-        zombieManager.getNaturalZombieProducer().levelStart(level);
+        gridManager.levelStart(level);
         plantCardManager.levelStart(level);
         //redrawTimer.start();
         

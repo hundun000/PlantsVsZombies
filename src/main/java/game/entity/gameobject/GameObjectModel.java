@@ -20,4 +20,6 @@ public class GameObjectModel<T> {
     public String toString() {
         return registerName + "-model";
     }
+    
+    public static int defaultOffset = 5;
 }

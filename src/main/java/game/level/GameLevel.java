@@ -2,7 +2,7 @@ package game.level;
 
 import java.util.List;
 
-import game.entity.plant.PlantCard;
+import game.entity.others.PlantCard;
 
 /**
  * @author hundun

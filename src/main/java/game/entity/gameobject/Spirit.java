@@ -39,9 +39,12 @@ public class Spirit {
         return set(workState, Arrays.asList(singleIcon));
     }
     
-    
     public ImageIcon getImage() {
-        return getImage(WorkState.IDLE, 0);
+        return getImage(0);
+    }
+    
+    public ImageIcon getImage(int subtypeIndex) {
+        return getImage(WorkState.IDLE, subtypeIndex);
     }
     
     public ImageIcon getImage(WorkState workState, int subtypeIndex) {

@@ -13,6 +13,6 @@ public class DropModel extends GameObjectModel<BaseDrop> {
         super(registerName, clazz);
     }
     
-    public int chargePoint = 25;
+    public int chargePoint = 0;
     public int disappearFrame = 100;
 }
