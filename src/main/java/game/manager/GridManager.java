@@ -63,8 +63,8 @@ public class GridManager extends BaseManager implements MouseListener, ILevelLis
     public static final int MANAGER_HEIGHT = GamePanel.SCREEN_HEIGHT_CONSTANT;
 
     private PlantSlot[][] plantSlots;
-    private ArrayList<BaseBullet> bullets;
-    private ArrayList<BaseDrop> drops;
+    private List<BaseBullet> bullets;
+    private List<BaseDrop> drops;
     private List<BaseZombie> zombies;
     
     private NaturalZombieProducer naturalZombieProducer;
@@ -322,5 +322,8 @@ public class GridManager extends BaseManager implements MouseListener, ILevelLis
         return result;
     }
 
+    public List<BaseBullet> getBullets() {
+        return bullets;
+    }
 
 }

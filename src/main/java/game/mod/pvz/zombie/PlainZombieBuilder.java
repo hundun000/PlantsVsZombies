@@ -6,6 +6,7 @@ import game.entity.zombie.ZombieModelBuilder;
 import game.entity.zombie.template.NormalZombie;
 import game.mod.pvz.PvzMod;
 import game.mod.pvz.bullet.ZombieHitBuilder;
+import game.mod.pvz.plant.PlantModelBuilderTool;
 import game.utils.ImageLoadTool;
 
 /**
@@ -27,10 +28,9 @@ public class PlainZombieBuilder extends ZombieModelBuilder {
 
     @Override
     protected void build(ZombieModel model) {
-        model.fightData
-                .buildBullet(ZombieHitBuilder.NAME)
-                .buildSelfGridAttackRange()
-                .buildDefaultZombieAttackLoop();
+        PlantModelBuilderTool.buildBullet(model.fightData, ZombieHitBuilder.NAME);
+        PlantModelBuilderTool.buildSelfGridAttackRange(model.fightData);
+        PlantModelBuilderTool.buildDefaultZombieAttackLoop(model.fightData);
     }
 
 }

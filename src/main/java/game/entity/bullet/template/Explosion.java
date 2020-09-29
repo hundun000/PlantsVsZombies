@@ -32,28 +32,11 @@ public class Explosion extends BaseBullet {
     }
     
     double DELAY_DISAPPEAR_SECONDS = 2;
-    int delayDisappearCount;
-    boolean delayDisappearing = false;
-    
-    
-    @Override
-    public void updateLogicFrame() {
-        super.updateLogicFrame();
-        if (!delayDisappearing) {
-            delayDisappearCount = (int) (GamePanel.LOGICAL_FRAME_NUM_PER_SECOND * DELAY_DISAPPEAR_SECONDS);
-            delayDisappearing = true;
-        } else {
-            delayDisappearCount--;
-            if (delayDisappearCount <= 0) {
-                this.getHealthComponent().forceKilled();
-            }
-        }
-    }
-    
-    
+    Integer delayDisappearCount;
+       
     @Override
     protected List<FightObject> calculateHitTargets() {
-        if (!delayDisappearing) {
+        if (delayDisappearCount == null) {
             Rectangle bulletRect = this.getPositionComponent().getCoillderBox();
             List<FightObject> zombies = gamePanel.getGridManager().getIntersectedOtherSideFightObjects(bulletRect, attacterSide);
             logger.debug(instanceName + " hit " + zombies.size() + " zombies.");
@@ -62,5 +45,18 @@ public class Explosion extends BaseBullet {
             return new ArrayList<>(0);
         }
 
+    }
+
+
+    @Override
+    protected void onMoveDone() {
+        if (delayDisappearCount == null) {
+            delayDisappearCount = (int) (GamePanel.LOGICAL_FRAME_NUM_PER_SECOND * DELAY_DISAPPEAR_SECONDS);
+        } else {
+            delayDisappearCount--;
+            if (delayDisappearCount <= 0) {
+                this.getHealthComponent().forceKilled();
+            }
+        }
     }
 }

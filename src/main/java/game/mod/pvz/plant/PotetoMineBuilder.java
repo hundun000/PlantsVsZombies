@@ -33,10 +33,9 @@ public class PotetoMineBuilder extends PlantModelBuilder {
 
     @Override
     protected void build(PlantModel model) {
-        model.fightData
-                .buildBullet(PotetoMineExplosionBuilder.NAME)
-                .buildSelfGridAttackRange()
-                .buildDefaultPlantAttackLoop();
+        PlantModelBuilderTool.buildBullet(model.fightData, PotetoMineExplosionBuilder.NAME);
+        PlantModelBuilderTool.buildSelfGridAttackRange(model.fightData);
+        PlantModelBuilderTool.buildDefaultPlantAttackLoop(model.fightData);
         model.fightData.attackColdDownFrameNum = GamePanel.LOGICAL_FRAME_NUM_PER_SECOND * 4;
         model.fightData.bulletStartOffsetX = - 0;
         model.fightData.bulletStartOffsetY = 0;

@@ -52,9 +52,10 @@ public class FightComponent {
     
     public FightComponent(FightObject fightObject, FightData fightData) {
         this.fightObject = fightObject;
-        if (fightData.attackColdDownFrameNum != null) {
+        if (fightData.attackWorkType != null) {
             this.attackStatus = new WorkStatus(
-                    WorkType.LOOP, WorkState.IDLE, 
+                    fightData.attackWorkType, 
+                    fightData.attackInitState, 
                     fightData.attackColdDownFrameNum,
                     fightData.attackStartFrameNum,
                     fightData.attackContinuousTime,
@@ -63,9 +64,10 @@ public class FightComponent {
         } else {
             this.attackStatus = new WorkStatus();
         }
-        if (fightData.skillColdDownFrameNum != null) {
+        if (fightData.skillWorkType != null) {
             this.skillStatus = new WorkStatus(
-                        WorkType.LOOP, WorkState.IDLE, 
+                    fightData.skillWorkType, 
+                    fightData.skillInitState, 
                         fightData.skillColdDownFrameNum,
                         fightData.skillStartFrameNum,
                         1,

@@ -17,10 +17,11 @@ public class ZombieModel extends GameObjectModel<BaseZombie> {
     public int health = 1000;
     
     private int defaultOffset = 5;
+    public int coillderBoxWidth = (int) (GridManager.GRID_WIDTH* 0.5 - defaultOffset * 2);
+    public int coillderBoxHeight = GridManager.GRID_HEIGHT - defaultOffset * 2;
     public int coillderBoxOffsetX = defaultOffset;
     public int coillderBoxOffsetY = - GridManager.GRID_HEIGHT + defaultOffset;
-    public int coillderBoxWidth = GridManager.GRID_WIDTH - defaultOffset * 2;
-    public int coillderBoxHeight = GridManager.GRID_HEIGHT - defaultOffset * 2;
+    
 
     public double speedXGridPerSecond = 0.5;
 

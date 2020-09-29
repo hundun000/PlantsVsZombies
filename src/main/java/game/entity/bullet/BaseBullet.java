@@ -57,11 +57,19 @@ public abstract class BaseBullet extends GameObject {
     
     public void bulletHitGameObject(FightObject targetObject) {
 
-        
-        targetObject.getHealthComponent().subtractHealth(this.getDamage());
         this.addDebuff(targetObject);
+        int actualDamage = getActualDamageWithDebuff(targetObject, this.getDamage());
+        targetObject.getHealthComponent().subtractHealth(actualDamage);
         
 
+    }
+    
+    protected int getActualDamageWithDebuff(FightObject targetObject, int originDamage) {
+        if (targetObject.getFireStacks() > 0) {
+            return (int) (originDamage * 1.5);
+        } else {
+            return originDamage;
+        }
     }
     
     @Override
@@ -90,6 +98,10 @@ public abstract class BaseBullet extends GameObject {
             if (forceKilledAfterHit) {
                 this.getHealthComponent().forceKilled();
             }
+        }
+        
+        if (getPositionComponent().isMoveDone()) {
+            onMoveDone();
         }
         
     }
@@ -125,6 +137,11 @@ public abstract class BaseBullet extends GameObject {
     @Override
     protected boolean wantMove() {
         return true;
+    }
+    
+    
+    protected void onMoveDone() {
+        this.getHealthComponent().forceKilled();
     }
 
 }

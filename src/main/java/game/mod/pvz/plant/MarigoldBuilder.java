@@ -33,7 +33,7 @@ public class MarigoldBuilder extends PlantModelBuilder {
 
     @Override
     protected void build(PlantModel model) {
-        model.fightData.buildDropSkill(CoinDrop.NAME);
+        PlantModelBuilderTool.buildDropSkill(model.fightData, CoinDrop.NAME);
     }
 
 }

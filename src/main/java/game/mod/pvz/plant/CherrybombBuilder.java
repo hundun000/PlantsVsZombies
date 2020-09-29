@@ -36,9 +36,8 @@ public class CherrybombBuilder extends PlantModelBuilder {
 
     @Override
     protected void build(PlantModel model) {
-        model.fightData
-                .buildBullet(CherrybombExplosionBuilder.NAME)
-                .buildDefaultPlantAttackLoop();
+        PlantModelBuilderTool.buildBullet(model.fightData, CherrybombExplosionBuilder.NAME);
+        PlantModelBuilderTool.buildDefaultPlantAttackLoop(model.fightData);
         model.fightData.attackColdDownFrameNum = (int) (GamePanel.LOGICAL_FRAME_NUM_PER_SECOND * 0.5);
         model.fightData.bulletStartOffsetX = - GridManager.GRID_WIDTH;
         model.fightData.bulletStartOffsetY = GridManager.GRID_HEIGHT;

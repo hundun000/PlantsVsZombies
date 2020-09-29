@@ -3,6 +3,7 @@ package game.entity.gameobject;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -16,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import game.GamePanel;
 import game.entity.bullet.BaseBullet;
 import game.entity.bullet.BulletInstanceParams;
+import game.entity.bullet.template.DebuffBullect.DebuffType;
 import game.entity.component.FightComponent;
 import game.entity.component.PositionComponent;
 import game.entity.gameobject.WorkStatus.WorkState;
@@ -37,7 +39,8 @@ public abstract class FightObject extends GameObject {
     
     protected FightSide fightSide;
     protected FightData fightData;
-    int slowFrame = 0;
+    int frozenStacks = 0;
+    int fireStacks = 0;
     private List<FightObject> currentBlockedObjects = new ArrayList<>();
     
     public FightObject(GamePanel gamePanel, String registerName, FightData fightData, FightSide fightSide) {
@@ -94,10 +97,10 @@ public abstract class FightObject extends GameObject {
     
     @Override
     public void updateLogicFrame() {
-        if (slowFrame > 0) {
-            slowFrame--;
+        if (frozenStacks > 0) {
+            frozenStacks--;
         }
-        if (slowFrame % 2 != 0) {
+        if (frozenStacks % 2 != 0) {
             return;
         }
         
@@ -206,14 +209,38 @@ public abstract class FightObject extends GameObject {
     
     
     
-    public void setSlowDebuff(int slowFrameNum) {;
-        this.slowFrame = slowFrameNum;
+    public void onDebuff(DebuffType debuffType, int addStacks) {
+        int lostStacks;
+        switch (debuffType) {
+            case FREEZE:
+                lostStacks = Math.min(addStacks, this.fireStacks);
+                this.fireStacks -= lostStacks;
+                this.frozenStacks += (addStacks - lostStacks);
+                break;
+            case FIRE:
+                lostStacks = Math.min(addStacks, this.frozenStacks);
+                this.fireStacks -= lostStacks;
+                this.frozenStacks += (addStacks - lostStacks);
+                this.fireStacks += addStacks;
+                break;
+            default:
+                break;
+        }
+        
     }
     
     @Override
     protected ImageIcon getSpiritImageIcon() {
         //logger.debug("{} getSpiritImageIcon use getSubTypeId() = {}", this.toString(), getSubTypeId());
         return spirit.getImage(getFightComponent().getAttackStatus().getWorkState(), getSubTypeId());
+    }
+    
+    public int getFireStacks() {
+        return fireStacks;
+    }
+    
+    public int getFrozenStacks() {
+        return frozenStacks;
     }
     
 }

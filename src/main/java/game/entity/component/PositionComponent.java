@@ -39,6 +39,10 @@ public abstract class PositionComponent implements ILogicFrameListener {
         return posY;
     }
     
+    public boolean isMoveDone() {
+        return moveDone;
+    }
+    
     @Override
     public String toString() {
         return "(" + posX + ", " + posY + ")";

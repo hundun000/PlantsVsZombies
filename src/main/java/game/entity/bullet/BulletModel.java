@@ -17,10 +17,11 @@ public class BulletModel extends GameObjectModel<BaseBullet> {
 
     }
     
-    public int coillderBoxWidth = 20;
-    public int coillderBoxHeight = 20;
-    public int coillderBoxOffsetX = 0;
-    public int coillderBoxOffsetY = - coillderBoxHeight;
+    public int coillderBoxWidth;
+    public int coillderBoxHeight;
+    public int coillderBoxOffsetX= 0;
+    public int coillderBoxOffsetY;
+    
     
     
     public Integer endDeltaX;
@@ -29,19 +30,7 @@ public class BulletModel extends GameObjectModel<BaseBullet> {
     public Integer speedX;
     public Integer speedY;
     
-    public void buildeDefaultSpeedAndRange() {
-        this.speedX = 15;
-        this.speedY = 0;
-        this.endDeltaX = 10 * GridManager.GRID_WIDTH;
-        this.endDeltaY = 0;
-    }
     
-    public void buildeNoSpeedAndRange() {
-        this.speedX = 0;
-        this.speedY = 0;
-        this.endDeltaX = 0;
-        this.endDeltaY = 0;
-    }
     
     public Integer damage = 100;
     public FightData fightData;

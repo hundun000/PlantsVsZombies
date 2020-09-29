@@ -37,8 +37,8 @@ public class CherrybombExplosionBuilder extends BulletModelBuilder {
         model.coillderBoxHeight = GridManager.GRID_HEIGHT * 3;
         model.coillderBoxWidth = GridManager.GRID_WIDTH * 3;
         model.coillderBoxOffsetX = 0;
-        model.coillderBoxOffsetY = - GridManager.GRID_HEIGHT * 3;
-        model.buildeNoSpeedAndRange();
+        model.coillderBoxOffsetY = - model.coillderBoxHeight;
+        BulletModelBuilderTool.buildeNoSpeedAndRange(model);
         model.damage = 1000;
     }
 

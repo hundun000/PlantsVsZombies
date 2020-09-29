@@ -33,7 +33,7 @@ public class DebuffBullect extends BaseBullet {
             this.subTypeId = subTypeId;
         }
         
-        public int getSubTypeId() {
+        public int getId() {
             return subTypeId;
         }
     }
@@ -47,9 +47,12 @@ public class DebuffBullect extends BaseBullet {
     public void addDebuff(FightObject targetObject) {
         super.addDebuff(targetObject);
         if (getSubTypeId() == DebuffType.FREEZE.subTypeId) {
-            targetObject.setSlowDebuff(GamePanel.LOGICAL_FRAME_NUM_PER_SECOND * 3);
+            targetObject.onDebuff(DebuffType.FREEZE, GamePanel.LOGICAL_FRAME_NUM_PER_SECOND * 3);
         }
     }
+
+
+    
     
 
 }

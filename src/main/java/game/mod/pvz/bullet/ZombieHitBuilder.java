@@ -35,7 +35,8 @@ public class ZombieHitBuilder extends BulletModelBuilder {
 
     @Override
     protected void build(BulletModel model) {
-        model.buildeNoSpeedAndRange();
+        BulletModelBuilderTool.buildeNoSpeedAndRange(model);
+        BulletModelBuilderTool.buildCloseAttackCoillderBox(model);
     }
 
 

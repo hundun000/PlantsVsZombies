@@ -30,7 +30,7 @@ public class FrozenPeashooterBuilder extends PeashooterBuilder {
     @Override
     protected void build(PlantModel model) {
         super.build(model);
-        model.fightData.bulletSubTypeId = DebuffType.FREEZE.getSubTypeId();
+        model.fightData.bulletSubTypeId = DebuffType.FREEZE.getId();
     }
 
 

@@ -34,10 +34,12 @@ public class PeashooterBuilder extends PlantModelBuilder {
 
     @Override
     protected void build(PlantModel model) {
-        model.fightData
-            .buildBullet(PeaBuilder.NAME)
-            .buildDefaultPlantAttackRange()
-            .buildDefaultPlantAttackLoop();
+        
+        PlantModelBuilderTool.buildBullet(model.fightData, PeaBuilder.NAME);
+        PlantModelBuilderTool.buildDefaultPlantAttackRange(model.fightData);
+        PlantModelBuilderTool.buildDefaultPlantAttackLoop(model.fightData);
     }
+    
+    
 
 }

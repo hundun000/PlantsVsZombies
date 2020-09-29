@@ -149,6 +149,8 @@ public class WorkStatus {
                     } else {
                         nextWorkStatus = WorkState.WORK_READY;
                     }
+                    workProgress = 1;
+                    targetProgress = 1;
                 }
                 break;
             default:

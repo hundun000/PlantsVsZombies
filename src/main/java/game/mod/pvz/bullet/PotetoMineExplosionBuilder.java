@@ -36,8 +36,8 @@ public class PotetoMineExplosionBuilder extends BulletModelBuilder {
         model.coillderBoxHeight = GridManager.GRID_HEIGHT * 1;
         model.coillderBoxWidth = (int) (GridManager.GRID_WIDTH * 1.2);
         model.coillderBoxOffsetX = 0;
-        model.coillderBoxOffsetY = - GridManager.GRID_HEIGHT * 1;
-        model.buildeNoSpeedAndRange();
+        model.coillderBoxOffsetY = - model.coillderBoxHeight;
+        BulletModelBuilderTool.buildeNoSpeedAndRange(model);
         model.damage = 1000;
     }
 
