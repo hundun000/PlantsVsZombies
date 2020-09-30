@@ -21,7 +21,7 @@ public class WallnutBuilder extends PlantModelBuilder {
     protected PlantModel start() {
         PlantModel model;
         model = new PlantModel(IldePlant.NAME, IldePlant.class);
-        model.spirit = new Spirit(ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.IDLE));
+        model.spirit = new Spirit(model.registerName, ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.IDLE));
         model.plantCost = 50;
         return model;
     }

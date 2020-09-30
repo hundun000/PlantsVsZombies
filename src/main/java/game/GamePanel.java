@@ -158,7 +158,7 @@ public class GamePanel extends JLayeredPane implements ILogicFrameListener, ILev
         
         for (PlantModel model : plantFactory.getModels()) {
             String cardRegisterName = PlantCardManager.getCardRegisterName(model.registerName);
-            Spirit spirit = new Spirit(ImageLoadTool.loadOnePlantCardImage(mod.getModName(), cardRegisterName));
+            Spirit spirit = new Spirit(cardRegisterName, ImageLoadTool.loadOnePlantCardImage(mod.getModName(), cardRegisterName));
             plantCardManager.registerPlantCard(model.registerName, spirit);
         }
         

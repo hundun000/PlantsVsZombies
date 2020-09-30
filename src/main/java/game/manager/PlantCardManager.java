@@ -136,7 +136,7 @@ public class PlantCardManager extends BaseManager implements ILevelListener, Mou
                 unactiveCard(plantCard);
             }
         } else if (gamePanel.gameState == GameState.FIGHT) {
-            gamePanel.getGridManager().planting = plantCard.getPlantModel();
+            gamePanel.getGridManager().holdingPlantModel = plantCard.getPlantModel();
         }
     }
     

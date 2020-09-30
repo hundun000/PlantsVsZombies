@@ -23,7 +23,7 @@ public class FightData {
     public String bulletRegisterName;
     public Integer bulletStartOffsetX;
     public Integer bulletStartOffsetY;
-    public Integer bulletSubTypeId;
+    public String bulletSubTypeName;
     
     
     

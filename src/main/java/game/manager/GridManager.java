@@ -48,7 +48,7 @@ public class GridManager extends BaseManager implements MouseListener, ILevelLis
     public static final int GRID_HEIGHT = 120;
     public static final int GRID_WIDTH = 100;
     public static final int LAYER_PLANT_SLOT = 0;
-    PlantModel planting = null;
+    PlantModel holdingPlantModel = null;
     
     public static final int MANAGER_START_Y = 0;
     
@@ -202,17 +202,17 @@ public class GridManager extends BaseManager implements MouseListener, ILevelLis
 
 
     public void clearPlanting() {
-        logger.info("plating will be cleared: {}", planting);
-        this.planting = null;
+        logger.info("plating will be cleared: {}", holdingPlantModel);
+        this.holdingPlantModel = null;
     }
     
-    public void setPlanting(PlantModel plantModel) {
+    public void setHoldingPlantModel(PlantModel plantModel) {
         logger.info("plating set: {}", plantModel);
-        this.planting = plantModel;
+        this.holdingPlantModel = plantModel;
     }
     
-    public PlantModel getPlanting() {
-        return planting;
+    public PlantModel getHoldingPlantModel() {
+        return holdingPlantModel;
     }
 
 

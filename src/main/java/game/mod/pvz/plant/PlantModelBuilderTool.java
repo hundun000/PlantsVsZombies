@@ -52,7 +52,7 @@ public class PlantModelBuilderTool {
         fightData.bulletRegisterName = bulletRegisterName;
         fightData.bulletStartOffsetX = GridManager.GRID_WIDTH / 2;
         fightData.bulletStartOffsetY = - GridManager.GRID_HEIGHT / 2;
-        fightData.bulletSubTypeId = 0;
+        fightData.bulletSubTypeName = null;
         
     }
     

@@ -6,6 +6,7 @@ import game.entity.plant.PlantModel;
 import game.entity.plant.PlantModelBuilder;
 import game.entity.plant.template.DropPlant;
 import game.mod.pvz.PvzMod;
+import game.mod.pvz.plant.template.TorchwoodPlant;
 import game.utils.ImageLoadTool;
 
 /**
@@ -21,9 +22,11 @@ public class TorchwoodBuilder extends PlantModelBuilder {
     @Override
     protected PlantModel start() {
         PlantModel model;
-        model = new PlantModel(NAME, DropPlant.class);
-        model.spirit = new Spirit(ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.IDLE))
-                .build(WorkState.WORKING, ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.WORKING));
+        model = new PlantModel(NAME, TorchwoodPlant.class);
+        model.spirit = new Spirit(model.registerName, 
+                ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.IDLE),
+                ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.WORKING)
+                );
         model.plantCost = 175;
         return model;
     }

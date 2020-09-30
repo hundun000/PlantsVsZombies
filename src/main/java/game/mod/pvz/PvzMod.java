@@ -50,6 +50,7 @@ import game.mod.pvz.plant.FrozenPeashooterBuilder;
 import game.mod.pvz.plant.PeashooterBuilder;
 import game.mod.pvz.plant.PotetoMineBuilder;
 import game.mod.pvz.plant.SunflowerBuilder;
+import game.mod.pvz.plant.TorchwoodBuilder;
 import game.mod.pvz.plant.WallnutBuilder;
 import game.mod.pvz.zombie.ConeheadZombieBuilder;
 import game.mod.pvz.zombie.PlainZombieBuilder;
@@ -85,7 +86,7 @@ public class PvzMod extends Mod{
         DropModel model;
         
         model = new DropModel(SunItem.NAME, SunItem.class);
-        model.spirit = new Spirit(ImageLoadTool.loadOneDropImage(modName, model.registerName));
+        model.spirit = new Spirit(model.registerName, ImageLoadTool.loadOneDropImage(modName, model.registerName));
         model.chargePoint = 25;
         models.add(model);
         
@@ -128,6 +129,8 @@ public class PvzMod extends Mod{
         models.add(new PotetoMineBuilder().model());
         
         models.add(new WallnutBuilder().model());
+        
+        models.add(new TorchwoodBuilder().model());
         
         return models;
     }

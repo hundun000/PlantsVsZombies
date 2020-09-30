@@ -25,10 +25,8 @@ public class ZombieHitBuilder extends BulletModelBuilder {
     protected BulletModel start() {
         BulletModel model;
         model = new BulletModel(NAME, DebuffBullect.class);
-        model.spirit = new Spirit(
-                Arrays.asList(
-                        ImageLoadTool.loadOneBulletImage(modName, model.registerName)
-                        )
+        model.spirit = new Spirit(model.registerName, 
+                ImageLoadTool.loadOneBulletImage(modName, model.registerName)
                 );
         return model;
     }

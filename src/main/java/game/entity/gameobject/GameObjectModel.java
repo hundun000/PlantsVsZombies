@@ -21,5 +21,5 @@ public class GameObjectModel<T> {
         return registerName + "-model";
     }
     
-    public static int defaultOffset = 5;
+    public static int defaultOffset = 10;
 }

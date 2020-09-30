@@ -9,6 +9,8 @@ import game.manager.GridManager;
 public abstract class PositionComponent implements ILogicFrameListener {
     protected int posX;
     protected int posY;
+    protected HeightZ posZ;
+    
     protected GamePanel gamePanel;
     protected boolean moveDone;
     
@@ -17,8 +19,23 @@ public abstract class PositionComponent implements ILogicFrameListener {
         this.posY = posY;
         this.gamePanel = gamePanel;
         this.moveDone = false;
+        this.posZ = HeightZ.GROUND;
     }
 
+    
+    /**
+     * Z轴高度
+     */
+    public enum HeightZ {
+        GROUND,
+        JUMPING,
+        FLY;
+        
+        
+        public boolean higherThan(HeightZ other) {
+            return this.ordinal() < other.ordinal();
+        }
+    }
 
     @Override
     public void updateLogicFrame() {
@@ -39,13 +56,17 @@ public abstract class PositionComponent implements ILogicFrameListener {
         return posY;
     }
     
+    public HeightZ getPosZ() {
+        return posZ;
+    }
+    
     public boolean isMoveDone() {
         return moveDone;
     }
     
     @Override
     public String toString() {
-        return "(" + posX + ", " + posY + ")";
+        return "(" + posX + ", " + posY + ", " + posZ.ordinal() + ")";
     }
     
     public abstract Rectangle getCoillderBox();

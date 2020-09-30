@@ -5,6 +5,7 @@ import java.util.List;
 
 import game.GamePanel;
 import game.entity.bullet.BaseBullet;
+import game.entity.bullet.template.DebuffBullect;
 import game.entity.bullet.template.DebuffBullect.DebuffType;
 import game.entity.plant.BasePlant;
 import game.entity.plant.PlantInstanceParams;
@@ -15,11 +16,11 @@ import game.mod.pvz.bullet.PeaBuilder;
  * @author hundun
  * Created on 2020/09/29
  */
-public class BulletSubTypeChangePlant extends BasePlant {
+public class TorchwoodPlant extends BasePlant {
 
     
     
-    public BulletSubTypeChangePlant(GamePanel gamePanel, PlantModel model, PlantInstanceParams params) {
+    public TorchwoodPlant(GamePanel gamePanel, PlantModel model, PlantInstanceParams params) {
         super(gamePanel, model, params);
         // TODO Auto-generated constructor stub
     }
@@ -46,10 +47,10 @@ public class BulletSubTypeChangePlant extends BasePlant {
             if (bullet.getRegisterName().equals(PeaBuilder.NAME) 
                     && chackRange.intersects(bullet.getPositionComponent().getCoillderBox())
                     ) {
-                if (bullet.getSubTypeId() == DebuffType.NORMAL.getId()) {
-                    bullet.setSubTypeId(DebuffType.FIRE.getId());
-                } else if (bullet.getSubTypeId() == DebuffType.FREEZE.getId()) {
-                    bullet.setSubTypeId(DebuffType.NORMAL.getId());
+                if (bullet.getSubTypeName().equals(DebuffType.NONE.name())) {
+                    bullet.setSubTypeName(DebuffType.FIRE.name());
+                } else if (bullet.getSubTypeName().equals(DebuffType.FREEZE.name())) {
+                    bullet.setSubTypeName(DebuffType.NONE.name());
                 }
             }
         }

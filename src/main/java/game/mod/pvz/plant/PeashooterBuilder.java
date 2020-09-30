@@ -25,9 +25,10 @@ public class PeashooterBuilder extends PlantModelBuilder {
         PlantModel model;
         
         model = new PlantModel(NAME, ShooterPlant.class);
-        model.spirit = new Spirit(ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.IDLE))
-                .build(WorkState.WORKING, ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.WORKING))
-                ;
+        model.spirit = new Spirit(model.registerName, 
+                ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.IDLE),
+                ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.WORKING)
+                );
         model.plantCost = 100;
         return model;
     }

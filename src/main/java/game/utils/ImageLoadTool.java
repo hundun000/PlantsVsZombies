@@ -56,6 +56,7 @@ public class ImageLoadTool {
         File file = new File(filePath);
         if (file.exists()) {
             ImageIcon image = new ImageIcon(filePath);
+            image.setDescription(fileName);
             return image;
         } else {
             logger.warn("file {} not found", filePath);

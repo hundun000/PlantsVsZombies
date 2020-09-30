@@ -22,7 +22,7 @@ public class PlainZombieBuilder extends ZombieModelBuilder {
     protected ZombieModel start() {
         ZombieModel model;
         model = new ZombieModel(NAME, NormalZombie.class);
-        model.spirit = new Spirit(ImageLoadTool.loadOneZombieImage(modName, model.registerName));
+        model.spirit = new Spirit(model.registerName, ImageLoadTool.loadOneZombieImage(modName, model.registerName));
         return model;
     }
 

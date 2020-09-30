@@ -22,20 +22,10 @@ public class DebuffBullect extends BaseBullet {
     //public static String NAME = "pea";
     
     public enum DebuffType {
-        NORMAL(0),
-        FREEZE(1),
-        FIRE(2)
+        NONE,
+        FREEZE,
+        FIRE
         ;
-        
-        private final int subTypeId;
-        
-        private DebuffType(int subTypeId) {
-            this.subTypeId = subTypeId;
-        }
-        
-        public int getId() {
-            return subTypeId;
-        }
     }
     
     public DebuffBullect(GamePanel gamePanel, BulletModel model, BulletInstanceParams params) {
@@ -46,9 +36,18 @@ public class DebuffBullect extends BaseBullet {
     @Override
     public void addDebuff(FightObject targetObject) {
         super.addDebuff(targetObject);
-        if (getSubTypeId() == DebuffType.FREEZE.subTypeId) {
-            targetObject.onDebuff(DebuffType.FREEZE, GamePanel.LOGICAL_FRAME_NUM_PER_SECOND * 3);
+        if (getSubTypeName() != null) {
+            if (getSubTypeName().equals(DebuffType.FREEZE.name())) {
+                targetObject.onDebuff(DebuffType.FREEZE, GamePanel.LOGICAL_FRAME_NUM_PER_SECOND * 3);
+            }
         }
+        
+    }
+
+    
+    @Override
+    protected String getSpiritSubId() {
+        return super.getSpiritSubId();
     }
 
 

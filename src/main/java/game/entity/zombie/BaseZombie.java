@@ -14,6 +14,7 @@ import game.entity.component.FightComponent;
 import game.entity.component.HealthComponent;
 import game.entity.component.PositionComponent;
 import game.entity.component.ZombiePositionComponent;
+import game.entity.component.ZombiePositionComponent.MoveType;
 import game.entity.gameobject.FightObject;
 import game.entity.gameobject.GameObject;
 import game.entity.gameobject.FightObject.FightSide;
@@ -59,6 +60,9 @@ public abstract class BaseZombie extends FightObject {
     
     @Override
     protected boolean wantAttack() {
+        if (zombiePositionComponent.getMoveType() == MoveType.JUMPING) {
+            return false;
+        }
         return wantAttackByAttackRangeBox();
     }
 
@@ -79,6 +83,19 @@ public abstract class BaseZombie extends FightObject {
     @Override
     public HealthComponent getHealthComponent() {
         return healthComponent;
+    }
+    
+    @Override
+    public void updateLogicFrame() {
+        
+        super.updateLogicFrame();
+        
+        // update jump status
+        boolean wantJump = zombiePositionComponent.getMoveType() == MoveType.JUMP_PREPARE && isBlockedByOtherSide();
+        if (wantJump) {
+            zombiePositionComponent.setMoveTypeAndUpdatePosZ(MoveType.JUMPING);
+        }
+        
     }
     
     @Override

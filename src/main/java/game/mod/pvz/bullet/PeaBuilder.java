@@ -23,17 +23,16 @@ public class PeaBuilder extends BulletModelBuilder{
     protected BulletModel start() {
         BulletModel model;
         model = new BulletModel(NAME, DebuffBullect.class);
-        model.spirit = new Spirit(
-                Arrays.asList(
-                        ImageLoadTool.loadOneBulletImage(modName, model.registerName + "_0"),
-                        ImageLoadTool.loadOneBulletImage(modName, model.registerName + "_1")
-                        )
+        model.spirit = new Spirit(model.registerName, 
+                ImageLoadTool.loadOneBulletImage(modName, model.registerName + "_0"),
+                ImageLoadTool.loadOneBulletImage(modName, model.registerName + "_1")
                 );
         return model;
     }
 
     @Override
     protected void build(BulletModel model) {
+        BulletModelBuilderTool.buildSmallCoillderBox(model);
         BulletModelBuilderTool.buildeDefaultSpeedAndRange(model);
     }
 

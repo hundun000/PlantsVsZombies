@@ -119,7 +119,7 @@ public class PlantSlot extends GameObject implements MouseListener, MouseMotionL
         }
         logger.info("click slot[{}][{}]", gridX, gridY);
         
-        PlantModel plantModel = gamePanel.getGridManager().getPlanting();
+        PlantModel plantModel = gamePanel.getGridManager().getHoldingPlantModel();
         if (plantModel != null) {
             logger.info("planting = {}", plantModel.registerName);
             PlantInstanceParams params = new PlantInstanceParams(gridX, gridY, getPositionComponent().getPosX(), getPositionComponent().getPosY());

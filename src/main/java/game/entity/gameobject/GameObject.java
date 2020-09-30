@@ -25,8 +25,8 @@ public abstract class GameObject implements ILogicFrameListener {
     public static Font positionFont = new Font(Font.SERIF, Font.PLAIN, (int) (GridManager.GRID_HEIGHT * 0.1));
     
     protected final String registerName;
-    public static final int NO_SUBTYPE_INDEX = 0;
-    private int subTypeId = NO_SUBTYPE_INDEX;
+
+    private String subTypeName;
     protected ImageIcon selfImageIcon;
     protected final GamePanel gamePanel;
     private boolean highLight = false;
@@ -54,13 +54,13 @@ public abstract class GameObject implements ILogicFrameListener {
 //        return gamePanel;
 //    }
     
-    protected ImageIcon getSpiritImageIcon() {
-        return spirit.getImage(getSubTypeId());
+    protected String getSpiritSubId() {
+        return subTypeName == null ? "" : subTypeName;
     }
     
     public void drawSelf(Graphics g) {
         if (spirit != null) {
-            ImageIcon imageIcon = getSpiritImageIcon();
+            ImageIcon imageIcon = spirit.getImage(registerName + getSpiritSubId());
             g.drawImage(imageIcon.getImage(), this.getPositionComponent().getPosX(), this.getPositionComponent().getPosY() - imageIcon.getIconHeight(), null);
         }
         if (GamePanel.DRAW_DEBUG_BOX) {
@@ -114,12 +114,12 @@ public abstract class GameObject implements ILogicFrameListener {
 
     protected abstract boolean wantMove();
 
-    public int getSubTypeId() {
-        return subTypeId;
+    public String getSubTypeName() {
+        return subTypeName;
     }
     
-    public void setSubTypeId(int subTypeId) {
-        this.subTypeId = subTypeId;
+    public void setSubTypeName(String subTypeName) {
+        this.subTypeName = subTypeName;
     }
     
 

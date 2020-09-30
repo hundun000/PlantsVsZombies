@@ -20,9 +20,10 @@ public class FrozenPeashooterBuilder extends PeashooterBuilder {
         PlantModel model;
         
         model = new PlantModel(NAME, ShooterPlant.class);
-        model.spirit = new Spirit(ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.IDLE))
-                .build(WorkState.WORKING, ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.WORKING))
-                ;
+        model.spirit = new Spirit(model.registerName, 
+                ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.IDLE),
+                ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.WORKING)
+                );
         model.plantCost = 175;
         return model;
     }
@@ -30,7 +31,7 @@ public class FrozenPeashooterBuilder extends PeashooterBuilder {
     @Override
     protected void build(PlantModel model) {
         super.build(model);
-        model.fightData.bulletSubTypeId = DebuffType.FREEZE.getId();
+        model.fightData.bulletSubTypeName = DebuffType.FREEZE.name();
     }
 
 

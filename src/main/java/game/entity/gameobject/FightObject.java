@@ -20,6 +20,7 @@ import game.entity.bullet.BulletInstanceParams;
 import game.entity.bullet.template.DebuffBullect.DebuffType;
 import game.entity.component.FightComponent;
 import game.entity.component.PositionComponent;
+import game.entity.component.PositionComponent.HeightZ;
 import game.entity.gameobject.WorkStatus.WorkState;
 import game.entity.plant.BasePlant;
 import game.entity.zombie.BaseZombie;
@@ -32,16 +33,23 @@ public abstract class FightObject extends GameObject {
     
     private static Logger logger = LoggerFactory.getLogger(FightObject.class);
     
+    /**
+     * 阵营：玩家/敌人
+     */
     public enum FightSide {
         PLAYER,
         ZOMBIE
     }
+    
+    
     
     protected FightSide fightSide;
     protected FightData fightData;
     int frozenStacks = 0;
     int fireStacks = 0;
     private List<FightObject> currentBlockedObjects = new ArrayList<>();
+    private HeightZ maxBlockableHeightZ = HeightZ.GROUND;
+    
     
     public FightObject(GamePanel gamePanel, String registerName, FightData fightData, FightSide fightSide) {
         super(gamePanel, registerName);
@@ -61,7 +69,9 @@ public abstract class FightObject extends GameObject {
         boolean blockedByOtherSide = false;
         List<FightObject> intersectedObjects = gamePanel.getGridManager().getIntersectedOtherSideFightObjects(getPositionComponent().getCoillderBox(), fightSide);
         for (FightObject intersectedObject : intersectedObjects) {
-            if (intersectedObject.getCurrentBlockedObjects().contains(this)) {
+            if (intersectedObject.getCurrentBlockedObjects().contains(this)
+                    && intersectedObject.maxBlockableHeightZ.higherThan(this.getPositionComponent().getPosZ())
+                    ) {
                 blockedByOtherSide = true;
                 break;
             }
@@ -177,8 +187,8 @@ public abstract class FightObject extends GameObject {
             BulletInstanceParams params = new BulletInstanceParams(bulletStartX, bulletStartY, fightSide);
             BaseBullet bullet = gamePanel.getBulletFactory().getInstacne(
                     fightData.bulletRegisterName, gamePanel, params);
-            bullet.setSubTypeId(fightData.bulletSubTypeId);
-            logger.info("generateBullet by bulletSubTypeId = {}", bullet.getSubTypeId());
+            bullet.setSubTypeName(fightData.bulletSubTypeName);
+            logger.info("generateBullet by bulletSubTypeId = {}", fightData.bulletSubTypeName);
             return bullet;
         } else {
             return null;
@@ -230,9 +240,8 @@ public abstract class FightObject extends GameObject {
     }
     
     @Override
-    protected ImageIcon getSpiritImageIcon() {
-        //logger.debug("{} getSpiritImageIcon use getSubTypeId() = {}", this.toString(), getSubTypeId());
-        return spirit.getImage(getFightComponent().getAttackStatus().getWorkState(), getSubTypeId());
+    protected String getSpiritSubId() {
+        return super.getSpiritSubId();
     }
     
     public int getFireStacks() {

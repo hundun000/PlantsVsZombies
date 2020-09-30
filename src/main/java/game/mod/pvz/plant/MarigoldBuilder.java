@@ -25,8 +25,10 @@ public class MarigoldBuilder extends PlantModelBuilder {
     public PlantModel start() {
         PlantModel model;
         model = new PlantModel(NAME, DropPlant.class);
-        model.spirit = new Spirit(ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.IDLE))
-                .build(WorkState.WORKING, ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.WORKING));
+        model.spirit = new Spirit(model.registerName, 
+                ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.IDLE),
+                ImageLoadTool.loadOnePlantImage(modName, model.registerName, WorkState.WORKING)
+                );
         model.plantCost = 50;
         return model;
     }

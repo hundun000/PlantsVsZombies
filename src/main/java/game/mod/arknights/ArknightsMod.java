@@ -41,7 +41,7 @@ public class ArknightsMod extends Mod {
         DropModel model;
         
         model = new DropModel(DeployCostDrop.NAME, DeployCostDrop.class);
-        model.spirit = new Spirit(ImageLoadTool.loadOneDropImage(modName, model.registerName));
+        model.spirit = new Spirit(model.registerName, ImageLoadTool.loadOneDropImage(modName, model.registerName));
         model.chargePoint = 5;
         models.add(model);
         
@@ -54,15 +54,7 @@ public class ArknightsMod extends Mod {
         List<BulletModel> models = new ArrayList<>();
         BulletModel model;
         
-        model = new BulletModel(CloseHit.NAME, CloseHit.class);
-        model.spirit = new Spirit(
-                Arrays.asList(
-                        ImageLoadTool.loadOneBulletImage(modName, model.registerName)
-                        )
-                );
-        models.add(model);
-        
-        
+
         return models;
     }
 

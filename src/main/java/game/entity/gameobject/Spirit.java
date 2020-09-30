@@ -5,8 +5,12 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.swing.ImageIcon;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import game.entity.gameobject.WorkStatus.WorkState;
 import game.utils.ImageLoadTool;
@@ -18,42 +22,37 @@ import game.utils.ImageLoadTool;
  */
 public class Spirit {
     
-    private final Map<WorkState, List<ImageIcon>> images = new HashMap<>();
+    private static Logger logger = LoggerFactory.getLogger(Spirit.class);
     
-    public Spirit(ImageIcon singleIcon) {
-        this(Arrays.asList(singleIcon));
-    }
     
-    public Spirit(List<ImageIcon> singleIcons) {
-        images.put(WorkState.IDLE, singleIcons);
-        images.put(WorkState.WORK_READY, singleIcons);
-        images.put(WorkState.WORKING, singleIcons);
-    }
+    private final Map<String, ImageIcon> images = new HashMap<>();
+    private String owner; 
 
-    public Spirit set(WorkState workState, List<ImageIcon> singleIcons) {
-        images.put(workState, singleIcons);
+    public Spirit(String owner, ImageIcon... icons) {
+        this.owner = owner;
+        for (ImageIcon icon : icons) {
+            add(icon);
+        }
+    }
+    
+    public Spirit add(ImageIcon singleIcon) {
+        images.put(singleIcon.getDescription(), singleIcon);
         return this;
     }
+
     
-    public Spirit build(WorkState workState, ImageIcon singleIcon) {
-        return set(workState, Arrays.asList(singleIcon));
-    }
-    
-    public ImageIcon getImage() {
-        return getImage(0);
-    }
-    
-    public ImageIcon getImage(int subtypeIndex) {
-        return getImage(WorkState.IDLE, subtypeIndex);
-    }
-    
-    public ImageIcon getImage(WorkState workState, int subtypeIndex) {
-        List<ImageIcon> stateImages = images.get(workState);
-        if (stateImages != null && stateImages.size() > subtypeIndex) {
-            return stateImages.get(subtypeIndex);
-        } else {}
+    public ImageIcon getImage(String id) {
+        if (images.containsKey(id)) {
+            return images.get(id);
+        } else {
+            for (Entry<String, ImageIcon> entry : images.entrySet()) {
+                if (entry.getKey().startsWith(id)) {
+                    return entry.getValue();
+                }
+            }
+            logger.warn("Sprite[{}] no image of id = {}", owner, id);
             return ImageLoadTool.defaultIcon;
-        
+        }
     }
 
     
