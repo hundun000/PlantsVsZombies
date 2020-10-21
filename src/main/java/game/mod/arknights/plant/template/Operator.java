@@ -1,9 +1,9 @@
 package game.mod.arknights.plant.template;
 
-import game.GamePanel;
 import game.entity.plant.BasePlant;
 import game.entity.plant.PlantInstanceParams;
 import game.entity.plant.PlantModel;
+import game.ui.GamePanel;
 
 /**
  * 明日方舟干员

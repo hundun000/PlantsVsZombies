@@ -12,8 +12,6 @@ import javax.swing.ImageIcon;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import game.GamePanel;
-import game.GameWindow;
 import game.entity.bullet.BulletModel;
 import game.entity.bullet.template.DebuffBullect;
 import game.entity.bullet.template.Explosion;
@@ -40,6 +38,7 @@ import game.manager.PlantCardManager;
 import game.manager.SunScoreManager;
 import game.mod.Mod;
 import game.mod.pvz.bullet.CherrybombExplosionBuilder;
+import game.mod.pvz.bullet.KernelBuilder;
 import game.mod.pvz.bullet.PeaBuilder;
 import game.mod.pvz.bullet.PotetoMineExplosionBuilder;
 import game.mod.pvz.bullet.ZombieHitBuilder;
@@ -47,6 +46,7 @@ import game.mod.pvz.drop.SunItem;
 import game.mod.pvz.plant.CherrybombBuilder;
 import game.mod.pvz.plant.DoublePeashooterBuilder;
 import game.mod.pvz.plant.FrozenPeashooterBuilder;
+import game.mod.pvz.plant.KernelPitcherBuilder;
 import game.mod.pvz.plant.PeashooterBuilder;
 import game.mod.pvz.plant.PotetoMineBuilder;
 import game.mod.pvz.plant.SunflowerBuilder;
@@ -54,6 +54,8 @@ import game.mod.pvz.plant.TorchwoodBuilder;
 import game.mod.pvz.plant.WallnutBuilder;
 import game.mod.pvz.zombie.ConeheadZombieBuilder;
 import game.mod.pvz.zombie.PlainZombieBuilder;
+import game.ui.GamePanel;
+import game.ui.GameWindow;
 import game.utils.ImageLoadTool;
 
 /**
@@ -104,6 +106,8 @@ public class PvzMod extends Mod{
         
         models.add(new PotetoMineExplosionBuilder().model());
         
+        models.add(new KernelBuilder().model());
+        
         return models;
     }
 
@@ -131,6 +135,8 @@ public class PvzMod extends Mod{
         models.add(new WallnutBuilder().model());
         
         models.add(new TorchwoodBuilder().model());
+        
+        models.add(new KernelPitcherBuilder().model());
         
         return models;
     }

@@ -1,9 +1,9 @@
 package game.mod.arknights.bullet;
 
-import game.GamePanel;
 import game.entity.bullet.BaseBullet;
 import game.entity.bullet.BulletInstanceParams;
 import game.entity.bullet.BulletModel;
+import game.ui.GamePanel;
 
 /**
  * @author hundun

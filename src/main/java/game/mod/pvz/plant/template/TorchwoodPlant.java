@@ -3,7 +3,6 @@ package game.mod.pvz.plant.template;
 import java.awt.Rectangle;
 import java.util.List;
 
-import game.GamePanel;
 import game.entity.bullet.BaseBullet;
 import game.entity.bullet.template.DebuffBullect;
 import game.entity.bullet.template.DebuffBullect.DebuffType;
@@ -11,6 +10,7 @@ import game.entity.plant.BasePlant;
 import game.entity.plant.PlantInstanceParams;
 import game.entity.plant.PlantModel;
 import game.mod.pvz.bullet.PeaBuilder;
+import game.ui.GamePanel;
 
 /**
  * @author hundun

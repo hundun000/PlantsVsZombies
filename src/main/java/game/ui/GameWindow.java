@@ -1,4 +1,4 @@
-package game;
+package game.ui;
 import javax.swing.*;
 
 /**
@@ -33,7 +33,7 @@ public class GameWindow extends JFrame {
 	private void setGamePanel() {
 		gamePanel = new GamePanel(true);
         gamePanel.setLocation(0, 0);
-        getLayeredPane().add(gamePanel, new Integer(0));
+        getLayeredPane().add(gamePanel, Integer.valueOf(0));
 	}
 
 	

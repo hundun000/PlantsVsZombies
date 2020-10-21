@@ -4,11 +4,11 @@ package game.entity.plant.template;
  * Created on 2020/09/17
  */
 
-import game.GamePanel;
 import game.entity.gameobject.WorkStatus.WorkState;
 import game.entity.plant.BasePlant;
 import game.entity.plant.PlantInstanceParams;
 import game.entity.plant.PlantModel;
+import game.ui.GamePanel;
 
 public class MinePlant extends BasePlant {
     

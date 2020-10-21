@@ -1,12 +1,12 @@
 package game.entity.plant;
 
-import game.GamePanel;
 import game.entity.gameobject.FightData;
 import game.entity.gameobject.GameObjectModel;
 import game.entity.gameobject.Spirit;
 import game.factory.BulletFactory;
 import game.factory.DropFactory;
 import game.manager.GridManager;
+import game.ui.GamePanel;
 
 /**
  * @author hundun

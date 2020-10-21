@@ -9,7 +9,6 @@ import java.awt.Rectangle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import game.GamePanel;
 import game.entity.component.FightComponent;
 import game.entity.component.HealthComponent;
 import game.entity.component.PositionComponent;
@@ -22,6 +21,7 @@ import game.entity.gameobject.WorkStatus.WorkState;
 import game.entity.others.PlantSlot;
 import game.entity.zombie.template.NormalZombie;
 import game.manager.GridManager;
+import game.ui.GamePanel;
 
 /**
  * Created by Armin on 6/25/2016.

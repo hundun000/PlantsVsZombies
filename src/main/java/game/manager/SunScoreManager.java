@@ -13,9 +13,9 @@ import javax.swing.JLabel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import game.GamePanel;
 import game.entity.gameobject.Spirit;
 import game.mod.pvz.drop.SunItem;
+import game.ui.GamePanel;
 import game.utils.ImageLoadTool;
 
 /**

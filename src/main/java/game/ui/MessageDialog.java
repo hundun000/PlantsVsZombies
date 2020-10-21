@@ -1,4 +1,4 @@
-package game;
+package game.ui;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 

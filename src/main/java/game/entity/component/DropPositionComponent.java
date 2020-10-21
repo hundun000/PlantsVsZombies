@@ -2,7 +2,7 @@ package game.entity.component;
 
 import java.awt.Rectangle;
 
-import game.GamePanel;
+import game.ui.GamePanel;
 
 public class DropPositionComponent extends PositionComponent {
     private int endY;

@@ -16,9 +16,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import game.GamePanel;
-import game.GamePanel.GameState;
-import game.ILevelListener;
 import game.entity.bullet.BaseBullet;
 import game.entity.bullet.template.DebuffBullect;
 import game.entity.component.PositionComponent;
@@ -34,6 +31,8 @@ import game.entity.plant.template.ShooterPlant;
 import game.entity.zombie.BaseZombie;
 import game.entity.zombie.ZombieInstanceParams;
 import game.level.GameLevel;
+import game.ui.GamePanel;
+import game.ui.GamePanel.GameState;
 import game.utils.ImageLoadTool;
 
 /**

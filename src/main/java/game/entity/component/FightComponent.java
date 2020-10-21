@@ -3,7 +3,6 @@ package game.entity.component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import game.ILogicFrameListener;
 import game.entity.bullet.BulletInstanceParams;
 import game.entity.bullet.BulletModel;
 import game.entity.drop.DropInstanceParams;
@@ -18,6 +17,7 @@ import game.entity.plant.PlantInstanceParams;
 import game.entity.plant.PlantModel;
 import game.entity.zombie.ZombieInstanceParams;
 import game.entity.zombie.ZombieModel;
+import game.manager.ILogicFrameListener;
 
 /**
  * @author hundun

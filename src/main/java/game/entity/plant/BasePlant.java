@@ -8,7 +8,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import game.GamePanel;
 import game.entity.bullet.BaseBullet;
 import game.entity.bullet.BulletInstanceParams;
 import game.entity.component.FightComponent;
@@ -22,6 +21,7 @@ import game.entity.gameobject.FightObject;
 import game.entity.gameobject.GameObject;
 import game.entity.zombie.BaseZombie;
 import game.manager.GridManager;
+import game.ui.GamePanel;
 
 /**
  * Created by Armin on 6/25/2016.

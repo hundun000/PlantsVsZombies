@@ -2,9 +2,9 @@ package game.entity.component;
 
 import java.awt.Rectangle;
 
-import game.GamePanel;
 import game.entity.plant.PlantInstanceParams;
 import game.entity.plant.PlantModel;
+import game.ui.GamePanel;
 
 /**
  * @author hundun

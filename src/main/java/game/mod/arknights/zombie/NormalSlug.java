@@ -1,9 +1,9 @@
 package game.mod.arknights.zombie;
 
-import game.GamePanel;
 import game.entity.zombie.BaseZombie;
 import game.entity.zombie.ZombieInstanceParams;
 import game.entity.zombie.ZombieModel;
+import game.ui.GamePanel;
 
 /**
  * @author hundun

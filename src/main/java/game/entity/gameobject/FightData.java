@@ -1,10 +1,10 @@
 package game.entity.gameobject;
 
-import game.GamePanel;
 import game.entity.gameobject.WorkStatus.WorkState;
 import game.entity.gameobject.WorkStatus.WorkType;
 import game.manager.GridManager;
 import game.mod.pvz.drop.SunItem;
+import game.ui.GamePanel;
 
 /**
  * @author hundun

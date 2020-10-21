@@ -1,6 +1,5 @@
 package game.mod.pvz.plant;
 
-import game.GamePanel;
 import game.entity.bullet.template.Explosion;
 import game.entity.gameobject.Spirit;
 import game.entity.gameobject.WorkStatus.WorkState;
@@ -9,6 +8,7 @@ import game.entity.plant.PlantModelBuilder;
 import game.entity.plant.template.MinePlant;
 import game.mod.pvz.PvzMod;
 import game.mod.pvz.bullet.PotetoMineExplosionBuilder;
+import game.ui.GamePanel;
 import game.utils.ImageLoadTool;
 
 /**

@@ -8,11 +8,11 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import game.GamePanel;
 import game.entity.gameobject.GameObjectModel;
 import game.entity.plant.BasePlant;
 import game.entity.plant.PlantInstanceParams;
 import game.entity.plant.PlantModel;
+import game.ui.GamePanel;
 
 /**
  * @author hundun

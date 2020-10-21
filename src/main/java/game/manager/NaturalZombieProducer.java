@@ -5,13 +5,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import game.GamePanel;
-import game.GamePanel.GameState;
 import game.entity.zombie.BaseZombie;
-import game.ILevelListener;
-import game.ILogicFrameListener;
 import game.level.GameLevel;
 import game.level.NaturalZombieSpawnRule;
+import game.ui.GamePanel;
+import game.ui.GamePanel.GameState;
 
 /**
  * @author hundun

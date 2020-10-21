@@ -1,12 +1,13 @@
 package game.entity.bullet;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import game.GamePanel;
 import game.entity.bullet.template.Explosion;
 import game.entity.component.BulletPositionComponent;
 import game.entity.component.FightComponent;
@@ -16,6 +17,7 @@ import game.entity.gameobject.FightObject;
 import game.entity.gameobject.FightObject.FightSide;
 import game.entity.gameobject.GameObject;
 import game.entity.zombie.BaseZombie;
+import game.ui.GamePanel;
 
 /**
  * @author hundun
@@ -23,12 +25,14 @@ import game.entity.zombie.BaseZombie;
  */
 public abstract class BaseBullet extends GameObject {
     private static Logger logger = LoggerFactory.getLogger(BaseBullet.class);
+    private static Color speedColor = Color.DARK_GRAY;
     private BulletPositionComponent bulletPositionComponent;
     private BulletModel model;
     protected FightComponent status;
     protected HealthComponent healthComponent;
     protected FightSide attacterSide;
     protected boolean forceKilledAfterHit = true;
+    protected FightObject target;
     
     public BaseBullet(GamePanel gamePanel, BulletModel model, BulletInstanceParams params) {
         super(gamePanel, model.registerName);
@@ -92,16 +96,22 @@ public abstract class BaseBullet extends GameObject {
     public void updateLogicFrame() {
         super.updateLogicFrame();
         
+        if (target != null) {
+            bulletPositionComponent.updateSpeed(target);
+            logger.info("{} speed update to ({}, {})", this, bulletPositionComponent.getSpeedX(), bulletPositionComponent.getSpeedY());
+        }
+        
+        if (getPositionComponent().isMoveDone()) {
+            onMoveDone();
+        }
+        
+        
         List<FightObject> targets = calculateHitTargets();
         for (FightObject target : targets) {
             bulletHitGameObject(target);
             if (forceKilledAfterHit) {
                 this.getHealthComponent().forceKilled();
             }
-        }
-        
-        if (getPositionComponent().isMoveDone()) {
-            onMoveDone();
         }
         
     }
@@ -143,5 +153,21 @@ public abstract class BaseBullet extends GameObject {
     protected void onMoveDone() {
         this.getHealthComponent().forceKilled();
     }
+    
+    @Override
+    public void drawSelf(Graphics g) {
+        super.drawSelf(g);
+        
+        // draw speed
+        g.setColor(speedColor);
+        g.drawLine(bulletPositionComponent.getPosX(), bulletPositionComponent.getPosY(),
+                bulletPositionComponent.getPosX() + (int)bulletPositionComponent.getSpeedX(), bulletPositionComponent.getPosY() + (int)bulletPositionComponent.getSpeedY());
+    }
+    
+    public void setTarget(FightObject target) {
+        this.target = target;
+    }
+    
+    
 
 }

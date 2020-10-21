@@ -1,6 +1,5 @@
 package game.mod.pvz.plant;
 
-import game.GamePanel;
 import game.entity.bullet.template.Explosion;
 import game.entity.gameobject.Spirit;
 import game.entity.gameobject.WorkStatus.WorkState;
@@ -10,6 +9,7 @@ import game.entity.plant.template.BombPlant;
 import game.manager.GridManager;
 import game.mod.pvz.PvzMod;
 import game.mod.pvz.bullet.CherrybombExplosionBuilder;
+import game.ui.GamePanel;
 import game.utils.ImageLoadTool;
 
 /**

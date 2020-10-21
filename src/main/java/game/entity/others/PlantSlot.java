@@ -5,8 +5,6 @@ import javax.swing.border.LineBorder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import game.GamePanel;
-import game.ILogicFrameListener;
 import game.entity.component.FightComponent;
 import game.entity.component.HealthComponent;
 import game.entity.component.IdlePositionComponent;
@@ -19,7 +17,9 @@ import game.entity.plant.template.DropPlant;
 import game.entity.plant.template.ShooterPlant;
 import game.factory.PlantFactory;
 import game.manager.GridManager;
+import game.manager.ILogicFrameListener;
 import game.manager.SunScoreManager.BasicWealth;
+import game.ui.GamePanel;
 
 import java.awt.Color;
 import java.awt.Graphics;

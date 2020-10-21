@@ -2,8 +2,6 @@ package game.entity.bullet.template;
 import java.awt.Rectangle;
 import java.util.List;
 
-import game.GamePanel;
-import game.ILogicFrameListener;
 import game.entity.bullet.BaseBullet;
 import game.entity.bullet.BulletInstanceParams;
 import game.entity.bullet.BulletModel;
@@ -14,6 +12,8 @@ import game.entity.gameobject.FightObject;
 import game.entity.gameobject.GameObject;
 import game.entity.zombie.BaseZombie;
 import game.manager.GridManager;
+import game.manager.ILogicFrameListener;
+import game.ui.GamePanel;
 
 /**
  * Created by Armin on 6/25/2016.

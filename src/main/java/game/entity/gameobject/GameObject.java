@@ -8,12 +8,12 @@ import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
 
-import game.GamePanel;
-import game.ILogicFrameListener;
 import game.entity.component.HealthComponent;
 import game.entity.component.PositionComponent;
 import game.entity.gameobject.WorkStatus.WorkState;
 import game.manager.GridManager;
+import game.manager.ILogicFrameListener;
+import game.ui.GamePanel;
 
 /**
  * @author hundun
@@ -64,7 +64,6 @@ public abstract class GameObject implements ILogicFrameListener {
             g.drawImage(imageIcon.getImage(), this.getPositionComponent().getPosX(), this.getPositionComponent().getPosY() - imageIcon.getIconHeight(), null);
         }
         if (GamePanel.DRAW_DEBUG_BOX) {
-            Color last = g.getColor();
             g.setColor(coillderBoxColor);
             
             // draw coillderBox
@@ -82,12 +81,6 @@ public abstract class GameObject implements ILogicFrameListener {
             int drawPosX = getPositionComponent().getPosX();
             int drawPosY = getPositionComponent().getPosY() - coillderBox.height + positionFont.getSize();
             g.drawString(getPositionComponent().toString(), drawPosX, drawPosY);
-            
-            
-            
-
-            g.setColor(last);
-            
             
         }
     }

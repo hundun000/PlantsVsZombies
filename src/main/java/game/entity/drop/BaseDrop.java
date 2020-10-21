@@ -3,7 +3,6 @@ package game.entity.drop;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import game.GamePanel;
 import game.entity.component.DropPositionComponent;
 import game.entity.component.FightComponent;
 import game.entity.component.HealthComponent;
@@ -12,6 +11,7 @@ import game.entity.gameobject.FightObject;
 import game.entity.gameobject.GameObject;
 import game.manager.GridManager;
 import game.manager.SunScoreManager.WealthType;
+import game.ui.GamePanel;
 
 /**
  * @author hundun

@@ -4,7 +4,6 @@ import javax.swing.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import game.GamePanel;
 import game.entity.component.FightComponent;
 import game.entity.component.HealthComponent;
 import game.entity.component.IdlePositionComponent;
@@ -15,6 +14,7 @@ import game.entity.plant.PlantModel;
 import game.factory.PlantFactory;
 import game.manager.PlantCardManager;
 import game.manager.SunScoreManager.BasicWealth;
+import game.ui.GamePanel;
 import game.utils.ImageLoadTool;
 
 import java.awt.*;

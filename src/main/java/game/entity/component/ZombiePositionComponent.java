@@ -2,13 +2,13 @@ package game.entity.component;
 
 import java.awt.Rectangle;
 
-import game.GamePanel;
 import game.entity.gameobject.WorkStatus.WorkState;
 import game.entity.others.PlantSlot;
 import game.entity.zombie.BaseZombie;
 import game.entity.zombie.ZombieInstanceParams;
 import game.entity.zombie.ZombieModel;
 import game.manager.GridManager;
+import game.ui.GamePanel;
 
 public class ZombiePositionComponent extends PositionComponent{
     

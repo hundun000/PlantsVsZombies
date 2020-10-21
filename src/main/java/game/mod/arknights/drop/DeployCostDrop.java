@@ -2,10 +2,10 @@ package game.mod.arknights.drop;
 
 import java.awt.event.MouseEvent;
 
-import game.GamePanel;
 import game.entity.drop.BaseDrop;
 import game.entity.drop.DropInstanceParams;
 import game.entity.drop.DropModel;
+import game.ui.GamePanel;
 
 /**
  * 可拾取的部署费用

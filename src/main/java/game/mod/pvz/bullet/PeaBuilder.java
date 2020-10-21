@@ -33,7 +33,7 @@ public class PeaBuilder extends BulletModelBuilder{
     @Override
     protected void build(BulletModel model) {
         BulletModelBuilderTool.buildSmallCoillderBox(model);
-        BulletModelBuilderTool.buildeDefaultSpeedAndRange(model);
+        BulletModelBuilderTool.buildDefaultSpeedAndRange(model);
     }
 
 }

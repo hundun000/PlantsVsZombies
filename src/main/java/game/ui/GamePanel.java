@@ -1,4 +1,4 @@
-package game;
+package game.ui;
 import javax.swing.*;
 
 import org.slf4j.Logger;
@@ -13,6 +13,8 @@ import game.factory.PlantFactory;
 import game.factory.ZombieFactory;
 import game.level.GameLevel;
 import game.manager.GridManager;
+import game.manager.ILevelListener;
+import game.manager.ILogicFrameListener;
 import game.manager.PlantCardManager;
 import game.manager.SunScoreManager;
 import game.mod.Mod;

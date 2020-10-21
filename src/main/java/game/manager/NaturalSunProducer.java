@@ -2,11 +2,10 @@ package game.manager;
 
 import java.util.Random;
 
-import game.GamePanel;
-import game.ILogicFrameListener;
 import game.entity.drop.BaseDrop;
 import game.entity.drop.DropInstanceParams;
 import game.mod.pvz.drop.SunItem;
+import game.ui.GamePanel;
 
 /**
  * @author hundun

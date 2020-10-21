@@ -1,9 +1,9 @@
 package game.entity.plant.template;
 
-import game.GamePanel;
 import game.entity.plant.BasePlant;
 import game.entity.plant.PlantInstanceParams;
 import game.entity.plant.PlantModel;
+import game.ui.GamePanel;
 
 /**
  * @author hundun

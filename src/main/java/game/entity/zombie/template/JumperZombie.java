@@ -1,10 +1,10 @@
 package game.entity.zombie.template;
 
-import game.GamePanel;
 import game.entity.component.ZombiePositionComponent.MoveType;
 import game.entity.zombie.BaseZombie;
 import game.entity.zombie.ZombieInstanceParams;
 import game.entity.zombie.ZombieModel;
+import game.ui.GamePanel;
 
 /**
  * @author hundun

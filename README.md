@@ -1,5 +1,4 @@
 # PlantsVsZombies
-My Own Clone of Plants VS Zombies Game Using Java
 
 **项目正处于频繁更新阶段，故最新提交可能处于调试模式或存在bug甚至无法启动，且暂不提供稳定分支**
 

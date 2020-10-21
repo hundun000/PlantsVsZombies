@@ -1,4 +1,4 @@
-package game;
+package game.manager;
 /**
  * 响应逻辑帧
  */

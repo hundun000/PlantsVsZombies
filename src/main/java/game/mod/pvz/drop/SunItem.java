@@ -1,6 +1,4 @@
 package game.mod.pvz.drop;
-import game.GamePanel;
-import game.ILogicFrameListener;
 import game.entity.component.DropPositionComponent;
 import game.entity.component.FightComponent;
 import game.entity.component.PositionComponent;
@@ -9,7 +7,9 @@ import game.entity.drop.DropInstanceParams;
 import game.entity.drop.DropModel;
 import game.entity.gameobject.GameObject;
 import game.manager.GridManager;
+import game.manager.ILogicFrameListener;
 import game.manager.SunScoreManager.BasicWealth;
+import game.ui.GamePanel;
 
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;

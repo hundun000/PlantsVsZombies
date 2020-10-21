@@ -2,9 +2,9 @@ package game.entity.component;
 
 import java.awt.Rectangle;
 
-import game.GamePanel;
-import game.ILogicFrameListener;
 import game.manager.GridManager;
+import game.manager.ILogicFrameListener;
+import game.ui.GamePanel;
 
 public abstract class PositionComponent implements ILogicFrameListener {
     protected int posX;

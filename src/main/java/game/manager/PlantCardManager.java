@@ -12,12 +12,11 @@ import javax.swing.JButton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import game.GamePanel;
-import game.ILevelListener;
-import game.GamePanel.GameState;
 import game.entity.gameobject.Spirit;
 import game.entity.others.PlantCard;
 import game.level.GameLevel;
+import game.ui.GamePanel;
+import game.ui.GamePanel.GameState;
 import game.utils.ImageLoadTool;
 
 /**
@@ -43,7 +42,9 @@ public class PlantCardManager extends BaseManager implements ILevelListener, Mou
     private List<PlantCard> activatedCards;
     private List<PlantCard> registeredCards;
     private int maxActiveCardNum = 6;
-    
+    int row = 0;
+    int col = 0;
+    static final int COL_CAP = 5;
     
     
     public PlantCardManager(GamePanel gamePanel) {
@@ -56,11 +57,16 @@ public class PlantCardManager extends BaseManager implements ILevelListener, Mou
     
     public void registerPlantCard(String plantRegisterName, Spirit spirit) {
         String cardRegisterName = getCardRegisterName(plantRegisterName);
-        int posX = REGISTERED_CARDS_START_X + CARD_WIDTH * registeredCards.size();
-        int posY = REGISTERED_CARDS_START_Y;
+        int posX = REGISTERED_CARDS_START_X + CARD_WIDTH * col;
+        int posY = REGISTERED_CARDS_START_Y + CARD_HEIGHT * row;
         PlantCard plantCard = new PlantCard(gamePanel, posX, posY, plantRegisterName, cardRegisterName, spirit);
         registeredCards.add(plantCard);
         addMouseListener(plantCard);
+        col++;
+        if (col > COL_CAP) {
+            col = 0;
+            row ++;
+        }
         logger.info("card {} registered.", cardRegisterName);
     }
 

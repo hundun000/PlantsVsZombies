@@ -1,10 +1,10 @@
 package game.mod.pvz.drop;
 
-import game.GamePanel;
 import game.entity.drop.BaseDrop;
 import game.entity.drop.DropInstanceParams;
 import game.entity.drop.DropModel;
 import game.manager.SunScoreManager.BasicWealth;
+import game.ui.GamePanel;
 
 /**
  * @author hundun

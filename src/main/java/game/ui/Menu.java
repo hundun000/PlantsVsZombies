@@ -1,5 +1,6 @@
-package game;
+package game.ui;
 import javax.swing.*;
+
 import java.awt.*;
 
 /*

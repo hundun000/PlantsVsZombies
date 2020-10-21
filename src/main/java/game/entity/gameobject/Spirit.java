@@ -36,7 +36,7 @@ public class Spirit {
     }
     
     public Spirit add(ImageIcon singleIcon) {
-        images.put(singleIcon.getDescription(), singleIcon);
+        images.put(owner + singleIcon.getDescription(), singleIcon);
         return this;
     }
 

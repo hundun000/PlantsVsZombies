@@ -1,11 +1,11 @@
 package game.mod.pvz.plant;
 
-import game.GamePanel;
 import game.entity.gameobject.FightData;
 import game.entity.gameobject.GameObjectModel;
 import game.entity.gameobject.WorkStatus.WorkState;
 import game.entity.gameobject.WorkStatus.WorkType;
 import game.manager.GridManager;
+import game.ui.GamePanel;
 
 /**
  * @author hundun
@@ -60,7 +60,15 @@ public class PlantModelBuilderTool {
         fightData.attackRangeWidth = GridManager.GRID_WIDTH * 6 ;
         fightData.attackRangeHeight = GridManager.GRID_HEIGHT - GameObjectModel.defaultOffset * 2;
         fightData.attackRangeOffsetX = GameObjectModel.defaultOffset;
-        fightData.attackRangeOffsetY = - GameObjectModel.defaultOffset - fightData.attackRangeHeight;
+        fightData.attackRangeOffsetY = GameObjectModel.defaultOffset - GridManager.GRID_HEIGHT;
+        
+    }
+    
+    public static void buildPitcherPlantAttackRange(FightData fightData) {
+        fightData.attackRangeWidth = GridManager.GRID_WIDTH * 6 ;
+        fightData.attackRangeHeight = GridManager.GRID_HEIGHT * 3 - GameObjectModel.defaultOffset * 2;
+        fightData.attackRangeOffsetX = GameObjectModel.defaultOffset;
+        fightData.attackRangeOffsetY = GameObjectModel.defaultOffset - GridManager.GRID_HEIGHT * 2;
         
     }
     
@@ -68,7 +76,7 @@ public class PlantModelBuilderTool {
         fightData.attackRangeWidth = GridManager.GRID_WIDTH - GameObjectModel.defaultOffset * 2;
         fightData.attackRangeHeight = GridManager.GRID_HEIGHT - GameObjectModel.defaultOffset * 2;
         fightData.attackRangeOffsetX = 0;
-        fightData.attackRangeOffsetY = - GameObjectModel.defaultOffset - fightData.attackRangeHeight;
+        fightData.attackRangeOffsetY = GameObjectModel.defaultOffset - fightData.attackRangeHeight;
         
     }
     

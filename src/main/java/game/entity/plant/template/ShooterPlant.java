@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.swing.*;
 
-import game.GamePanel;
 import game.entity.bullet.BaseBullet;
 import game.entity.bullet.BulletInstanceParams;
 import game.entity.bullet.BulletModel;
@@ -15,6 +14,7 @@ import game.entity.plant.PlantInstanceParams;
 import game.entity.plant.PlantModel;
 import game.entity.zombie.BaseZombie;
 import game.manager.GridManager;
+import game.ui.GamePanel;
 
 /**
  * Created by Armin on 6/25/2016.

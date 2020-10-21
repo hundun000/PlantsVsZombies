@@ -12,8 +12,7 @@ import javax.swing.JLayeredPane;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import game.GamePanel;
-import game.ILogicFrameListener;
+import game.ui.GamePanel;
 
 /**
  * @author hundun

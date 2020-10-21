@@ -27,7 +27,7 @@ public class BulletModelBuilderTool {
     }
     
     
-    public static BulletModel buildeDefaultSpeedAndRange(BulletModel model) {
+    public static BulletModel buildDefaultSpeedAndRange(BulletModel model) {
         model.speedX = 15;
         model.speedY = 0;
         model.endDeltaX = 10 * GridManager.GRID_WIDTH;
@@ -35,7 +35,15 @@ public class BulletModelBuilderTool {
         return model;
     }
     
-    public static BulletModel buildeNoSpeedAndRange(BulletModel model) {
+    public static BulletModel buildGuidedSpeedAndRange(BulletModel model) {
+        model.speedX = 10;
+        model.speedY = 10;
+        model.endDeltaX = null;
+        model.endDeltaY = null;
+        return model;
+    }
+    
+    public static BulletModel buildNoSpeedAndRange(BulletModel model) {
         model.speedX = 0;
         model.speedY = 0;
         model.endDeltaX = 0;

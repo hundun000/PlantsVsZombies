@@ -1,7 +1,6 @@
 package game.entity.plant.template;
 import javax.swing.*;
 
-import game.GamePanel;
 import game.entity.drop.BaseDrop;
 import game.entity.drop.DropInstanceParams;
 import game.entity.plant.BasePlant;
@@ -9,6 +8,7 @@ import game.entity.plant.PlantInstanceParams;
 import game.entity.plant.PlantModel;
 import game.manager.GridManager;
 import game.mod.pvz.drop.SunItem;
+import game.ui.GamePanel;
 
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;

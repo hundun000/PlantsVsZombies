@@ -14,7 +14,6 @@ import javax.swing.ImageIcon;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import game.GamePanel;
 import game.entity.bullet.BaseBullet;
 import game.entity.bullet.BulletInstanceParams;
 import game.entity.bullet.template.DebuffBullect.DebuffType;
@@ -24,6 +23,7 @@ import game.entity.component.PositionComponent.HeightZ;
 import game.entity.gameobject.WorkStatus.WorkState;
 import game.entity.plant.BasePlant;
 import game.entity.zombie.BaseZombie;
+import game.ui.GamePanel;
 
 /**
  * @author hundun

@@ -1,7 +1,8 @@
-package game;
+package game.manager;
 
-import game.GamePanel.GameState;
 import game.level.GameLevel;
+import game.ui.GamePanel;
+import game.ui.GamePanel.GameState;
 
 
 /**
